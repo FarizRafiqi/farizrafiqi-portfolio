@@ -1,0 +1,10 @@
+{
+  "model": "vip",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Buatlah sebuah tagline yang modern, canggih, dan berkesan untuk portfolio seorang Software Engineer yang juga ahli dalam 3D Design. Nama: Fariz Rafiqi."
+    }
+  ],
+  "stream": false
+}

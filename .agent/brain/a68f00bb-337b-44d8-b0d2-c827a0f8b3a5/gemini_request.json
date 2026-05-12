@@ -1,0 +1,10 @@
+{
+  "model": "google/gemini-pro",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi"
+    }
+  ],
+  "stream": false
+}
