@@ -1,10 +1,18 @@
-// Personal data sourced from farizrafiqi.dev and GitHub
 export const personalData = {
   name: "Aulia El Ihza Fariz Rafiqi",
   shortName: "Fariz Rafiqi",
-  title: "Software Engineer & 3D Designer",
-  tagline: "Engineering Worlds in Code & Dimension",
-  bio: "Undergraduate informatics student with experience in software engineering since 2018. Former full-stack web developer at a software house in Jakarta. Passionate about Game Development, 3D Design, Machine Learning, VR, AR, and Mobile Development.",
+  title: {
+    en: "Software Engineer & AI Enthusiast",
+    id: "Software Engineer & Antusias AI"
+  },
+  tagline: {
+    en: "Engineering Intelligence in Code & Infrastructure",
+    id: "Merekayasa Kecerdasan dalam Kode & Infrastruktur"
+  },
+  bio: {
+    en: "Fresh graduate informatics student with experience in software engineering since 2018. Currently working as a Fullstack Engineer at Solusi Teknologi Kreatif. Passionate about AI, Server Management, and Modern Full-stack Development.",
+    id: "Fresh graduate informatika S1 dengan pengalaman dalam rekayasa perangkat lunak sejak 2018. Saat ini bekerja sebagai Fullstack Engineer di Solusi Teknologi Kreatif. Antusias terhadap AI, Manajemen Server, dan Pengembangan Full-stack Modern."
+  },
   location: "Bekasi, Indonesia",
   email: "auliaelihza07@gmail.com",
   socials: {
@@ -18,39 +26,238 @@ export const personalData = {
   website: "https://farizrafiqi.dev",
 };
 
+export const experiences = [
+  {
+    year: { en: "Sep 2025 – Present", id: "Sep 2025 – Sekarang" },
+    title: { en: "Fullstack Engineer", id: "Insinyur Fullstack" },
+    company: "Solusi Teknologi Kreatif (STK)",
+    location: "Jakarta, Indonesia · On-site",
+    type: "full-time",
+    isCurrent: true,
+    description: {
+      en: [
+        "Developing and maintaining full-stack web applications.",
+        "Collaborating with cross-functional teams to deliver software solutions.",
+        "Implementing modern frontend and backend technologies.",
+      ],
+      id: [
+        "Mengembangkan dan memelihara aplikasi web full-stack.",
+        "Berkolaborasi dengan tim lintas fungsi untuk memberikan solusi perangkat lunak.",
+        "Mengimplementasikan teknologi frontend dan backend modern.",
+      ]
+    },
+    tags: ["TypeScript", "Vue.js", "Node.js", "Laravel"],
+  },
+  {
+    year: { en: "May 2025 – Aug 2025", id: "Mei 2025 – Agt 2025" },
+    title: { en: "Backend Developer", id: "Pengembang Backend" },
+    company: "PT. Zamasco Mitra Solusindo",
+    location: "Jakarta, Indonesia · Hybrid",
+    type: "full-time",
+    description: {
+      en: [
+        "Designed and built RESTful APIs for internal business applications.",
+        "Optimized database queries and improved system performance.",
+        "Worked on integrations with third-party services.",
+      ],
+      id: [
+        "Merancang dan membangun RESTful API untuk aplikasi bisnis internal.",
+        "Mengoptimalkan kueri database dan meningkatkan performa sistem.",
+        "Bekerja pada integrasi dengan layanan pihak ketiga."
+      ]
+    },
+    tags: ["Go", "PHP", "MySQL", "REST API"],
+  },
+  {
+    year: { en: "2022 – 2025", id: "2022 – 2025" },
+    title: { en: "Fullstack Web Developer", id: "Pengembang Web Fullstack" },
+    company: { en: "Freelance", id: "Lepas (Freelance)" },
+    type: "freelance",
+    description: {
+      en: [
+        "Built custom web applications for clients across various industries.",
+        "Delivered projects including e-commerce platforms and admin dashboards.",
+        "Managed projects end-to-end from requirements to deployment.",
+      ],
+      id: [
+        "Membangun aplikasi web kustom untuk klien di berbagai industri.",
+        "Memberikan proyek termasuk platform e-commerce dan dashboard admin.",
+        "Mengelola proyek dari awal hingga akhir dari persyaratan hingga peluncuran."
+      ]
+    },
+    tags: ["Laravel", "Vue.js", "React", "Tailwind CSS"],
+  },
+  {
+    year: { en: "2021 – Present", id: "2021 – Sekarang" },
+    title: { en: "Informatics Engineering", id: "Teknik Informatika" },
+    company: "UPNVJ",
+    location: "Depok, Indonesia",
+    type: "education",
+    description: {
+      en: [
+        "Undergraduate student specializing in software engineering.",
+        "Active in campus organizations and coding competitions.",
+        "Pursuing interests in Linux, Docker, NestJS, and Proxmox.",
+      ],
+      id: [
+        "Mahasiswa S1 spesialisasi rekayasa perangkat lunak.",
+        "Aktif dalam organisasi kampus dan kompetisi pemrograman.",
+        "Mengejar minat dalam Linux, Docker, NestJS, dan Proxmox."
+      ]
+    },
+    tags: ["Algorithms", "Software Engineering", "Databases"],
+  },
+];
+
 export const projects = [
   {
-    id: 1,
-    title: "Kaladwipa",
-    subtitle: "Local Arts Engagement Platform",
-    description:
-      "A website created for the ICT Student Exhibition (Gemastik). Built with my team — enabling users to support local artists and discover artworks. Features multiplatform support via Ionic and Capacitor.",
-    tech: ["Laravel", "Vue.js", "Ionic", "Capacitor", "Tailwind CSS"],
-    category: "Full Stack",
-    color: "from-emerald-500 to-teal-600",
+    id: "syasaa",
+    title: { en: "Attendance App", id: "Aplikasi Presensi" },
+    subtitle: { en: "Freelance Administration Platform", id: "Platform Administrasi Freelance" },
+    description: {
+      en: "A professional attendance system featuring location-based check-ins and AI-powered face recognition for secure identity verification. Built with Ionic React and Laravel.",
+      id: "Sistem presensi profesional yang dilengkapi fitur absen berbasis lokasi dan pengenalan wajah berbasis AI untuk verifikasi identitas yang aman. Dibangun dengan Ionic React dan Laravel."
+    },
+    tags: ["Ionic React", "Capacitor", "TypeScript", "Laravel"],
+    category: { en: "Mobile", id: "Mobile" },
+    images: ["/img/portfolio/syasaa.png"],
+    githubUrl: "https://github.com/FarizRafiqi/syasaa",
     featured: true,
   },
   {
-    id: 2,
-    title: "Kania Jaya E-Shop",
-    subtitle: "Admin Panel",
-    description:
-      "A comprehensive e-commerce admin panel for managing product data, orders, payments, and users. Clean interface built with Vue.js and enhanced with Tailwind CSS for a university project.",
-    tech: ["Laravel", "Vue.js", "Tailwind CSS"],
-    category: "Full Stack",
-    color: "from-cyan-500 to-blue-600",
+    id: "flowbyte",
+    title: { en: "Flowbyte", id: "Flowbyte" },
+    subtitle: { en: "The Next-Gen Music Experience", id: "Pengalaman Musik Generasi Mendatang" },
+    description: {
+      en: "A premium music streaming application built natively with Kotlin. Features seamless integration with the Spotify API for online streaming and supports local storage playback for a complete music experience.",
+      id: "Aplikasi streaming musik premium yang dibangun secara native dengan Kotlin. Menampilkan integrasi mulus dengan Spotify API untuk streaming online dan mendukung pemutaran penyimpanan lokal untuk pengalaman musik yang lengkap."
+    },
+    tags: ["Kotlin", "Android Studio", "Spotify API"],
+    category: { en: "Mobile App", id: "Aplikasi Mobile" },
+    images: [
+      "/img/portfolio/flowbyte/Home Page.png",
+      "/img/portfolio/flowbyte/Explore Page.png",
+      "/img/portfolio/flowbyte/Library.png",
+      "/img/portfolio/flowbyte/Playlist.png",
+      "/img/portfolio/flowbyte/Song.png",
+      "/img/portfolio/flowbyte/Stats.png",
+      "/img/portfolio/flowbyte/Welcome.png",
+    ],
+    githubUrl: "https://github.com/FarizRafiqi/flowbyte-app",
+    featured: true,
+    gradient: "bg-gradient-to-t from-black/95 via-blue-900/40 to-transparent",
+  },
+  {
+    id: "kaladwipa",
+    title: { en: "Kaladwipa", id: "Kaladwipa" },
+    subtitle: { en: "Local Arts Engagement Platform", id: "Platform Keterlibatan Seni Lokal" },
+    description: {
+      en: "A platform enabling users to support local artists and discover artworks. Features multiplatform support via Ionic and Capacitor.",
+      id: "Platform yang memungkinkan pengguna untuk mendukung seniman lokal dan menemukan karya seni. Menampilkan dukungan multiplatform via Ionic dan Capacitor."
+    },
+    tags: ["Laravel", "Vue.js", "Ionic", "Capacitor"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    images: ["/img/portfolio/megamendung.png"],
+    githubUrl: "https://github.com/FarizRafiqi/kaladwipa",
     featured: true,
   },
   {
-    id: 3,
-    title: "MegaMendung PPOB",
-    subtitle: "Payment Point Online Bank",
-    description:
-      "A PPOB website for checking and paying electric bills — my vocational school final project. Features customer and admin pages, integrated with the Midtrans payment gateway.",
-    tech: ["Laravel", "Bootstrap 4", "Livewire", "Midtrans"],
-    category: "Full Stack",
-    color: "from-violet-500 to-purple-600",
+    id: "megamendung",
+    title: { en: "MegaMendung PPOB", id: "PPOB MegaMendung" },
+    subtitle: { en: "Electric Bill Payment System", id: "Sistem Pembayaran Tagihan Listrik" },
+    description: {
+      en: "PPOB website for checking and paying electric bills, integrated with Midtrans payment gateway.",
+      id: "Situs web PPOB untuk mengecek dan membayar tagihan listrik, terintegrasi dengan payment gateway Midtrans."
+    },
+    tags: ["Laravel", "Livewire", "Midtrans"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    images: ["/img/portfolio/kaladwipa.png"],
+    githubUrl: "https://github.com/FarizRafiqi/megamendung-ppob",
     featured: true,
+  },
+  {
+    id: "madina-inventory",
+    title: { en: "Madina Inventory", id: "Inventaris Madina" },
+    subtitle: { en: "Stock & Warehouse Management", id: "Manajemen Stok & Gudang" },
+    description: {
+      en: "A professional mobile application for real-time inventory tracking and warehouse management. Features barcode scanning and stock analysis.",
+      id: "Aplikasi mobile profesional untuk pelacakan inventaris real-time dan manajemen gudang. Menampilkan pemindaian barcode dan analisis stok."
+    },
+    tags: ["Ionic React", "Capacitor", "TypeScript", "Node.js"],
+    category: { en: "Mobile", id: "Mobile" },
+    images: ["/img/portfolio/madina-inventory.png"],
+    githubUrl: "https://github.com/FarizRafiqi/madina-inventory",
+    featured: true,
+  },
+  {
+    id: "ankersal",
+    title: { en: "Ankersal App", id: "Aplikasi Ankersal" },
+    subtitle: { en: "Emergency & Consultation PWA", id: "PWA Darurat & Konsultasi" },
+    description: {
+      en: "A Progressive Web App for emergency reporting and medical consultations. Features real-time SOS tracking and expert chat systems.",
+      id: "Progressive Web App untuk pelaporan darurat dan konsultasi medis. Menampilkan pelacakan SOS real-time dan sistem obrolan ahli."
+    },
+    tags: ["Laravel", "PWA", "MySQL", "Socket.io"],
+    category: { en: "Web / PWA", id: "Web / PWA" },
+    images: ["/img/portfolio/ankersal.png"],
+    githubUrl: "https://github.com/FarizRafiqi/ankersal-app",
+    featured: true,
+  },
+  {
+    id: "kania-jaya",
+    title: { en: "Kania Jaya E-Shop", id: "E-Shop Kania Jaya" },
+    subtitle: { en: "Admin Panel", id: "Panel Admin" },
+    description: {
+      en: "Comprehensive e-commerce admin panel for managing product data, orders, payments, and users. Built with Laravel + Vue.js.",
+      id: "Panel admin e-commerce komprehensif untuk mengelola data produk, pesanan, pembayaran, dan pengguna. Dibangun dengan Laravel + Vue.js."
+    },
+    tags: ["Laravel", "Vue.js", "Tailwind CSS"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    images: ["/img/portfolio/kania-jaya.png"],
+    githubUrl: "https://github.com/FarizRafiqi/kania-jaya-eshop",
+    featured: false,
+  },
+  {
+    id: "youtube-filter",
+    title: { en: "YouTube Comment Filter", id: "Filter Komentar YouTube" },
+    subtitle: { en: "AI-Powered Spam Blocker", id: "Pemblokir Spam Berbasis AI" },
+    description: {
+      en: "A Chrome extension using Gemini AI to filter spam, gambling, and toxic comments in real-time.",
+      id: "Ekstensi Chrome menggunakan Gemini AI untuk memfilter spam, judi, dan komentar toksik secara real-time."
+    },
+    tags: ["JavaScript", "Chrome Extension API", "Gemini API"],
+    category: { en: "Extension / AI", id: "Ekstensi / AI" },
+    images: ["/img/portfolio/youtube-filter.png"],
+    githubUrl: "https://github.com/FarizRafiqi/youtube-comment-filter",
+    featured: false,
+  },
+  {
+    id: "doyaneat",
+    title: { en: "DoyanEat", id: "DoyanEat" },
+    subtitle: { en: "Street Food Recommendation", id: "Rekomendasi Makanan Kaki Lima" },
+    description: {
+      en: "Vibrant platform for discovering Indonesian street food with ratings and location services.",
+      id: "Platform ceria untuk menemukan makanan kaki lima Indonesia dengan rating dan layanan lokasi."
+    },
+    tags: ["Vue.js", "Ionic", "Capacitor", "Tailwind CSS"],
+    category: { en: "Mobile", id: "Mobile" },
+    images: ["/img/portfolio/doyaneat.png"],
+    githubUrl: "https://github.com/FarizRafiqi/doyaneat",
+    featured: false,
+  },
+  {
+    id: "workfrom",
+    title: { en: "Workfrom", id: "Workfrom" },
+    subtitle: { en: "Workspace Booking Platform", id: "Platform Pemesanan Ruang Kerja" },
+    description: {
+      en: "A web redesign of workfrom.id created during a bootcamp at Maxy Academy. Focused on improving UI/UX for coworking space discovery.",
+      id: "Redesain web dari workfrom.id yang dibuat saat bootcamp di Maxy Academy. Berfokus pada peningkatan UI/UX untuk penemuan ruang kerja bersama."
+    },
+    tags: ["Laravel", "Bootstrap 5"],
+    category: { en: "Web Design", id: "Desain Web" },
+    images: ["/img/portfolio/workfrom.png"],
+    githubUrl: "https://github.com/FarizRafiqi/workfrom",
+    featured: false,
   },
 ];
 
@@ -66,17 +273,28 @@ export const skills = {
   backend: [
     { name: "Laravel", icon: "laravel" },
     { name: "PHP", icon: "php" },
+    { name: "NestJS", icon: "nestjs" },
+    { name: "Elasticsearch", icon: "elasticsearch" },
     { name: "MySQL", icon: "mysql" },
     { name: "Node.js", icon: "nodedotjs" },
+    { name: "Express", icon: "express" },
+    { name: "Python", icon: "python" },
+    { name: "Go", icon: "go" },
+    { name: "MongoDB", icon: "mongodb" },
   ],
   tools: [
     { name: "Git", icon: "git" },
     { name: "Docker", icon: "docker" },
+    { name: "Linux", icon: "linux" },
+    { name: "Ubuntu", icon: "ubuntu" },
+    { name: "Debian", icon: "debian" },
+    { name: "Proxmox", icon: "proxmox" },
     { name: "Figma", icon: "figma" },
     { name: "Blender", icon: "blender" },
     { name: "Three.js", icon: "threedotjs" },
+    { name: "Unity", icon: "unity" },
   ],
-  interests: ["Game Development", "3D Design", "Machine Learning", "VR & AR", "Mobile Development"],
+  interests: ["Linux Ecosystem", "Proxmox", "AI & Machine Learning", "Server Management", "Software Engineering"],
 };
 
 export const navLinks = [

@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useTheme } from "next-themes";
-import { navLinks, personalData } from "@/lib/data";
+import { personalData } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
+import { Globe } from "lucide-react";
 
 function SunIcon({ className }: { className?: string }) {
   return (
@@ -24,6 +26,7 @@ function MoonIcon({ className }: { className?: string }) {
 }
 
 export default function Navbar() {
+  const { language, setLanguage, t } = useLanguage();
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -35,7 +38,13 @@ export default function Navbar() {
 
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cursorNear = useRef(false);
-  const isScrolling = useRef(false);
+
+  const navLinks = [
+    { href: "#home", label: t("nav.home") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#about", label: t("nav.about") },
+    { href: "#contact", label: t("nav.contact") },
+  ];
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -88,7 +97,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map((l) => l.href.slice(1));
+      const sections = ["home", "projects", "about", "contact"];
       for (const section of sections.slice().reverse()) {
         const el = document.getElementById(section);
         if (el && window.scrollY >= el.offsetTop - 120) {
@@ -162,31 +171,45 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2 flex-shrink-0">
             {mounted && (
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer"
-                aria-label="Toggle theme"
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  {isDark ? (
-                    <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                      <SunIcon className="w-4 h-4" />
-                    </motion.div>
-                  ) : (
-                    <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                      <MoonIcon className="w-4 h-4" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+              <>
+                {/* Language Toggle */}
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setLanguage(language === "en" ? "id" : "en")}
+                  className="px-2 h-8 rounded-full flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer"
+                  aria-label="Toggle language"
+                >
+                  <Globe size={14} />
+                  <span className="text-[11px] font-bold uppercase">{language}</span>
+                </motion.button>
+
+                {/* Theme Toggle */}
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setTheme(isDark ? "light" : "dark")}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer"
+                  aria-label="Toggle theme"
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    {isDark ? (
+                      <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                        <SunIcon className="w-4 h-4" />
+                      </motion.div>
+                    ) : (
+                      <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                        <MoonIcon className="w-4 h-4" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+              </>
             )}
 
             <a
               href="#contact"
               className="hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-[13px] font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all duration-200 cursor-pointer shadow-sm"
             >
-              Hire Me
+              {t("nav.contact")}
             </a>
 
             <button
@@ -232,7 +255,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className="mt-2 block px-4 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-sm font-semibold text-center cursor-pointer hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all duration-200"
             >
-              Hire Me
+              {t("nav.contact")}
             </a>
           </motion.div>
         )}

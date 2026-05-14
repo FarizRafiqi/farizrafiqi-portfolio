@@ -1,8 +1,10 @@
 "use client";
 
 import { personalData, navLinks } from "@/lib/data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -27,7 +29,7 @@ export default function Footer() {
                 href={link.href}
                 className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-200 cursor-pointer"
               >
-                {link.label}
+                {t(`nav.${link.label.toLowerCase()}`)}
               </a>
             ))}
           </div>

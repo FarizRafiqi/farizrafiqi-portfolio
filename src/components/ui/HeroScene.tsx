@@ -107,10 +107,10 @@ function Scene({ isDark }: { isDark: boolean }) {
   return (
     <>
       <WireShape position={[-4.5, 2, 0]} size={0.35} speed={1.2} type="ico" isDark={isDark} />
-      <WireShape position={[4.2, 1.8, -1]} size={0.28} speed={0.9} type="box" isDark={isDark} />
-      <WireShape position={[-3, -2.2, -1]} size={0.25} speed={1.4} type="octa" isDark={isDark} />
-      <WireShape position={[3.8, -2.3, 0]} size={0.3} speed={1.0} type="ico" isDark={isDark} />
-      <WireShape position={[0.5, 3.2, -1.5]} size={0.22} speed={0.7} type="box" isDark={isDark} />
+      <WireShape position={[4.2, 1.8, -1]} size={0.28} speed={0.9} type="octa" isDark={isDark} />
+      <WireShape position={[-3, -2.2, -1]} size={0.25} speed={1.4} type="ico" isDark={isDark} />
+      <WireShape position={[3.8, -2.3, 0]} size={0.3} speed={1.0} type="octa" isDark={isDark} />
+      <WireShape position={[0.5, 3.2, -1.5]} size={0.22} speed={0.7} type="ico" isDark={isDark} />
     </>
   );
 }

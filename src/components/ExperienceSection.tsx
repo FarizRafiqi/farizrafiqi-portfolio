@@ -2,7 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Timeline, type TimelineItem } from "@/components/ui/Timeline";
+import { Timeline } from "@/components/ui/Timeline";
+import { experiences } from "@/lib/data";
+import { useLanguage } from "@/context/LanguageContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
   <div className="flex items-center justify-center gap-3 mb-4">
@@ -12,97 +14,26 @@ const SectionLabel = ({ text }: { text: string }) => (
   </div>
 );
 
-const experiences: TimelineItem[] = [
-  {
-    year: "Sep 2025 – Present",
-    title: "Fullstack Engineer",
-    company: "Solusi Teknologi Kreatif (STK)",
-    location: "Jakarta, Indonesia · On-site",
-    type: "full-time",
-    isCurrent: true,
-    description: [
-      "Developing and maintaining full-stack web applications.",
-      "Collaborating with cross-functional teams to deliver software solutions.",
-      "Implementing modern frontend and backend technologies.",
-    ],
-    tags: ["TypeScript", "Vue.js", "Node.js", "Laravel"],
-  },
-  {
-    year: "May 2025 – Aug 2025",
-    title: "Backend Developer",
-    company: "PT. Zamasco Mitra Solusindo",
-    location: "Jakarta, Indonesia · Hybrid",
-    type: "full-time",
-    description: [
-      "Designed and built RESTful APIs for internal business applications.",
-      "Optimized database queries and improved system performance.",
-      "Worked on integrations with third-party services.",
-    ],
-    tags: ["Go", "PHP", "MySQL", "REST API"],
-  },
-  {
-    year: "2022 – 2025",
-    title: "Fullstack Web Developer",
-    company: "Freelance",
-    type: "freelance",
-    description: [
-      "Built custom web applications for clients across various industries.",
-      "Delivered projects including e-commerce platforms and admin dashboards.",
-      "Managed projects end-to-end from requirements to deployment.",
-    ],
-    tags: ["Laravel", "Vue.js", "React", "Tailwind CSS"],
-  },
-  {
-    year: "2023 – 2024",
-    title: "Fullstack Web Developer Intern",
-    company: "MAXY Academy",
-    location: "Remote",
-    type: "internship",
-    description: [
-      "Built and shipped multiple web application features during the internship.",
-      "Worked on frontend interfaces and backend API integrations.",
-      "Participated in agile sprints and code reviews.",
-    ],
-    tags: ["React", "Node.js", "PostgreSQL"],
-  },
-  {
-    year: "2022 – 2023",
-    title: "Head of Academic & Web Development",
-    company: "KSM Multimedia UPNVJ",
-    location: "Depok, Indonesia",
-    type: "leadership",
-    description: [
-      "Led the academic division and organized workshops and technical events.",
-      "Managed the organization's web development projects and mentored members.",
-      "Coordinated cross-division programs and community initiatives.",
-    ],
-    tags: ["Leadership", "Web Dev", "Teaching"],
-  },
-  {
-    year: "2021 – Present",
-    title: "Informatics Engineering",
-    company: "Universitas Pembangunan Nasional Veteran Jakarta (UPNVJ)",
-    location: "Depok, Indonesia",
-    type: "education",
-    description: [
-      "Undergraduate student specializing in software engineering.",
-      "Active in campus organizations and coding competitions.",
-      "Pursuing interests in 3D design, game dev, and machine learning.",
-    ],
-    tags: ["Algorithms", "Software Engineering", "Databases"],
-  },
-];
-
-const stats = [
-  { value: "4+", label: "Years Experience" },
-  { value: "10+", label: "Projects Shipped" },
-  { value: "3+", label: "Companies Worked" },
-  { value: "2+", label: "Internships" },
-];
-
 export default function ExperienceSection() {
+  const { language, t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const stats = [
+    { value: "4+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
+    { value: "10+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
+    { value: "3+", label: language === "en" ? "Companies Worked" : "Perusahaan" },
+    { value: "2+", label: language === "en" ? "Internships" : "Magang" },
+  ];
+
+  // Localize experiences
+  const localizedExperiences = experiences.map((exp) => ({
+    ...exp,
+    year: exp.year[language],
+    title: exp.title[language],
+    company: typeof exp.company === "string" ? exp.company : exp.company[language],
+    description: exp.description[language],
+  }));
 
   return (
     <section id="experience" ref={ref} className="section relative bg-neutral-50 dark:bg-neutral-950">
@@ -119,12 +50,15 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6"
         >
-          <SectionLabel text="Experience" />
+          <SectionLabel text={t("nav.experience")} />
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mt-4">
-            My <span className="gradient-text-cyan">Journey</span>
+            {language === "en" ? "My " : "Perjalanan "}
+            <span className="gradient-text-cyan">{language === "en" ? "Journey" : "Saya"}</span>
           </h2>
           <p className="text-neutral-500 dark:text-neutral-400 mt-4 max-w-xl mx-auto">
-            Professional experience, internships, freelance work, and leadership roles that shaped who I am as a developer.
+            {language === "en" 
+              ? "Professional experience, internships, freelance work, and leadership roles that shaped who I am as a developer."
+              : "Pengalaman profesional, magang, kerja freelance, dan peran kepemimpinan yang membentuk saya sebagai pengembang."}
           </p>
         </motion.div>
 
@@ -147,7 +81,7 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Timeline */}
-        <Timeline items={experiences} />
+        <Timeline items={localizedExperiences as any} />
 
         {/* LinkedIn CTA */}
         <motion.div
@@ -165,7 +99,7 @@ export default function ExperienceSection() {
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
-            Full Profile on LinkedIn
+            {language === "en" ? "Full Profile on LinkedIn" : "Profil Lengkap di LinkedIn"}
           </a>
         </motion.div>
       </div>

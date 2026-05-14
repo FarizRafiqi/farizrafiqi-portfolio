@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
+import { useLanguage } from "@/context/LanguageContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
   <div className="flex items-center justify-center gap-3 mb-4">
@@ -26,17 +27,23 @@ const frontendTechs = [
 const backendTechs = [
   { name: "Laravel", slug: "laravel" },
   { name: "PHP", slug: "php" },
-  { name: "Go", slug: "go" },
-  { name: "Python", slug: "python" },
+  { name: "NestJS", slug: "nestjs" },
+  { name: "Elasticsearch", slug: "elasticsearch" },
   { name: "Node.js", slug: "nodedotjs" },
   { name: "Express", slug: "express" },
+  { name: "Go", slug: "go" },
+  { name: "Python", slug: "python" },
   { name: "MySQL", slug: "mysql" },
   { name: "MongoDB", slug: "mongodb" },
 ];
 
 const toolsTechs = [
-  { name: "Git", slug: "git" },
+  { name: "Linux", slug: "linux" },
+  { name: "Ubuntu", slug: "ubuntu" },
+  { name: "Debian", slug: "debian" },
+  { name: "Proxmox", slug: "proxmox" },
   { name: "Docker", slug: "docker" },
+  { name: "Git", slug: "git" },
   { name: "Figma", slug: "figma" },
   { name: "Blender", slug: "blender" },
   { name: "Three.js", slug: "threedotjs" },
@@ -45,13 +52,14 @@ const toolsTechs = [
 ];
 
 const exploringTechs = [
-  { name: "Three.js", slug: "threedotjs" },
-  { name: "Blender", slug: "blender" },
-  { name: "Unity", slug: "unity" },
-  { name: "Capacitor", slug: "capacitor" },
+  { name: "Linux", slug: "linux" },
+  { name: "Docker", slug: "docker" },
+  { name: "NestJS", slug: "nestjs" },
+  { name: "Proxmox", slug: "proxmox" },
 ];
 
 export default function SkillsSection() {
+  const { language, t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -73,12 +81,13 @@ export default function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <SectionLabel text="Skills" />
+          <SectionLabel text={t("nav.skills")} />
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mt-4">
-            Tech <span className="gradient-text-cyan">Stack</span>
+            {language === "en" ? "Tech " : "Keahlian "}
+            <span className="gradient-text-cyan">{language === "en" ? "Stack" : "Teknologi"}</span>
           </h2>
           <p className="text-neutral-500 dark:text-neutral-400 mt-4 max-w-xl mx-auto">
-            Technologies I use to craft modern, scalable, and visually impressive applications.
+            {t("skills.subtitle")}
           </p>
         </motion.div>
 
@@ -119,7 +128,9 @@ export default function SkillsSection() {
           transition={{ delay: 0.5 }}
           className="mt-12 rounded-2xl p-8 border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02]"
         >
-          <p className="text-neutral-400 dark:text-neutral-500 text-xs text-center mb-6 uppercase tracking-widest">Currently Exploring</p>
+          <p className="text-neutral-400 dark:text-neutral-500 text-xs text-center mb-6 uppercase tracking-widest">
+            {language === "en" ? "Currently Exploring" : "Sedang Dipelajari"}
+          </p>
           <div className="flex flex-wrap gap-3 justify-center items-center">
             {exploringTechs.map((item) => (
               <motion.div

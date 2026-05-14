@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "Fariz Rafiqi — Software Engineer & 3D Designer",
+  title: "Fariz Rafiqi — Software Engineer | AI & Server Specialist",
   description:
-    "Portfolio of Aulia El Ihza Fariz Rafiqi — a software engineer passionate about full-stack web development, 3D design, game development, and emerging technologies like AR/VR.",
+    "Portfolio of Aulia El Ihza Fariz Rafiqi — a software engineer focused on AI, Server Infrastructure, and Linux systems. Currently working at Solusi Teknologi Kreatif.",
   keywords: [
     "Fariz Rafiqi",
     "Software Engineer",
+    "AI Specialist",
+    "Server Infrastructure",
+    "Linux Engineer",
+    "Proxmox",
+    "NestJS",
     "Full Stack Developer",
-    "3D Designer",
     "Laravel",
     "Vue.js",
     "React",
@@ -18,16 +23,16 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Aulia El Ihza Fariz Rafiqi", url: "https://farizrafiqi.dev" }],
   openGraph: {
-    title: "Fariz Rafiqi — Software Engineer & 3D Designer",
-    description: "Engineering Worlds in Code & Dimension",
+    title: "Fariz Rafiqi — Software Engineer | AI & Server Specialist",
+    description: "Engineering Intelligence in Code & Infrastructure",
     url: "https://farizrafiqi.dev",
     siteName: "Fariz Rafiqi Portfolio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fariz Rafiqi — Software Engineer & 3D Designer",
-    description: "Engineering Worlds in Code & Dimension",
+    title: "Fariz Rafiqi — Software Engineer | AI & Server Specialist",
+    description: "Engineering Intelligence in Code & Infrastructure",
     creator: "@rafiqi_fariz",
   },
 };
@@ -43,14 +48,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange={false}
         >
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

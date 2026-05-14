@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { personalData, skills } from "@/lib/data";
+import { useLanguage } from "@/context/LanguageContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
   <div className="flex items-center gap-3 mb-4">
@@ -13,6 +14,7 @@ const SectionLabel = ({ text }: { text: string }) => (
 );
 
 export default function AboutSection() {
+  const { language, t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -26,10 +28,10 @@ export default function AboutSection() {
   };
 
   const stats = [
-    { value: "6+", label: "Years Experience" },
-    { value: "3+", label: "Projects Shipped" },
-    { value: "5+", label: "Technologies" },
-    { value: "∞", label: "Curiosity" },
+    { value: "6+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
+    { value: "3+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
+    { value: "5+", label: language === "en" ? "Technologies" : "Teknologi" },
+    { value: "∞", label: language === "en" ? "Curiosity" : "Rasa Ingin Tahu" },
   ];
 
   return (
@@ -43,26 +45,14 @@ export default function AboutSection() {
         >
           <div className="space-y-8">
             <motion.div variants={itemVariants} className="text-center lg:text-left">
-              <SectionLabel text="About Me" />
+              <SectionLabel text={t("about.title")} />
               <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mt-4">
                 Hello, I&apos;m <span className="gradient-text">{personalData.shortName}</span>
               </h2>
             </motion.div>
 
             <motion.p variants={itemVariants} className="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
-              As a passionate web developer and technology enthusiast, I find joy in crafting
-              visually stunning and user-friendly websites. With a strong foundation in coding
-              and design principles, I strive to create seamless online experiences.
-            </motion.p>
-
-            <motion.p variants={itemVariants} className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              My journey into software engineering began in <span className="text-black dark:text-white font-medium">2018</span>.
-              I&apos;ve worked as a full-stack developer at a software house in Jakarta,
-              and I&apos;m constantly exploring new frontiers — from{" "}
-              <span className="text-neutral-800 dark:text-neutral-300 font-medium">3D Design</span> and{" "}
-              <span className="text-neutral-800 dark:text-neutral-300 font-medium">Game Development</span> to{" "}
-              <span className="text-neutral-800 dark:text-neutral-300 font-medium">Machine Learning</span> and{" "}
-              <span className="text-neutral-800 dark:text-neutral-300 font-medium">VR/AR</span>.
+              {personalData.bio[language]}
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
@@ -83,7 +73,7 @@ export default function AboutSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white font-medium transition-colors duration-200 cursor-pointer group"
               >
-                View my GitHub
+                {language === "en" ? "View my GitHub" : "Lihat GitHub saya"}
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </motion.div>
@@ -113,7 +103,6 @@ export default function AboutSection() {
                   <p className="text-black dark:text-white font-semibold">{personalData.shortName}</p>
                   <p className="text-neutral-500 text-sm">{personalData.location}</p>
                 </div>
-
               </div>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
