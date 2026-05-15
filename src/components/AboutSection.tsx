@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { personalData, skills } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -18,11 +18,11 @@ export default function AboutSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
