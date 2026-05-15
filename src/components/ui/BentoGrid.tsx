@@ -56,13 +56,17 @@ export function BentoCard({
     >
       {/* Image */}
       <div className="absolute inset-0">
-        <Image
-          src={project.images[0]}
-          alt={project.title[language]}
-          fill
-          className="object-cover object-top transition-transform duration-1000 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 66vw"
-        />
+        {project.images && project.images[0] ? (
+          <Image
+            src={project.images[0]}
+            alt={project.title[language]}
+            fill
+            className="object-cover object-top transition-transform duration-1000 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 66vw"
+          />
+        ) : (
+          <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900" />
+        )}
         {/* Gradient overlay */}
         <div className={cn(
           "absolute inset-0",
@@ -111,12 +115,12 @@ export function BentoCard({
               {project.title[language]}
             </h3>
             <p className="text-sm text-neutral-300 line-clamp-2 leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-6 group-hover:translate-y-0 transition-all duration-500">
-              {project.description[language].split(/(workfrom\.id)/g).map((part, i) => 
+              {project.description[language].split(/(workfrom\.id)/g).map((part, i) =>
                 part === "workfrom.id" ? (
-                  <a 
-                    key={i} 
-                    href="https://workfrom.id" 
-                    target="_blank" 
+                  <a
+                    key={i}
+                    href="https://workfrom.id"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-400 hover:underline font-medium"
                     onClick={(e) => e.stopPropagation()}

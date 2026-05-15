@@ -96,14 +96,20 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0"
                 >
-                  <Image
-                    src={project.images[currentImageIndex]}
-                    alt={project.title[language]}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 768px) 90vw, 720px"
-                    priority
-                  />
+                  {project.images && project.images[currentImageIndex] ? (
+                    <Image
+                      src={project.images[currentImageIndex]}
+                      alt={project.title[language]}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 90vw, 720px"
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center">
+                      <span className="text-neutral-400 text-sm">No image available</span>
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
 

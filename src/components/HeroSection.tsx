@@ -79,7 +79,7 @@ export default function HeroSection() {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-neutral-950 transition-colors duration-500"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 transition-colors duration-500"
     >
       {mounted && (
         <>
@@ -101,7 +101,7 @@ export default function HeroSection() {
             >
               {/* Main Heading */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-none">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-black dark:text-white leading-none">
                   {personalData.shortName.split(" ").map((word, i) => (
                     <span key={i} className="block">
                       {i === 1 ? <span className="gradient-text">{word}</span> : word}
@@ -113,13 +113,13 @@ export default function HeroSection() {
               {/* Tagline */}
               <motion.p
                 variants={itemVariants}
-                className="text-xl md:text-2xl font-medium text-neutral-400 max-w-xl"
+                className="text-xl md:text-2xl font-medium text-neutral-700 dark:text-neutral-200 max-w-xl"
               >
                 {personalData.tagline[language]}
               </motion.p>
               <motion.p
                 variants={itemVariants}
-                className="text-base md:text-lg text-neutral-500 max-w-2xl leading-relaxed"
+                className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl leading-relaxed"
               >
                 {personalData.title[language]} — {t("hero.title")}
               </motion.p>
@@ -128,7 +128,7 @@ export default function HeroSection() {
               <motion.div variants={itemVariants} className="flex items-center gap-4 flex-wrap justify-center">
                 <a
                   href="#projects"
-                  className="group flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all duration-200 cursor-pointer shadow-md"
+                  className="group flex items-center gap-2 px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all duration-200 cursor-pointer shadow-md"
                 >
                   {t("hero.viewProjects")}
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +137,7 @@ export default function HeroSection() {
                 </a>
                 <a
                   href="#contact"
-                  className="px-6 py-3 rounded-xl border border-white/10 text-white font-semibold text-sm hover:border-white/25 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer"
+                  className="px-6 py-3 rounded-xl border border-black/[0.12] dark:border-white/10 text-black dark:text-white font-semibold text-sm hover:border-black/25 dark:hover:border-white/25 hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all duration-200 cursor-pointer"
                 >
                   {t("hero.getInTouch")}
                 </a>
