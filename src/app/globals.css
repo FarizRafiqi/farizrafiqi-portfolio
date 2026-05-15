@@ -188,25 +188,37 @@ h1, h2, h3, h4, h5, h6 {
 /* ─────────────────────────────────────────────
    Animations
    ───────────────────────────────────────────── */
+:root {
+  --aurora-opacity-start: 0.12;
+  --aurora-opacity-mid: 0.2;
+  --aurora-opacity-end: 0.15;
+  --pulse-glow-color-1: rgba(0,0,0,0.2);
+  --pulse-glow-color-2: rgba(0,0,0,0.4);
+  --pulse-glow-color-3: rgba(0,0,0,0.1);
+}
+
+.dark {
+  --aurora-opacity-start: 0.06;
+  --aurora-opacity-mid: 0.1;
+  --aurora-opacity-end: 0.08;
+  --pulse-glow-color-1: rgba(255,255,255,0.3);
+  --pulse-glow-color-2: rgba(255,255,255,0.6);
+  --pulse-glow-color-3: rgba(255,255,255,0.15);
+}
+
 @keyframes aurora {
   0%, 100% {
     transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1);
-    opacity: 0.12;
+    opacity: var(--aurora-opacity-start);
   }
   33% {
     transform: translateX(-50%) translateY(-50%) rotate(120deg) scale(1.1);
-    opacity: 0.2;
+    opacity: var(--aurora-opacity-mid);
   }
   66% {
     transform: translateX(-50%) translateY(-50%) rotate(240deg) scale(0.9);
-    opacity: 0.15;
+    opacity: var(--aurora-opacity-end);
   }
-}
-
-.dark @keyframes aurora {
-  0%, 100% { opacity: 0.06; }
-  33% { opacity: 0.1; }
-  66% { opacity: 0.08; }
 }
 
 @keyframes float {
@@ -215,13 +227,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(0,0,0,0.2); }
-  50% { box-shadow: 0 0 20px rgba(0,0,0,0.4), 0 0 40px rgba(0,0,0,0.1); }
-}
-
-.dark @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,0.3); }
-  50% { box-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.15); }
+  0%, 100% { box-shadow: 0 0 8px var(--pulse-glow-color-1); }
+  50% { box-shadow: 0 0 20px var(--pulse-glow-color-2), 0 0 40px var(--pulse-glow-color-3); }
 }
 
 @keyframes spin-slow {
