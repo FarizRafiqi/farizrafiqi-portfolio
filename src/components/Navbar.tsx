@@ -41,8 +41,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "#home", label: t("nav.home") },
-    { href: "#projects", label: t("nav.projects") },
     { href: "#about", label: t("nav.about") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#skills", label: t("nav.skills") },
+    { href: "#experience", label: t("nav.experience") },
     { href: "#contact", label: t("nav.contact") },
   ];
 
@@ -97,10 +99,19 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "projects", "about", "contact"];
+      const sections = ["home", "about", "projects", "skills", "experience", "contact"];
+
+      // Check if we are at the bottom of the page
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+
+      if (isBottom) {
+        setActiveSection("contact");
+        return;
+      }
+
       for (const section of sections.slice().reverse()) {
         const el = document.getElementById(section);
-        if (el && window.scrollY >= el.offsetTop - 120) {
+        if (el && window.scrollY >= el.offsetTop - 150) {
           setActiveSection(section);
           break;
         }

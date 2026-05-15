@@ -67,9 +67,9 @@ export const experienceSchema = defineType({
         ],
       },
     }),
-    defineField({ 
-      name: "description", 
-      title: "Description Points", 
+    defineField({
+      name: "description",
+      title: "Description Points",
       type: "object",
       fields: [
         { name: "en", title: "English", type: "array", of: [{ type: "string" }] },
@@ -94,15 +94,17 @@ export const bioSchema = defineType({
     defineField({ name: "location", title: "Location", type: "string" }),
     defineField({ name: "email", title: "Email", type: "string" }),
     defineField({ name: "photo", title: "Profile Photo", type: "image", options: { hotspot: true } }),
-    defineField({ 
-      name: "socials", 
-      title: "Social Links", 
+    defineField({
+      name: "socials",
+      title: "Social Links",
       type: "object",
       fields: [
         { name: "github", type: "url" },
         { name: "linkedin", type: "url" },
         { name: "instagram", type: "url" },
         { name: "youtube", type: "url" },
+        { name: "twitter", type: "url" },
+        { name: "tiktok", type: "url" },
       ]
     }),
   ],

@@ -186,7 +186,7 @@ export const projects = [
     tags: ["Ionic React", "Capacitor", "TypeScript", "Node.js"],
     category: { en: "Mobile", id: "Mobile" },
     images: ["/img/portfolio/madina-inventory.png"],
-    githubUrl: "https://github.com/FarizRafiqi/madina-inventory",
+    githubUrl: "https://github.com/FarizRafiqi/MadinaInventoryApp",
     featured: true,
   },
   {
@@ -214,7 +214,7 @@ export const projects = [
     tags: ["Laravel", "Vue.js", "Tailwind CSS"],
     category: { en: "Full Stack", id: "Full Stack" },
     images: ["/img/portfolio/kania-jaya.png"],
-    githubUrl: "https://github.com/FarizRafiqi/kania-jaya-eshop",
+    githubUrl: "https://github.com/FarizRafiqi/TokoBajuKaniaJaya",
     featured: false,
   },
   {
