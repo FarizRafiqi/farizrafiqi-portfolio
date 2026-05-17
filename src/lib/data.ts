@@ -46,7 +46,7 @@ export const experiences = [
         "Mengimplementasikan teknologi frontend dan backend modern.",
       ]
     },
-    tags: ["TypeScript", "Vue.js", "Node.js", "Laravel"],
+    tags: ["Golang", "Next.js", "Kubernetes", "NestJS", "Docker", "Ubuntu", "PostgreSQL", "React.js", "TypeScript", "JavaScript"],
   },
   {
     year: { en: "May 2025 – Aug 2025", id: "Mei 2025 – Agt 2025" },

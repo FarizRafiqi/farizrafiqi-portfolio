@@ -117,7 +117,20 @@ export const skillSchema = defineType({
   fields: [
     defineField({ name: "name", title: "Name", type: "string" }),
     defineField({ name: "slug", title: "SimpleIcons Slug", type: "string" }),
-    defineField({ name: "category", title: "Category", type: "string", options: { list: ["Frontend", "Backend", "Tools & 3D"] } }),
+    defineField({ 
+      name: "category", 
+      title: "Categories", 
+      type: "array", 
+      of: [{ type: "string" }],
+      options: { 
+        list: [
+          { title: "Frontend", value: "frontend" },
+          { title: "Backend", value: "backend" },
+          { title: "Tools & 3D", value: "tools" },
+          { title: "Exploring / Interests", value: "exploring" }
+        ] 
+      } 
+    }),
     defineField({ name: "order", title: "Order", type: "number" }),
   ],
 });
