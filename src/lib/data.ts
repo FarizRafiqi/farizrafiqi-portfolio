@@ -162,17 +162,17 @@ export const projects = [
     featured: true,
   },
   {
-    id: "megamendung",
-    title: { en: "MegaMendung PPOB", id: "PPOB MegaMendung" },
-    subtitle: { en: "Electric Bill Payment System", id: "Sistem Pembayaran Tagihan Listrik" },
+    id: "nexpay",
+    title: { en: "NexPay", id: "NexPay" },
+    subtitle: { en: "PPOB & Bill Payment System", id: "Sistem Pembayaran PPOB & Tagihan" },
     description: {
-      en: "PPOB website for checking and paying electric bills, integrated with Midtrans payment gateway.",
-      id: "Situs web PPOB untuk mengecek dan membayar tagihan listrik, terintegrasi dengan payment gateway Midtrans."
+      en: "A modern PPOB (Payment Point Online Bank) web application for checking and paying electricity bills, fully integrated with Midtrans payment gateway. Built with Laravel and React.js via Inertia.js for a seamless single-page experience. Features include real-time billing checks, payment history, role-based user management (Admin, Bank, Customer), and comprehensive reporting.",
+      id: "Aplikasi web PPOB modern untuk mengecek dan membayar tagihan listrik, terintegrasi penuh dengan Midtrans payment gateway. Dibangun dengan Laravel dan React.js melalui Inertia.js untuk pengalaman single-page yang mulus. Fitur termasuk pengecekan tagihan real-time, riwayat pembayaran, manajemen pengguna berbasis peran (Admin, Bank, Pelanggan), dan pelaporan komprehensif."
     },
-    tags: ["Laravel", "Livewire", "Midtrans"],
+    tags: ["Laravel", "React.js", "Inertia.js", "Tailwind CSS", "MySQL", "Midtrans"],
     category: { en: "Full Stack", id: "Full Stack" },
-    images: ["/img/portfolio/kaladwipa.png"],
-    githubUrl: "https://github.com/FarizRafiqi/megamendung-ppob",
+    images: ["/img/portfolio/nexpay/1-landing.png", "/img/portfolio/nexpay/2-about-us.png", "/img/portfolio/nexpay/3-how-to-pay.png", "/img/portfolio/nexpay/4-faq.png", "/img/portfolio/nexpay/5-dashboard.png"],
+    githubUrl: "https://github.com/FarizRafiqi/nexpay",
     featured: true,
   },
   {
