@@ -64,19 +64,19 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
-            className="group/card relative rounded-2xl p-8 border border-black/[0.07] dark:border-white/[0.06] bg-neutral-50 dark:bg-white/[0.02] hover:border-black/15 dark:hover:border-white/15 transition-all duration-300"
+            className="group/card relative rounded-2xl p-6 sm:p-8 border border-black/[0.07] dark:border-white/[0.06] bg-neutral-50 dark:bg-white/[0.02] hover:border-black/15 dark:hover:border-white/15 transition-all duration-300"
           >
             <div className="flex items-center justify-between flex-wrap gap-4">
               <a
                 href={`mailto:${personalData.email}?subject=${encodeURIComponent(language === "en" ? "Collaboration Inquiry" : "Pertanyaan Kolaborasi")}&body=${encodeURIComponent(language === "en" ? "Hi Fariz,\n\nI saw your portfolio and would like to discuss..." : "Halo Fariz,\n\nSaya melihat portfolio Anda dan ingin berdiskusi mengenai...")}`}
-                className="flex items-center gap-4 cursor-pointer flex-1"
+                className="flex items-center gap-4 cursor-pointer flex-1 min-w-[200px]"
               >
-                <div className="w-12 h-12 rounded-xl bg-black/[0.05] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/10 flex items-center justify-center group-hover/card:bg-black/10 dark:group-hover/card:bg-white/10 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-black/[0.05] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/10 flex items-center justify-center group-hover/card:bg-black/10 dark:group-hover/card:bg-white/10 transition-colors flex-shrink-0">
                   <svg className="w-5 h-5 text-neutral-600 dark:text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-black dark:text-white font-medium group-hover/card:text-cyan-500 dark:group-hover/card:text-cyan-400 transition-colors">{personalData.email}</p>
+                  <p className="text-black dark:text-white font-medium group-hover/card:text-cyan-500 dark:group-hover/card:text-cyan-400 transition-colors text-sm sm:text-base break-all sm:break-normal">{personalData.email}</p>
                 </div>
               </a>
               <button

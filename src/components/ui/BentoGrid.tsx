@@ -82,7 +82,7 @@ export function BentoCard({
       </div>
 
       {/* Action buttons */}
-      <div className="absolute top-6 right-6 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+      <div className="absolute top-6 right-6 flex gap-2 z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 transform translate-y-0 md:translate-y-2 md:group-hover:translate-y-0">
         {project.githubUrl && (
           <a
             href={project.githubUrl}
@@ -111,10 +111,10 @@ export function BentoCard({
       <div className="absolute bottom-0 left-0 right-0 p-8 z-10 transition-all duration-500">
         <div className="flex items-end justify-between gap-4">
           <div className="flex-1 overflow-hidden">
-            <h3 className="text-2xl font-bold text-white mb-2 leading-tight transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+            <h3 className="text-2xl font-bold text-white mb-2 leading-tight transform translate-y-0 md:translate-y-6 md:group-hover:translate-y-0 transition-transform duration-500">
               {project.title[language]}
             </h3>
-            <p className="text-sm text-neutral-300 line-clamp-2 leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-6 group-hover:translate-y-0 transition-all duration-500">
+            <p className="text-sm text-neutral-300 line-clamp-2 leading-relaxed opacity-100 md:opacity-0 md:group-hover:opacity-100 transform translate-y-0 md:translate-y-6 md:group-hover:translate-y-0 transition-all duration-500">
               {project.description[language].split(/(workfrom\.id)/g).map((part, i) =>
                 part === "workfrom.id" ? (
                   <a
@@ -131,7 +131,7 @@ export function BentoCard({
               )}
             </p>
           </div>
-          <div className="flex-shrink-0 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-white/10 backdrop-blur-md group-hover:bg-cyan-500 group-hover:border-cyan-400">
+          <div className="flex-shrink-0 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 bg-white/10 backdrop-blur-md group-hover:bg-cyan-500 group-hover:border-cyan-400">
             <ArrowUpRight size={20} className="text-white" />
           </div>
         </div>

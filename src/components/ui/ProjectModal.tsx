@@ -118,13 +118,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-black/50"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 hover:bg-black/50"
                   >
                     <ChevronLeft size={20} />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-black/50"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 hover:bg-black/50"
                   >
                     <ChevronRight size={20} />
                   </button>
@@ -149,7 +149,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             {/* Content */}
-            <div className="p-8 -mt-10 relative z-10">
+            <div className="p-5 sm:p-8 -mt-10 relative z-10">
               <div className="flex gap-0 flex-wrap mb-4">
                 <TechIconStack tags={project.tags} variant="modal" isStack={false} />
               </div>

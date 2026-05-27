@@ -29,8 +29,8 @@ export default function AboutSection() {
 
   const stats = [
     { value: "6+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
-    { value: "3+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
-    { value: "5+", label: language === "en" ? "Technologies" : "Teknologi" },
+    { value: "10+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
+    { value: "30+", label: language === "en" ? "Technologies" : "Teknologi" },
     { value: "∞", label: language === "en" ? "Curiosity" : "Rasa Ingin Tahu" },
   ];
 

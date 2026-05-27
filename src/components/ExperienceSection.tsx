@@ -20,7 +20,7 @@ export default function ExperienceSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const stats = [
-    { value: "4+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
+    { value: "6+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
     { value: "10+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
     { value: "3+", label: language === "en" ? "Companies Worked" : "Perusahaan" },
     { value: "2+", label: language === "en" ? "Internships" : "Magang" },
