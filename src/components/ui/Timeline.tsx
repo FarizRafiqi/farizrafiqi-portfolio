@@ -42,8 +42,8 @@ export function Timeline({ items }: TimelineProps) {
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={cn(
