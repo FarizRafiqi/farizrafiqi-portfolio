@@ -57,8 +57,8 @@ export default function ExperienceSection() {
           </h2>
           <p className="text-neutral-500 dark:text-neutral-400 mt-4 max-w-xl mx-auto">
             {language === "en" 
-              ? "Professional experience, internships, freelance work, and leadership roles that shaped who I am as a developer."
-              : "Pengalaman profesional, magang, kerja freelance, dan peran kepemimpinan yang membentuk saya sebagai pengembang."}
+              ? "Professional experience, internships, and freelance work that shaped who I am as a developer."
+              : "Pengalaman profesional, magang, dan kerja freelance yang membentuk saya sebagai pengembang."}
           </p>
         </motion.div>
 

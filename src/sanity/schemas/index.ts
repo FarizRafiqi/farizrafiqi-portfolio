@@ -135,4 +135,121 @@ export const skillSchema = defineType({
   ],
 });
 
-export const schemaTypes = [projectSchema, experienceSchema, bioSchema, skillSchema, localeString, localeText];
+export const articleSchema = defineType({
+  name: "article",
+  title: "Article / Blog Post",
+  type: "document",
+  fields: [
+    defineField({ name: "title", title: "Title", type: "localeString" }),
+    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title.en" } }),
+    defineField({ name: "publishedAt", title: "Published At", type: "datetime" }),
+    defineField({ name: "mainImage", title: "Main Image", type: "image", options: { hotspot: true } }),
+    defineField({ name: "excerpt", title: "Excerpt", type: "localeText" }),
+    defineField({
+      name: "content",
+      title: "Content",
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [
+            { type: "block" },
+            { type: "image", options: { hotspot: true } }
+          ]
+        },
+        {
+          name: "id",
+          title: "Indonesian",
+          type: "array",
+          of: [
+            { type: "block" },
+            { type: "image", options: { hotspot: true } }
+          ]
+        }
+      ]
+    }),
+    defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "string" }]
+    })
+  ],
+  preview: {
+    select: { title: "title.en", media: "mainImage" }
+  }
+});
+
+export const pitchSchema = defineType({
+  name: "pitch",
+  title: "Application Pitch",
+  type: "document",
+  fields: [
+    defineField({
+      name: "companyName",
+      title: "Company Name",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "companyName",
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "role",
+      title: "Target Role",
+      type: "string",
+      description: "e.g., Frontend Developer, Backend Engineer. Determines the default role customization.",
+      options: {
+        list: [
+          { title: "Frontend Engineer", value: "frontend" },
+          { title: "Backend Engineer", value: "backend" },
+          { title: "Fullstack Engineer", value: "fullstack" },
+          { title: "Mobile Engineer", value: "mobile" },
+          { title: "3D & VR Developer", value: "3d" },
+        ]
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "greeting",
+      title: "Greeting Message",
+      type: "localeText",
+      description: "Personalized welcome message for the recruiters.",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "selectedProjects",
+      title: "Selected Projects (Top 3)",
+      description: "Choose up to 3 projects to feature at the top of the grid.",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "project" }] }],
+      validation: (Rule) => Rule.max(3),
+    }),
+  ],
+  preview: {
+    select: {
+      title: "companyName",
+      subtitle: "role",
+    },
+  },
+});
+
+export const schemaTypes = [
+  projectSchema,
+  experienceSchema,
+  bioSchema,
+  skillSchema,
+  articleSchema,
+  pitchSchema,
+  localeString,
+  localeText
+];

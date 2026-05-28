@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import { personalData } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCustomization } from "@/context/CustomizationContext";
 import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
 
@@ -58,6 +59,8 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
   const ref = useRef(null);
 
+  const { role, pitch } = useCustomization();
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -74,6 +77,60 @@ export default function HeroSection() {
     hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
   };
+
+  const roleTitles: Record<string, { en: string; id: string }> = {
+    frontend: {
+      en: "Frontend Engineer | React, Next.js, TypeScript & Ionic",
+      id: "Frontend Engineer | React, Next.js, TypeScript & Ionic",
+    },
+    backend: {
+      en: "Backend Engineer | Go, NestJS, Laravel & Kubernetes",
+      id: "Backend Engineer | Go, NestJS, Laravel & Kubernetes",
+    },
+    fullstack: {
+      en: "Fullstack Engineer | Next.js, Go, NestJS & Cloud Infrastructure",
+      id: "Fullstack Engineer | Next.js, Go, NestJS & Infrastruktur Cloud",
+    },
+    mobile: {
+      en: "Mobile Engineer | Kotlin, Ionic React & Capacitor",
+      id: "Mobile Engineer | Kotlin, Ionic React & Capacitor",
+    },
+    "3d": {
+      en: "3D & VR Developer | Unity, C#, Three.js & Blender",
+      id: "Pengembang 3D & VR | Unity, C#, Three.js & Blender",
+    },
+  };
+
+  const roleTaglines: Record<string, { en: string; id: string }> = {
+    frontend: {
+      en: "Engineering Premium and Interactive User Interfaces",
+      id: "Merekayasa Antarmuka Pengguna yang Premium dan Interaktif",
+    },
+    backend: {
+      en: "Designing Scalable APIs and Robust Server Architecture",
+      id: "Merancang API Terukur dan Arsitektur Server yang Andal",
+    },
+    fullstack: {
+      en: "Bridging Backend Robustness with Premium Frontend Experiences",
+      id: "Menghubungkan Keandalan Backend dengan Pengalaman Frontend Premium",
+    },
+    mobile: {
+      en: "Building High-Performance Native & Multiplatform Mobile Apps",
+      id: "Membangun Aplikasi Mobile Native & Multiplatform Berkinerja Tinggi",
+    },
+    "3d": {
+      en: "Creating Immersive 3D Experiences & Interactive Virtual Realities",
+      id: "Menciptakan Pengalaman 3D Imersif & Virtual Reality Interaktif",
+    },
+  };
+
+  const displayedTitle = (role && roleTitles[role]) 
+    ? roleTitles[role][language] 
+    : personalData.title[language];
+
+  const displayedTagline = (role && roleTaglines[role])
+    ? roleTaglines[role][language]
+    : personalData.tagline[language];
 
   return (
     <section
@@ -99,6 +156,23 @@ export default function HeroSection() {
               animate="show"
               className="flex flex-col items-center gap-6"
             >
+              {/* Personalized Pitch Banner */}
+              {pitch && (
+                <motion.div
+                  variants={itemVariants}
+                  className="mb-2 p-5 md:p-6 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 dark:bg-cyan-500/10 backdrop-blur-md max-w-2xl mx-auto text-left relative overflow-hidden shadow-lg shadow-cyan-500/5"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/25 mb-4">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+                    Special Pitch for {pitch.companyName}
+                  </span>
+                  <p className="text-sm md:text-base text-neutral-800 dark:text-neutral-200 leading-relaxed font-medium">
+                    "{pitch.greeting[language] || pitch.greeting.en}"
+                  </p>
+                </motion.div>
+              )}
+
               {/* Main Heading */}
               <motion.div variants={itemVariants} className="space-y-2">
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-black dark:text-white leading-none">
@@ -115,13 +189,13 @@ export default function HeroSection() {
                 variants={itemVariants}
                 className="text-xl md:text-2xl font-medium text-neutral-700 dark:text-neutral-200 max-w-xl"
               >
-                {personalData.tagline[language]}
+                {displayedTagline}
               </motion.p>
               <motion.p
                 variants={itemVariants}
                 className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl leading-relaxed"
               >
-                {personalData.title[language]} — {t("hero.title")}
+                {displayedTitle} — {t("hero.title")}
               </motion.p>
 
               {/* CTAs */}

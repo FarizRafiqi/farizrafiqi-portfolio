@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import React from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export type TimelineItem = {
   year: string;
@@ -16,12 +17,12 @@ export type TimelineItem = {
   isCurrent?: boolean;
 };
 
-const typeConfig: Record<TimelineItem["type"], { label: string }> = {
-  "full-time":  { label: "Full-time"  },
-  "internship": { label: "Internship" },
-  "freelance":  { label: "Freelance"  },
-  "education":  { label: "Education"  },
-  "leadership": { label: "Leadership" },
+const typeConfig: Record<TimelineItem["type"], { en: string; id: string }> = {
+  "full-time":  { en: "Full-time", id: "Penuh Waktu" },
+  "internship": { en: "Internship", id: "Magang" },
+  "freelance":  { en: "Freelance", id: "Freelance" },
+  "education":  { en: "Education", id: "Pendidikan" },
+  "leadership": { en: "Leadership", id: "Kepemimpinan" },
 };
 
 interface TimelineProps {
@@ -113,9 +114,10 @@ function CardContent({
   align,
 }: {
   item: TimelineItem;
-  cfg: { label: string };
+  cfg: { en: string; id: string };
   align?: "right";
 }) {
+  const { language } = useLanguage();
   return (
     <div
       className={cn(
@@ -135,12 +137,12 @@ function CardContent({
               : "bg-black/[0.03] dark:bg-white/[0.03] border-black/10 dark:border-white/10 text-neutral-500"
           )}
         >
-          {cfg.label}
+          {cfg[language]}
         </span>
         {item.isCurrent && (
           <span className="flex items-center gap-1 text-[10px] text-neutral-700 dark:text-neutral-300 font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white animate-pulse" />
-            Current
+            {language === "en" ? "Current" : "Sekarang"}
           </span>
         )}
       </div>

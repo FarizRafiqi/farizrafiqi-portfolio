@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { ProjectModal } from "@/components/ui/ProjectModal";
 import { BentoGrid, BentoCard } from "@/components/ui/BentoGrid";
 import { projects } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCustomization } from "@/context/CustomizationContext";
+import { cn } from "@/lib/utils";
 
 const SectionLabel = ({ text }: { text: string }) => (
   <div className="flex items-center justify-center gap-3 mb-4">
@@ -16,16 +18,120 @@ const SectionLabel = ({ text }: { text: string }) => (
   </div>
 );
 
+type TabType = "all" | "web" | "mobile" | "3d";
+
 export default function ProjectsSection() {
   const { language, t } = useLanguage();
+  const { role, pitch } = useCustomization();
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [showAll, setShowAll] = useState(false);
 
-  // Group projects
-  const featuredProjects = projects.filter((p) => p.featured);
-  const otherProjects = projects.filter((p) => !p.featured);
+  // Map role params to default tab categories
+  const defaultTab = useMemo<TabType>(() => {
+    if (!role) return "all";
+    if (["backend", "frontend", "fullstack", "web"].includes(role)) return "web";
+    if (role === "mobile") return "mobile";
+    if (["3d", "game"].includes(role)) return "3d";
+    return "all";
+  }, [role]);
+
+  const [activeTab, setActiveTab] = useState<TabType>("all");
+
+  // Update tab automatically when defaultTab changes
+  useEffect(() => {
+    if (defaultTab !== "all") {
+      setActiveTab(defaultTab);
+    }
+  }, [defaultTab]);
+
+  const mainTabs = [
+    { type: "all" as const, labelKey: "projects.tab.all" },
+    { type: "web" as const, labelKey: "projects.tab.web" },
+    { type: "mobile" as const, labelKey: "projects.tab.mobile" },
+    { type: "3d" as const, labelKey: "projects.tab.3d" },
+  ];
+
+  // Logic for dynamic spans in filtered bento grids
+  const getSpanClass = (index: number, total: number) => {
+    if (total === 1) return "md:col-span-3 md:row-span-1";
+    if (total === 2) {
+      return index === 0 ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
+    }
+    
+    // Last item, starts a new row alone (starts at index % 2 === 0)
+    if (index === total - 1 && index % 2 === 0) {
+      return "md:col-span-3 md:row-span-1";
+    }
+    
+    // Alternating patterns: [2, 1] then [1, 2]
+    const rowIndex = Math.floor(index / 2);
+    if (rowIndex % 2 === 0) {
+      return index % 2 === 0 ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
+    } else {
+      return index % 2 === 0 ? "md:col-span-1 md:row-span-1" : "md:col-span-2 md:row-span-1";
+    }
+  };
+
+  // Reorder/feature projects based on Custom Pitch selections
+  const customizedProjects = useMemo(() => {
+    let list = [...projects];
+    if (pitch?.selectedProjects && pitch.selectedProjects.length > 0) {
+      const matched: typeof projects = [];
+      const remaining: typeof projects = [];
+      
+      projects.forEach((proj) => {
+        const isSelected = pitch.selectedProjects?.some((sp) => {
+          const slugLower = sp.slug.current.toLowerCase();
+          const projIdLower = proj.id.toLowerCase();
+          return slugLower === projIdLower ||
+                 slugLower.includes(projIdLower) ||
+                 projIdLower.includes(slugLower) ||
+                 sp.title.en.toLowerCase() === proj.title.en.toLowerCase();
+        });
+        
+        if (isSelected) {
+          matched.push({ ...proj, featured: true }); // Move to featured to display in top Bento grid
+        } else {
+          remaining.push(proj);
+        }
+      });
+      
+      // Sort matched projects by the order specified in Sanity CMS
+      matched.sort((a, b) => {
+        const indexA = pitch.selectedProjects!.findIndex(sp => 
+          sp.slug.current.toLowerCase().includes(a.id.toLowerCase()) || a.id.toLowerCase().includes(sp.slug.current.toLowerCase())
+        );
+        const indexB = pitch.selectedProjects!.findIndex(sp => 
+          sp.slug.current.toLowerCase().includes(b.id.toLowerCase()) || b.id.toLowerCase().includes(sp.slug.current.toLowerCase())
+        );
+        return indexA - indexB;
+      });
+
+      list = [...matched, ...remaining];
+    }
+    return list;
+  }, [pitch]);
+
+  // Group projects for default "all" tab
+  const featuredProjects = customizedProjects.filter((p) => p.featured);
+  const otherProjects = customizedProjects.filter((p) => !p.featured);
+
+  // Filtered projects list for active tab (if not "all")
+  const filteredList = customizedProjects.filter((p) => {
+    if (activeTab === "all") return true;
+    if (activeTab === "web") {
+      return p.categoryType === "fullstack" || p.categoryType === "frontend" || p.categoryType === "backend" || p.categoryType === "web";
+    }
+    if (activeTab === "mobile") {
+      return p.categoryType === "mobile" || p.tags.includes("Ionic") || p.tags.includes("Capacitor");
+    }
+    if (activeTab === "3d") {
+      return p.categoryType === "3d" || p.categoryType === "game" || p.categoryType === "others" || p.id === "vrvttj";
+    }
+    return false;
+  });
 
   return (
     <section id="projects" ref={sectionRef} className="section relative bg-neutral-50 dark:bg-neutral-950 overflow-hidden">
@@ -41,7 +147,7 @@ export default function ProjectsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <SectionLabel text="Portfolio" />
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mt-4">
@@ -53,84 +159,166 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <BentoGrid className="mb-4">
-          {featuredProjects.map((project, i) => {
-            let spanClass = "md:col-span-1 md:row-span-1";
-            if (i === 0) spanClass = "md:col-span-2 md:row-span-1"; // Attendance
-            if (i === 1) spanClass = "md:col-span-1 md:row-span-1"; // Flowbyte
-            if (i === 2) spanClass = "md:col-span-1 md:row-span-1"; // Kaladwipa
-            if (i === 3) spanClass = "md:col-span-2 md:row-span-1"; // MegaMendung
-            if (i === 4) spanClass = "md:col-span-2 md:row-span-1"; // Madina
-            if (i === 5) spanClass = "md:col-span-1 md:row-span-1"; // Ankersal
-
+        {/* Tab Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center justify-center gap-6 md:gap-8 mb-12 max-w-2xl mx-auto border-b border-black/[0.05] dark:border-white/[0.05] pb-px"
+        >
+          {mainTabs.map((tab) => {
+            const isActive = activeTab === tab.type;
             return (
-              <BentoCard
-                key={project.id}
-                project={project as any}
-                index={i}
-                onClick={() => setSelectedProject(project)}
-                className={spanClass}
-              />
+              <button
+                key={tab.type}
+                onClick={() => {
+                  setActiveTab(tab.type);
+                  setShowAll(false); // Reset reveal grid on tab change
+                }}
+                className={cn(
+                  "relative py-3 text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer select-none outline-none",
+                  isActive
+                    ? "text-black dark:text-white"
+                    : "text-neutral-400 hover:text-black dark:hover:text-white"
+                )}
+              >
+                {t(tab.labelKey)}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabUnderline"
+                    className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
             );
           })}
-        </BentoGrid>
-
-        {/* Revealable Grid for Other Projects */}
-        <AnimatePresence>
-          {showAll && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <BentoGrid>
-                {otherProjects.map((project, i) => (
-                  <BentoCard
-                    key={project.id}
-                    project={project as any}
-                    index={featuredProjects.length + i}
-                    onClick={() => setSelectedProject(project)}
-                    className={i % 3 === 0 ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1"}
-                  />
-                ))}
-              </BentoGrid>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Toggle Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
-          className="flex justify-center mt-8"
-        >
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="group flex items-center gap-2 px-8 py-4 rounded-2xl bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] text-black dark:text-white hover:border-black/20 dark:hover:border-white/20 hover:shadow-lg transition-all duration-300 text-sm font-bold"
-          >
-            {showAll ? (
-              <>
-                {t("projects.showLess")}
-                <ChevronUp size={18} className="group-hover:-translate-y-1 transition-transform" />
-              </>
-            ) : (
-              <>
-                {t("projects.showMore")}
-                <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
-              </>
-            )}
-          </button>
         </motion.div>
+
+        {/* Bento Grid */}
+        <div className="relative min-h-[400px]">
+          <AnimatePresence mode="wait">
+            {activeTab === "all" ? (
+              <motion.div
+                key="all-grid"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35 }}
+              >
+                {/* Featured Projects Bento Grid */}
+                <BentoGrid className="mb-4">
+                  {featuredProjects.map((project, i) => {
+                    let spanClass = "md:col-span-1 md:row-span-1";
+                    if (i === 0) spanClass = "md:col-span-2 md:row-span-1"; // syasaa
+                    if (i === 1) spanClass = "md:col-span-1 md:row-span-1"; // flowbyte
+                    if (i === 2) spanClass = "md:col-span-1 md:row-span-1"; // kaladwipa
+                    if (i === 3) spanClass = "md:col-span-2 md:row-span-1"; // nexpay
+                    if (i === 4) spanClass = "md:col-span-2 md:row-span-1"; // madina-inventory
+                    if (i === 5) spanClass = "md:col-span-1 md:row-span-1"; // ankersal
+                    if (i === 6) spanClass = "md:col-span-3 md:row-span-1"; // vrvttj (spans 3 to occupy full row)
+
+                    return (
+                      <BentoCard
+                        key={project.id}
+                        project={project as any}
+                        index={i}
+                        onClick={() => setSelectedProject(project)}
+                        className={spanClass}
+                      />
+                    );
+                  })}
+                </BentoGrid>
+
+                {/* Revealable Grid for Other Projects */}
+                <AnimatePresence>
+                  {showAll && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <BentoGrid>
+                        {otherProjects.map((project, i) => (
+                          <BentoCard
+                            key={project.id}
+                            project={project as any}
+                            index={featuredProjects.length + i}
+                            onClick={() => setSelectedProject(project)}
+                            className={i % 3 === 0 ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1"}
+                          />
+                        ))}
+                      </BentoGrid>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Toggle Button */}
+                {otherProjects.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={inView ? { opacity: 1 } : {}}
+                    transition={{ delay: 0.3 }}
+                    className="flex justify-center mt-8"
+                  >
+                    <button
+                      onClick={() => setShowAll(!showAll)}
+                      className="group flex items-center gap-2 px-8 py-4 rounded-2xl bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] text-black dark:text-white hover:border-black/20 dark:hover:border-white/20 hover:shadow-lg transition-all duration-300 text-sm font-bold cursor-pointer"
+                    >
+                      {showAll ? (
+                        <>
+                          {t("projects.showLess")}
+                          <ChevronUp size={18} className="group-hover:-translate-y-1 transition-transform" />
+                        </>
+                      ) : (
+                        <>
+                          {t("projects.showMore")}
+                          <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </motion.div>
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key={`${activeTab}-grid`}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35 }}
+              >
+                {filteredList.length > 0 ? (
+                  <BentoGrid>
+                    {filteredList.map((project, i) => (
+                      <BentoCard
+                        key={project.id}
+                        project={project as any}
+                        index={i}
+                        onClick={() => setSelectedProject(project)}
+                        className={getSpanClass(i, filteredList.length)}
+                      />
+                    ))}
+                  </BentoGrid>
+                ) : (
+                  <div className="text-center py-20 rounded-3xl border border-dashed border-black/10 dark:border-white/10">
+                    <p className="text-neutral-500 dark:text-neutral-400 font-medium">
+                      {language === "en" ? "No projects found in this category" : "Tidak ada proyek di kategori ini"}
+                    </p>
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* GitHub CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.5 }}
           className="flex flex-col items-center mt-16"
         >
           <div className="h-px w-32 bg-gradient-to-r from-transparent via-neutral-200 dark:via-neutral-800 to-transparent mb-8" />

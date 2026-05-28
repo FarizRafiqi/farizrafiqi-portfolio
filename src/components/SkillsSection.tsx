@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCustomization } from "@/context/CustomizationContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
   <div className="flex items-center justify-center gap-3 mb-4">
@@ -41,7 +42,7 @@ const toolsTechs = [
   { name: "Linux", slug: "linux" },
   { name: "Ubuntu", slug: "ubuntu" },
   { name: "Debian", slug: "debian" },
-  { name: "Proxmox", slug: "proxmox" },
+  { name: "Kubernetes", slug: "kubernetes" },
   { name: "Docker", slug: "docker" },
   { name: "Git", slug: "git" },
   { name: "Figma", slug: "figma" },
@@ -52,16 +53,43 @@ const toolsTechs = [
 ];
 
 const exploringTechs = [
-  { name: "Linux", slug: "linux" },
-  { name: "Docker", slug: "docker" },
+  { name: "Next.js", slug: "nextdotjs" },
   { name: "NestJS", slug: "nestjs" },
-  { name: "Proxmox", slug: "proxmox" },
+  { name: "Docker", slug: "docker" },
+  { name: "Linux", slug: "linux" },
 ];
 
 export default function SkillsSection() {
   const { language, t } = useLanguage();
+  const { role } = useCustomization();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const rows = useMemo(() => {
+    const defaultRows = [
+      { key: "frontend", items: frontendTechs, direction: "left" as const, speed: "normal" as const },
+      { key: "backend", items: backendTechs, direction: "right" as const, speed: "normal" as const },
+      { key: "tools", items: toolsTechs, direction: "left" as const, speed: "slow" as const }
+    ];
+    
+    if (role === "backend") {
+      return [
+        defaultRows[1], // backend
+        defaultRows[0], // frontend
+        defaultRows[2], // tools
+      ];
+    }
+    
+    if (role === "tools" || role === "3d") {
+      return [
+        defaultRows[2], // tools
+        defaultRows[0], // frontend
+        defaultRows[1], // backend
+      ];
+    }
+    
+    return defaultRows;
+  }, [role]);
 
   return (
     <section id="skills" ref={ref} className="section relative bg-white dark:bg-black">
@@ -93,32 +121,16 @@ export default function SkillsSection() {
 
         {/* Scrolling rows */}
         <div className="space-y-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-          >
-
-            <InfiniteMovingCards items={frontendTechs} direction="left" speed="normal" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-          >
-
-            <InfiniteMovingCards items={backendTechs} direction="right" speed="normal" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3 }}
-          >
-
-            <InfiniteMovingCards items={toolsTechs} direction="left" speed="slow" />
-          </motion.div>
+          {rows.map((row, i) => (
+            <motion.div
+              key={row.key}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 * (i + 1) }}
+            >
+              <InfiniteMovingCards items={row.items} direction={row.direction} speed={row.speed} />
+            </motion.div>
+          ))}
         </div>
 
         {/* Currently Exploring */}

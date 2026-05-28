@@ -6,6 +6,8 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import Chatbot from "@/components/Chatbot";
+import LatestArticles from "@/components/LatestArticles";
 
 export default function Home() {
   return (
@@ -16,8 +18,10 @@ export default function Home() {
       <ProjectsSection />
       <SkillsSection />
       <ExperienceSection />
+      <LatestArticles />
       <ContactSection />
       <Footer />
+      <Chatbot />
     </main>
   );
 }

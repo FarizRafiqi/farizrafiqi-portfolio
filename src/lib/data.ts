@@ -2,16 +2,16 @@ export const personalData = {
   name: "Aulia El Ihza Fariz Rafiqi",
   shortName: "Fariz Rafiqi",
   title: {
-    en: "Software Engineer & AI Enthusiast",
-    id: "Software Engineer & Antusias AI"
+    en: "Software Engineer | Backend, Frontend, Fullstack & Mobile",
+    id: "Software Engineer | Backend, Frontend, Fullstack & Mobile"
   },
   tagline: {
-    en: "Engineering Intelligence in Code & Infrastructure",
-    id: "Merekayasa Kecerdasan dalam Kode & Infrastruktur"
+    en: "Engineering Intelligence in Web, Mobile & AI Solutions",
+    id: "Merekayasa Kecerdasan dalam Solusi Web, Mobile & AI"
   },
   bio: {
-    en: "Fresh graduate informatics student with experience in software engineering since 2018. Currently working as a Fullstack Engineer at Solusi Teknologi Kreatif. Passionate about AI, Server Management, and Modern Full-stack Development.",
-    id: "Fresh graduate informatika S1 dengan pengalaman dalam rekayasa perangkat lunak sejak 2018. Saat ini bekerja sebagai Fullstack Engineer di Solusi Teknologi Kreatif. Antusias terhadap AI, Manajemen Server, dan Pengembangan Full-stack Modern."
+    en: "Software Engineer with a strong passion for building scalable systems and practical digital solutions. Gaining experience in software engineering since 2018, I have professional experience as a Fullstack Engineer at Solusi Teknologi Kreatif (STK) in Jakarta, a history of freelance full-stack web development, and multiple industry internships. I specialize in backend, frontend, fullstack, and mobile development, focusing on engineering robust and scalable software.",
+    id: "Software Engineer dengan passion kuat dalam membangun sistem terukur dan solusi digital praktis. Memulai perjalanan di rekayasa perangkat lunak sejak 2018, saya memiliki pengalaman profesional sebagai Fullstack Engineer di Solusi Teknologi Kreatif (STK) di Jakarta, serta rekam jejak sebagai freelance full-stack web developer dan berbagai magang industri. Saya berspesialisasi dalam pengembangan backend, frontend, fullstack, dan mobile untuk menghasilkan perangkat lunak yang andal."
   },
   location: "Bekasi, Indonesia",
   email: "auliaelihza07@gmail.com",
@@ -28,100 +28,184 @@ export const personalData = {
 
 export const experiences = [
   {
-    year: { en: "Sep 2025 – Present", id: "Sep 2025 – Sekarang" },
+    year: { en: "09/2025 – Present", id: "09/2025 – Sekarang" },
     title: { en: "Fullstack Engineer", id: "Insinyur Fullstack" },
     company: "Solusi Teknologi Kreatif (STK)",
-    location: "Jakarta, Indonesia · On-site",
+    location: "South Jakarta, Indonesia · On-site",
     type: "full-time",
     isCurrent: true,
     description: {
       en: [
-        "Developing and maintaining full-stack web applications.",
-        "Collaborating with cross-functional teams to deliver software solutions.",
-        "Implementing modern frontend and backend technologies.",
+        "Developing and maintaining full-stack web applications in a software house environment.",
+        "Collaborating with cross-functional teams to deliver scaleable software solutions.",
+        "Implementing modern frontend and backend technologies."
       ],
       id: [
-        "Mengembangkan dan memelihara aplikasi web full-stack.",
-        "Berkolaborasi dengan tim lintas fungsi untuk memberikan solusi perangkat lunak.",
-        "Mengimplementasikan teknologi frontend dan backend modern.",
+        "Mengembangkan dan memelihara aplikasi web full-stack di lingkungan software house.",
+        "Berkolaborasi dengan tim lintas fungsi untuk memberikan solusi perangkat lunak yang terukur.",
+        "Mengimplementasikan teknologi frontend dan backend modern."
       ]
     },
     tags: ["Golang", "Next.js", "Kubernetes", "NestJS", "Docker", "Ubuntu", "PostgreSQL", "React.js", "TypeScript", "JavaScript"],
   },
   {
-    year: { en: "May 2025 – Aug 2025", id: "Mei 2025 – Agt 2025" },
+    year: { en: "05/2025 – 08/2025", id: "05/2025 – 08/2025" },
     title: { en: "Backend Developer", id: "Pengembang Backend" },
     company: "PT. Zamasco Mitra Solusindo",
-    location: "Jakarta, Indonesia · Hybrid",
-    type: "full-time",
+    location: "Jakarta, Indonesia · Remote / Freelance",
+    type: "freelance",
     description: {
       en: [
-        "Designed and built RESTful APIs for internal business applications.",
-        "Optimized database queries and improved system performance.",
-        "Worked on integrations with third-party services.",
+        "Developed and optimized Asset Management System (AMS) modules (Asset Under Construction, Fixed Asset Acquisition, Non Fixed Asset Acquisition).",
+        "Built and maintained APIs with Laravel + SQL Server, and optimized heavy jobs with Go.",
+        "Improved performance on bulk imports and monthly depreciation runs with chunked processing and recalculation logic.",
+        "Collaborated with senior developers and business analysts to deliver AMS features for clients PT Vale Indonesia, Sumbawa Timur Mining (STM), and Sumbawa Timur Geothermal (STG)."
       ],
       id: [
-        "Merancang dan membangun RESTful API untuk aplikasi bisnis internal.",
-        "Mengoptimalkan kueri database dan meningkatkan performa sistem.",
-        "Bekerja pada integrasi dengan layanan pihak ketiga."
+        "Mengembangkan dan mengoptimalkan modul Asset Management System (AMS) (Asset Under Construction, Fixed Asset Acquisition, Non Fixed Asset Acquisition).",
+        "Membangun dan memelihara API dengan Laravel + SQL Server, serta mengoptimalkan pekerjaan berat menggunakan Go.",
+        "Meningkatkan performa pada impor massal dan perhitungan penyusutan bulanan dengan pemrosesan chunked dan logika rekalkulasi.",
+        "Berkolaborasi dengan pengembang senior dan analis bisnis untuk menghadirkan fitur AMS bagi klien PT Vale Indonesia, Sumbawa Timur Mining (STM), dan Sumbawa Timur Geothermal (STG)."
       ]
     },
-    tags: ["Go", "PHP", "MySQL", "REST API"],
+    tags: ["Go", "Laravel", "SQL Server", "PHP", "REST API"],
   },
   {
-    year: { en: "2022 – 2025", id: "2022 – 2025" },
-    title: { en: "Fullstack Web Developer", id: "Pengembang Web Fullstack" },
-    company: { en: "Freelance", id: "Lepas (Freelance)" },
+    year: { en: "01/2022 – 08/2025", id: "01/2022 – 08/2025" },
+    title: { en: "Freelance Fullstack Web Developer", id: "Freelance Fullstack Web Developer" },
+    company: "Freelance",
+    location: "Indonesia · Remote",
     type: "freelance",
     description: {
       en: [
         "Built custom web applications for clients across various industries.",
-        "Delivered projects including e-commerce platforms and admin dashboards.",
-        "Managed projects end-to-end from requirements to deployment.",
+        "Delivered projects including e-commerce platforms, payment gateway integrations, and admin dashboards.",
+        "Managed projects end-to-end from requirements gathering to hosting and deployment."
       ],
       id: [
         "Membangun aplikasi web kustom untuk klien di berbagai industri.",
-        "Memberikan proyek termasuk platform e-commerce dan dashboard admin.",
-        "Mengelola proyek dari awal hingga akhir dari persyaratan hingga peluncuran."
+        "Menyelesaikan proyek termasuk platform e-commerce, integrasi payment gateway, dan dashboard admin.",
+        "Mengelola proyek dari awal hingga akhir dari pengumpulan kebutuhan hingga hosting dan peluncuran."
       ]
     },
-    tags: ["Laravel", "Vue.js", "React", "Tailwind CSS"],
+    tags: ["Laravel", "Vue.js", "React.js", "Tailwind CSS", "MySQL"],
   },
   {
-    year: { en: "2021 – Present", id: "2021 – Sekarang" },
-    title: { en: "Informatics Engineering", id: "Teknik Informatika" },
-    company: "UPNVJ",
-    location: "Depok, Indonesia",
+    year: { en: "11/2023 – 01/2024", id: "11/2023 – 01/2024" },
+    title: { en: "Fullstack Web Developer", id: "Pengembang Web Fullstack" },
+    company: "MAXY Academy",
+    location: "Jakarta Selatan, Indonesia · Internship",
+    type: "internship",
+    description: {
+      en: [
+        "Developed full-stack web applications during the Maxy Academy program.",
+        "Worked on improving UI/UX for coworking space discovery website workfrom.id."
+      ],
+      id: [
+        "Mengembangkan aplikasi web full-stack selama program Maxy Academy.",
+        "Bekerja meningkatkan UI/UX untuk website pencarian coworking space workfrom.id."
+      ]
+    },
+    tags: ["Laravel", "Bootstrap 5", "UI/UX", "MySQL"],
+  },
+  {
+    year: { en: "08/2023 – 10/2023", id: "08/2023 – 10/2023" },
+    title: { en: "Backend Student", id: "Siswa Backend" },
+    company: "MAXY Academy",
+    location: "Jakarta, Indonesia · Internship",
+    type: "internship",
+    description: {
+      en: [
+        "Participated in intensive backend development training, focusing on PHP, Laravel, and database design.",
+        "Completed projects demonstrating API development and database optimization practices."
+      ],
+      id: [
+        "Mengikuti pelatihan intensif pengembangan backend, berfokus pada PHP, Laravel, dan desain database.",
+        "Menyelesaikan proyek-proyek yang mendemonstrasikan pengembangan API dan praktik optimasi database."
+      ]
+    },
+    tags: ["PHP", "Laravel", "MySQL", "API Development", "Backend Coding"],
+  },
+  {
+    year: { en: "06/2021 – 12/2021", id: "06/2021 – Des 2021" },
+    title: { en: "Programmer", id: "Programmer" },
+    company: "PT Bangun Kreatif Abadi",
+    location: "Jakarta, Indonesia · Internship",
+    type: "internship",
+    description: {
+      en: [
+        "Programmed and maintained backend and frontend modules for JLT SIBO, RPM (Route Planning and Monitoring) JLT, and POSKIBAR web applications.",
+        "Created POSKIBAR API documentation and user manual books; supported users and handled technical complaints.",
+        "Reported feature updates and demonstrated application functionality to clients."
+      ],
+      id: [
+        "Memprogram dan memelihara backend dan frontend untuk aplikasi web JLT SIBO, RPM (Route Planning and Monitoring) JLT, dan POSKIBAR.",
+        "Membuat dokumentasi API POSKIBAR dan buku panduan manual pengguna; mendukung pengguna dan menangani keluhan teknis.",
+        "Melaporkan pembaruan fitur dan mendemonstrasikan fungsionalitas aplikasi kepada klien."
+      ]
+    },
+    tags: ["PHP", "JavaScript", "MySQL", "API Documentation", "Technical Support"],
+  },
+  {
+    year: { en: "01/2021 – 12/2025", id: "01/2021 – 12/2025" },
+    title: { en: "Bachelor of Computer Science, Informatics", id: "Sarjana Ilmu Komputer, Informatika" },
+    company: "Universitas Pembangunan Nasional Veteran Jakarta",
+    location: "Jakarta, Indonesia",
     type: "education",
     description: {
       en: [
         "Undergraduate student specializing in software engineering.",
-        "Active in campus organizations and coding competitions.",
-        "Pursuing interests in Linux, Docker, NestJS, and Proxmox.",
+        "Active in campus organizations (KSM Multimedia) and software development competitions.",
+        "Pursuing interests in modern software architectures, APIs, and cloud infrastructure."
       ],
       id: [
         "Mahasiswa S1 spesialisasi rekayasa perangkat lunak.",
-        "Aktif dalam organisasi kampus dan kompetisi pemrograman.",
-        "Mengejar minat dalam Linux, Docker, NestJS, dan Proxmox."
+        "Aktif dalam organisasi kampus (KSM Multimedia) dan kompetisi pengembangan perangkat lunak.",
+        "Mengejar minat dalam arsitektur perangkat lunak modern, API, dan infrastruktur cloud."
       ]
     },
     tags: ["Algorithms", "Software Engineering", "Databases"],
   },
+  {
+    year: { en: "01/2018 – 12/2021", id: "01/2018 – 12/2021" },
+    title: { en: "Software Engineering", id: "Rekayasa Perangkat Lunak" },
+    company: "SMKN 1 KOTA BEKASI",
+    location: "Bekasi, Indonesia",
+    type: "education",
+    description: {
+      en: [
+        "Vocational High School student specializing in Software Engineering (RPL).",
+        "Gained initial foundation in programming, database design, and software lifecycle."
+      ],
+      id: [
+        "Siswa Sekolah Menengah Kejuruan jurusan Rekayasa Perangkat Lunak (RPL).",
+        "Mendapatkan fondasi awal pemrograman, desain database, dan siklus hidup perangkat lunak."
+      ]
+    },
+    tags: ["Basic Programming", "Database Design", "Web Development"],
+  }
 ];
 
 export const projects = [
   {
     id: "syasaa",
     title: { en: "Attendance App", id: "Aplikasi Presensi" },
-    subtitle: { en: "Freelance Administration Platform", id: "Platform Administrasi Freelance" },
+    subtitle: { en: "Freelance Administration & AI Verification", id: "Platform Administrasi & Verifikasi AI" },
     description: {
-      en: "A professional attendance system featuring location-based check-ins and AI-powered face recognition for secure identity verification. Built with Ionic React and Laravel.",
-      id: "Sistem presensi profesional yang dilengkapi fitur absen berbasis lokasi dan pengenalan wajah berbasis AI untuk verifikasi identitas yang aman. Dibangun dengan Ionic React dan Laravel."
+      en: "A comprehensive attendance system featuring location-based check-ins and AI-powered face recognition for secure identity verification. Collaborated with 1 peer student to design and build the complete UI/UX, frontend (Ionic React), and backend APIs (Laravel) with face recognition capabilities.",
+      id: "Sistem presensi komprehensif yang dilengkapi fitur absen berbasis lokasi dan pengenalan wajah berbasis AI untuk verifikasi identitas yang aman. Berkolaborasi dengan 1 rekan mahasiswa untuk mendesain dan membangun keseluruhan UI/UX, frontend (Ionic React), dan backend API (Laravel) dengan kemampuan pengenalan wajah."
     },
-    tags: ["Ionic React", "Capacitor", "TypeScript", "Laravel"],
-    category: { en: "Mobile", id: "Mobile" },
+    tags: ["Ionic React", "Capacitor", "TypeScript", "Laravel", "AI Face Recognition", "MySQL"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/syasaa.png"],
-    githubUrl: "https://github.com/FarizRafiqi/syasaa",
+    githubUrls: [
+      { label: "Frontend", url: "https://github.com/FarizRafiqi/syasaa-app" },
+      { label: "Backend", url: "https://github.com/FarizRafiqi/syasaa-backend" }
+    ],
+    role: { en: "Full Stack Developer, UI/UX Designer & AI Integrator", id: "Full Stack Developer, Desainer UI/UX & Integrator AI" },
+    contributors: 2,
+    isLead: false,
     featured: true,
   },
   {
@@ -129,11 +213,12 @@ export const projects = [
     title: { en: "Flowbyte", id: "Flowbyte" },
     subtitle: { en: "The Next-Gen Music Experience", id: "Pengalaman Musik Generasi Mendatang" },
     description: {
-      en: "A premium music streaming application built natively with Kotlin. Features seamless integration with the Spotify API for online streaming and supports local storage playback for a complete music experience.",
-      id: "Aplikasi streaming musik premium yang dibangun secara native dengan Kotlin. Menampilkan integrasi mulus dengan Spotify API untuk streaming online dan mendukung pemutaran penyimpanan lokal untuk pengalaman musik yang lengkap."
+      en: "A premium mobile music streaming application built as a final project for a Mobile Programming course. Built natively with Kotlin, integrating with the Spotify API and providing custom backend endpoints for complete library search and user statistics.",
+      id: "Aplikasi streaming musik mobile premium yang dibangun sebagai proyek akhir mata kuliah Pemrograman Mobile. Dibangun secara native dengan Kotlin, berintegrasi dengan Spotify API dan menyediakan endpoint backend kustom untuk pencarian pustaka lengkap dan statistik pengguna."
     },
     tags: ["Kotlin", "Android Studio", "Spotify API"],
     category: { en: "Mobile App", id: "Aplikasi Mobile" },
+    categoryType: "mobile",
     images: [
       "/img/portfolio/flowbyte/Home Page.png",
       "/img/portfolio/flowbyte/Explore Page.png",
@@ -143,7 +228,9 @@ export const projects = [
       "/img/portfolio/flowbyte/Stats.png",
       "/img/portfolio/flowbyte/Welcome.png",
     ],
-    githubUrl: "https://github.com/FarizRafiqi/flowbyte-app",
+    githubUrl: "https://github.com/FarizRafiqi/flowbyte",
+    role: { en: "Mobile Developer (Kotlin FE & BE)", id: "Pengembang Mobile (Kotlin FE & BE)" },
+    contributors: 1,
     featured: true,
     gradient: "bg-gradient-to-t from-black/95 via-blue-900/40 to-transparent",
   },
@@ -152,13 +239,17 @@ export const projects = [
     title: { en: "Kaladwipa", id: "Kaladwipa" },
     subtitle: { en: "Local Arts Engagement Platform", id: "Platform Keterlibatan Seni Lokal" },
     description: {
-      en: "A platform enabling users to support local artists and discover artworks. Features multiplatform support via Ionic and Capacitor.",
-      id: "Platform yang memungkinkan pengguna untuk mendukung seniman lokal dan menemukan karya seni. Menampilkan dukungan multiplatform via Ionic dan Capacitor."
+      en: "A platform enabling users to support local artists and discover artworks. Developed for the ICT Student Exhibition (Gemastik) 2023 competition, acting as the team lead and full-stack developer in a team of 3 members, building the Laravel backend API, Vue.js web frontend, and enabling multiplatform builds using Ionic and Capacitor.",
+      id: "Platform yang memungkinkan pengguna untuk mendukung seniman lokal dan menemukan karya seni. Dikembangkan untuk kompetisi Gemastik 2023, berperan sebagai ketua tim dan pengembang full-stack dalam tim beranggotakan 3 orang, membangun API backend Laravel, frontend web Vue.js, serta mengaktifkan build multiplatform menggunakan Ionic dan Capacitor."
     },
     tags: ["Laravel", "Vue.js", "Ionic", "Capacitor"],
     category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/megamendung.png"],
     githubUrl: "https://github.com/FarizRafiqi/kaladwipa",
+    role: { en: "Full Stack Developer & Team Lead", id: "Full Stack Developer & Ketua Tim" },
+    contributors: 3,
+    isLead: true,
     featured: true,
   },
   {
@@ -166,13 +257,17 @@ export const projects = [
     title: { en: "NexPay", id: "NexPay" },
     subtitle: { en: "PPOB & Bill Payment System", id: "Sistem Pembayaran PPOB & Tagihan" },
     description: {
-      en: "A modern PPOB (Payment Point Online Bank) web application for checking and paying electricity bills, fully integrated with Midtrans payment gateway. Built with Laravel and React.js via Inertia.js for a seamless single-page experience. Features include real-time billing checks, payment history, role-based user management (Admin, Bank, Customer), and comprehensive reporting.",
-      id: "Aplikasi web PPOB modern untuk mengecek dan membayar tagihan listrik, terintegrasi penuh dengan Midtrans payment gateway. Dibangun dengan Laravel dan React.js melalui Inertia.js untuk pengalaman single-page yang mulus. Fitur termasuk pengecekan tagihan real-time, riwayat pembayaran, manajemen pengguna berbasis peran (Admin, Bank, Pelanggan), dan pelaporan komprehensif."
+      en: "A modern PPOB (Payment Point Online Bank) web application for checking and paying electricity bills, fully integrated with Midtrans payment gateway. Developed as a redesign and complete refactor of a PRAKERIN vocational internship project (which replaced on-site internship during COVID-19). Built with Laravel, React.js, Inertia.js, and Tailwind CSS.",
+      id: "Aplikasi web PPOB modern untuk mengecek dan membayar tagihan listrik, terintegrasi penuh dengan Midtrans payment gateway. Dikembangkan sebagai redesain dan faktorisasi ulang proyek magang vokasi PRAKERIN (pengganti magang karena COVID-19). Dibangun dengan Laravel, React.js, Inertia.js, dan Tailwind CSS."
     },
     tags: ["Laravel", "React.js", "Inertia.js", "Tailwind CSS", "MySQL", "Midtrans"],
     category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/nexpay/1-landing.png", "/img/portfolio/nexpay/2-about-us.png", "/img/portfolio/nexpay/3-how-to-pay.png", "/img/portfolio/nexpay/4-faq.png", "/img/portfolio/nexpay/5-dashboard.png"],
     githubUrl: "https://github.com/FarizRafiqi/nexpay",
+    oldRepoUrl: "https://github.com/FarizRafiqi/1819_rplb_praukk_06_auliaelihzafarizrafiqi",
+    role: { en: "Full Stack Developer (Redesign)", id: "Full Stack Developer (Redesain)" },
+    contributors: 1,
     featured: true,
   },
   {
@@ -180,57 +275,74 @@ export const projects = [
     title: { en: "Madina Inventory", id: "Inventaris Madina" },
     subtitle: { en: "Stock & Warehouse Management", id: "Manajemen Stok & Gudang" },
     description: {
-      en: "A professional mobile application for real-time inventory tracking and warehouse management. Features barcode scanning and stock analysis.",
-      id: "Aplikasi mobile profesional untuk pelacakan inventaris real-time dan manajemen gudang. Menampilkan pemindaian barcode dan analisis stok."
+      en: "A professional mobile application for real-time inventory tracking and warehouse management. Built as a freelance client project in collaboration with 2 other developers, featuring barcode scanning and stock analysis.",
+      id: "Aplikasi mobile profesional untuk pelacakan inventaris real-time dan manajemen gudang. Dibangun sebagai proyek freelance klien, berkolaborasi dengan 2 pengembang lainnya, menampilkan pemindaian barcode dan analisis stok."
     },
-    tags: ["Ionic React", "Capacitor", "TypeScript", "Node.js"],
-    category: { en: "Mobile", id: "Mobile" },
+    tags: ["Ionic React", "Capacitor", "TypeScript", "Node.js", "Express", "MySQL"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/madina-inventory.png"],
-    githubUrl: "https://github.com/FarizRafiqi/MadinaInventoryApp",
+    githubUrls: [
+      { label: "Frontend", url: "https://github.com/FarizRafiqi/MadinaInventoryApp" },
+      { label: "Backend", url: "https://github.com/FarizRafiqi/MadinaInventoryBE" }
+    ],
+    role: { en: "Full Stack Developer", id: "Full Stack Developer" },
+    contributors: 3,
+    isLead: false,
     featured: true,
   },
   {
     id: "ankersal",
     title: { en: "Ankersal App", id: "Aplikasi Ankersal" },
-    subtitle: { en: "Emergency & Consultation PWA", id: "PWA Darurat & Konsultasi" },
+    subtitle: { en: "Sexual Violence Survivor Support Platform", id: "Platform Pendampingan Penyintas Kekerasan Seksual" },
     description: {
-      en: "A Progressive Web App for emergency reporting and medical consultations. Features real-time SOS tracking and expert chat systems.",
-      id: "Progressive Web App untuk pelaporan darurat dan konsultasi medis. Menampilkan pelacakan SOS real-time dan sistem obrolan ahli."
+      en: "A Progressive Web App designed to assist survivors of sexual violence, featuring emergency SOS reports and map integration. Developed for the Gemastik 15 competition (national finalist in Software Development). Built with Laravel, PWA, Leaflet.js for mapping, and Bootstrap for styling.",
+      id: "Progressive Web App (PWA) yang dirancang untuk mendampingi penyintas kekerasan seksual, dilengkapi pelaporan SOS darurat dan integrasi peta. Dikembangkan untuk kompetisi Gemastik 15 dan berhasil lolos sebagai finalis nasional dalam kategori Pengembangan Perangkat Lunak. Dibangun dengan Laravel, PWA, Leaflet.js untuk pemetaan, dan Bootstrap untuk styling."
     },
-    tags: ["Laravel", "PWA", "MySQL", "Socket.io"],
-    category: { en: "Web / PWA", id: "Web / PWA" },
+    tags: ["Laravel", "PWA", "Leaflet.js", "Bootstrap", "MySQL"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/ankersal.png"],
     githubUrl: "https://github.com/FarizRafiqi/ankersal-app",
+    role: { en: "Full Stack Developer", id: "Full Stack Developer" },
+    contributors: 3,
+    featured: true,
+  },
+  {
+    id: "vrvttj",
+    title: { en: "VR Javanese Dance Visualization", id: "VR Visualisasi Tari Tradisional Jawa" },
+    subtitle: { en: "VR Research & Animation Optimization", id: "Riset VR & Optimasi Animasi" },
+    description: {
+      en: "A Virtual Reality research project for Javanese traditional dance learning and visualization, built in Unity. Features animated movements optimized with Cascadeur, character costumes, and integrated API authentication.",
+      id: "Proyek riset Virtual Reality untuk pembelajaran dan visualisasi tari tradisional Jawa, dibangun menggunakan Unity. Menampilkan gerakan tari yang dioptimalkan dengan Cascadeur, kostum karakter, serta integrasi API."
+    },
+    tags: ["Unity", "C#", "Cascadeur", "Virtual Reality", "3D Modeling"],
+    category: { en: "VR / 3D", id: "VR / 3D" },
+    categoryType: "3d",
+    images: ["/img/portfolio/megamendung.png"],
+    githubUrl: "https://github.com/FarizRafiqi/VRVTTJ",
+    role: { en: "VR & 3D Developer, Cascadeur Animator", id: "Pengembang VR & 3D, Animator Cascadeur" },
+    contributors: 1,
     featured: true,
   },
   {
     id: "kania-jaya",
     title: { en: "Kania Jaya E-Shop", id: "E-Shop Kania Jaya" },
-    subtitle: { en: "Admin Panel", id: "Panel Admin" },
+    subtitle: { en: "Freelance E-Commerce Admin Platform", id: "Platform Admin E-Commerce Freelance" },
     description: {
-      en: "Comprehensive e-commerce admin panel for managing product data, orders, payments, and users. Built with Laravel + Vue.js.",
-      id: "Panel admin e-commerce komprehensif untuk mengelola data produk, pesanan, pembayaran, dan pengguna. Dibangun dengan Laravel + Vue.js."
+      en: "A comprehensive e-commerce admin panel developed as a freelance project to manage product catalogs, client orders, transaction details, and user profiles. Built with Laravel, Vue.js, Tailwind CSS, and MySQL database.",
+      id: "Panel admin e-commerce komprehensif yang dikembangkan sebagai proyek freelance untuk mengelola katalog produk, pesanan klien, rincian transaksi, dan profil pengguna. Dibangun dengan Laravel, Vue.js, Tailwind CSS, dan database MySQL."
     },
-    tags: ["Laravel", "Vue.js", "Tailwind CSS"],
+    tags: ["Laravel", "Vue.js", "Tailwind CSS", "MySQL"],
     category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
     images: ["/img/portfolio/kania-jaya.png"],
     githubUrl: "https://github.com/FarizRafiqi/TokoBajuKaniaJaya",
+    role: { en: "Full Stack Developer", id: "Full Stack Developer" },
+    contributors: 1,
     featured: false,
   },
-  {
-    id: "youtube-filter",
-    title: { en: "YouTube Comment Filter", id: "Filter Komentar YouTube" },
-    subtitle: { en: "AI-Powered Spam Blocker", id: "Pemblokir Spam Berbasis AI" },
-    description: {
-      en: "A Chrome extension using Gemini AI to filter spam, gambling, and toxic comments in real-time.",
-      id: "Ekstensi Chrome menggunakan Gemini AI untuk memfilter spam, judi, dan komentar toksik secara real-time."
-    },
-    tags: ["JavaScript", "Chrome Extension API", "Gemini API"],
-    category: { en: "Extension / AI", id: "Ekstensi / AI" },
-    images: ["/img/portfolio/youtube-filter.png"],
-    githubUrl: "https://github.com/FarizRafiqi/youtube-comment-filter",
-    featured: false,
-  },
+
   {
     id: "doyaneat",
     title: { en: "DoyanEat", id: "DoyanEat" },
@@ -240,7 +352,8 @@ export const projects = [
       id: "Platform ceria untuk menemukan makanan kaki lima Indonesia dengan rating dan layanan lokasi."
     },
     tags: ["Vue.js", "Ionic", "Capacitor", "Tailwind CSS"],
-    category: { en: "Mobile", id: "Mobile" },
+    category: { en: "Mobile App", id: "Aplikasi Mobile" },
+    categoryType: "mobile",
     images: ["/img/portfolio/doyaneat.png"],
     githubUrl: "https://github.com/FarizRafiqi/doyaneat",
     featured: false,
@@ -255,6 +368,7 @@ export const projects = [
     },
     tags: ["Laravel", "Bootstrap 5"],
     category: { en: "Web Design", id: "Desain Web" },
+    categoryType: "frontend",
     images: ["/img/portfolio/workfrom.png"],
     githubUrl: "https://github.com/FarizRafiqi/workfrom",
     featured: false,
@@ -288,20 +402,19 @@ export const skills = {
     { name: "Linux", icon: "linux" },
     { name: "Ubuntu", icon: "ubuntu" },
     { name: "Debian", icon: "debian" },
-    { name: "Proxmox", icon: "proxmox" },
+    { name: "Kubernetes", icon: "kubernetes" },
     { name: "Figma", icon: "figma" },
     { name: "Blender", icon: "blender" },
     { name: "Three.js", icon: "threedotjs" },
     { name: "Unity", icon: "unity" },
   ],
-  interests: ["Linux Ecosystem", "Proxmox", "AI & Machine Learning", "Server Management", "Software Engineering"],
+  interests: ["Web Development", "Mobile Development", "AI & Machine Learning", "Software Engineering"],
 };
 
 export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];

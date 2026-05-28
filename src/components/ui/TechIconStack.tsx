@@ -50,6 +50,8 @@ export const tagToSlug: Record<string, string> = {
   "Ubuntu": "ubuntu",
   "Debian": "debian",
   "Proxmox": "proxmox",
+  "Kubernetes": "kubernetes",
+  "TensorFlow": "tensorflow",
 };
 
 export const tagToColor: Record<string, string> = {
@@ -99,6 +101,8 @@ export const tagToColor: Record<string, string> = {
   "Ubuntu": "#E9430F",
   "Debian": "#A81D33",
   "Proxmox": "#E57000",
+  "Kubernetes": "#326CE5",
+  "TensorFlow": "#FF6F00",
 };
 
 type Variant = "card" | "modal";

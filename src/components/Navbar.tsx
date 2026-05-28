@@ -43,7 +43,6 @@ export default function Navbar() {
     { href: "#home", label: t("nav.home") },
     { href: "#about", label: t("nav.about") },
     { href: "#projects", label: t("nav.projects") },
-    { href: "#skills", label: t("nav.skills") },
     { href: "#experience", label: t("nav.experience") },
     { href: "#contact", label: t("nav.contact") },
   ];
@@ -99,7 +98,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "projects", "skills", "experience", "contact"];
+      const sections = ["home", "about", "projects", "experience", "contact"];
 
       // Check if we are at the bottom of the page
       const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
