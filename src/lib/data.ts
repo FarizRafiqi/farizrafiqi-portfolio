@@ -109,24 +109,6 @@ export const experiences = [
     tags: ["Laravel", "Bootstrap 5", "UI/UX", "MySQL"],
   },
   {
-    year: { en: "08/2023 – 10/2023", id: "08/2023 – 10/2023" },
-    title: { en: "Backend Student", id: "Siswa Backend" },
-    company: "MAXY Academy",
-    location: "Jakarta, Indonesia · Internship",
-    type: "internship",
-    description: {
-      en: [
-        "Participated in intensive backend development training, focusing on PHP, Laravel, and database design.",
-        "Completed projects demonstrating API development and database optimization practices."
-      ],
-      id: [
-        "Mengikuti pelatihan intensif pengembangan backend, berfokus pada PHP, Laravel, dan desain database.",
-        "Menyelesaikan proyek-proyek yang mendemonstrasikan pengembangan API dan praktik optimasi database."
-      ]
-    },
-    tags: ["PHP", "Laravel", "MySQL", "API Development", "Backend Coding"],
-  },
-  {
     year: { en: "06/2021 – 12/2021", id: "06/2021 – Des 2021" },
     title: { en: "Programmer", id: "Programmer" },
     company: "PT Bangun Kreatif Abadi",
