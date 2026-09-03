@@ -10,8 +10,8 @@ export const personalData = {
     id: "Merekayasa Kecerdasan dalam Solusi Web, Mobile & AI"
   },
   bio: {
-    en: "Software Engineer with a strong passion for building scalable systems and practical digital solutions. Gaining experience in software engineering since 2018, I have professional experience as a Fullstack Engineer at Solusi Teknologi Kreatif (STK) in Jakarta, a history of freelance full-stack web development, and multiple industry internships. I specialize in backend, frontend, fullstack, and mobile development, focusing on engineering robust and scalable software.",
-    id: "Software Engineer dengan passion kuat dalam membangun sistem terukur dan solusi digital praktis. Memulai perjalanan di rekayasa perangkat lunak sejak 2018, saya memiliki pengalaman profesional sebagai Fullstack Engineer di Solusi Teknologi Kreatif (STK) di Jakarta, serta rekam jejak sebagai freelance full-stack web developer dan berbagai magang industri. Saya berspesialisasi dalam pengembangan backend, frontend, fullstack, dan mobile untuk menghasilkan perangkat lunak yang andal."
+    en: "Software Engineer with a strong passion for building scalable systems and practical digital solutions. My professional experience spans freelance full-stack delivery and a full-time Fullstack Engineer role at Solusi Teknologi Kreatif (STK) through September 2026. I have been building software since 2018, with a focus on backend, frontend, fullstack, mobile, and AI-enabled products.",
+    id: "Software Engineer dengan passion kuat dalam membangun sistem terukur dan solusi digital praktis. Pengalaman profesional saya mencakup pekerjaan freelance full-stack dan peran Fullstack Engineer di Solusi Teknologi Kreatif (STK) hingga September 2026. Saya telah membangun perangkat lunak sejak 2018 dengan fokus pada backend, frontend, fullstack, mobile, dan produk berbasis AI."
   },
   location: "Bekasi, Indonesia",
   email: "auliaelihza07@gmail.com",
@@ -28,22 +28,22 @@ export const personalData = {
 
 export const experiences = [
   {
-    year: { en: "09/2025 – Present", id: "09/2025 – Sekarang" },
+    year: { en: "09/2025 – 09/2026", id: "09/2025 – 09/2026" },
     title: { en: "Fullstack Engineer", id: "Insinyur Fullstack" },
     company: "Solusi Teknologi Kreatif (STK)",
     location: "South Jakarta, Indonesia · On-site",
     type: "full-time",
-    isCurrent: true,
+    isCurrent: false,
     description: {
       en: [
-        "Developing and maintaining full-stack web applications in a software house environment.",
-        "Collaborating with cross-functional teams to deliver scaleable software solutions.",
-        "Implementing modern frontend and backend technologies."
+        "Delivered full-stack web applications for organizational, analytics, knowledge-base, and room-booking products.",
+        "Collaborated with product, design, and engineering stakeholders to turn operational requirements into production-ready software.",
+        "Worked across modern frontend, backend, AI-integration, and cloud-oriented technologies."
       ],
       id: [
-        "Mengembangkan dan memelihara aplikasi web full-stack di lingkungan software house.",
-        "Berkolaborasi dengan tim lintas fungsi untuk memberikan solusi perangkat lunak yang terukur.",
-        "Mengimplementasikan teknologi frontend dan backend modern."
+        "Menghadirkan aplikasi web full-stack untuk produk organisasi, analitik, knowledge base, dan pemesanan ruang rapat.",
+        "Berkolaborasi dengan pemangku kepentingan produk, desain, dan engineering untuk menerjemahkan kebutuhan operasional menjadi perangkat lunak siap produksi.",
+        "Bekerja lintas teknologi frontend modern, backend, integrasi AI, dan infrastruktur berorientasi cloud."
       ]
     },
     tags: ["Golang", "Next.js", "Kubernetes", "NestJS", "Docker", "Ubuntu", "PostgreSQL", "React.js", "TypeScript", "JavaScript"],
@@ -99,11 +99,11 @@ export const experiences = [
     description: {
       en: [
         "Developed full-stack web applications during the Maxy Academy program.",
-        "Worked on improving UI/UX for coworking space discovery website workfrom.id."
+        "Worked on improving UI/UX for a coworking space discovery website."
       ],
       id: [
         "Mengembangkan aplikasi web full-stack selama program Maxy Academy.",
-        "Bekerja meningkatkan UI/UX untuk website pencarian coworking space workfrom.id."
+        "Bekerja meningkatkan UI/UX untuk website pencarian coworking space."
       ]
     },
     tags: ["Laravel", "Bootstrap 5", "UI/UX", "MySQL"],
@@ -168,7 +168,165 @@ export const experiences = [
   }
 ];
 
+export const experienceSummary = {
+  professional: { en: "4+", id: "4+" },
+  journey: { en: "8+", id: "8+" },
+};
+
 export const projects = [
+  {
+    id: "satria-muda-indonesia",
+    title: { en: "Satria Muda Indonesia", id: "Satria Muda Indonesia" },
+    subtitle: { en: "Member & Art Battle Management Platform", id: "Platform Manajemen Anggota & Art Battle" },
+    description: {
+      en: "A production member and event-management platform for Satria Muda Indonesia. I worked across the art-battle bracket workflow, from scoring synchronization and match progression to manual winner decisions and printable recap reporting for event operators.",
+      id: "Platform produksi untuk manajemen anggota dan event Satria Muda Indonesia. Saya mengerjakan alur bracket art battle dari sinkronisasi penilaian dan progres pertandingan hingga penentuan pemenang manual serta laporan recap yang siap dicetak untuk operator event."
+    },
+    contributionHighlights: {
+      en: [
+        "Implemented art-battle bracket management across backend scoring sync and frontend match operations.",
+        "Added a manual winner workflow with a dedicated modal, API endpoint, and persisted winner score and duration.",
+        "Delivered dynamic match recap reporting with judge columns, print layout, and event-management deep links."
+      ],
+      id: [
+        "Mengimplementasikan manajemen bracket art battle pada sinkronisasi skor backend dan operasi pertandingan di frontend.",
+        "Menambahkan alur penentuan pemenang manual dengan modal, endpoint API, serta penyimpanan skor dan durasi pemenang.",
+        "Menghadirkan laporan recap pertandingan dinamis dengan kolom juri, layout cetak, dan deep link dari manajemen event."
+      ]
+    },
+    tags: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "WebSocket"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
+    images: ["/img/portfolio/stk/satria-muda-member.png"],
+    githubUrls: [
+      { label: "Frontend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-member-management" },
+      { label: "Public landing source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing" }
+    ],
+    role: { en: "Fullstack Engineer — Event Management", id: "Fullstack Engineer — Manajemen Event" },
+    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
+    featured: true,
+  },
+  {
+    id: "satria-muda-landing",
+    title: { en: "Satria Muda Landing", id: "Landing Page Satria Muda" },
+    subtitle: { en: "Bilingual Organization & Activity Website", id: "Website Organisasi & Aktivitas Bilingual" },
+    description: {
+      en: "The public-facing Satria Muda Indonesia website, built to present the organization, events, activities, and history in a polished bilingual experience. I established the localization foundation across the UI and Sanity content model, then carried it through activity and gallery surfaces.",
+      id: "Website publik Satria Muda Indonesia untuk menyajikan organisasi, event, aktivitas, dan sejarah dalam pengalaman bilingual yang rapi. Saya membangun fondasi localization pada UI dan content model Sanity, lalu menerapkannya pada halaman aktivitas dan galeri."
+    },
+    contributionHighlights: {
+      en: [
+        "Built the shared language context, locale files, and localized Sanity schema fields for the public site.",
+        "Carried localization through navigation, hero, events, gallery, organization structure, history, and activity surfaces."
+      ],
+      id: [
+        "Membangun language context, file locale, dan field schema Sanity yang mendukung konten terlokalisasi.",
+        "Menerapkan localization pada navigasi, hero, event, galeri, struktur organisasi, sejarah, dan halaman aktivitas."
+      ]
+    },
+    tags: ["Next.js", "TypeScript", "Sanity", "Tailwind CSS", "i18n"],
+    category: { en: "Frontend", id: "Frontend" },
+    categoryType: "frontend",
+    images: ["/img/portfolio/stk/satria-muda-landing.png"],
+    githubUrl: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing",
+    role: { en: "Frontend Engineer — Localization", id: "Frontend Engineer — Localization" },
+    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
+    featured: true,
+  },
+  {
+    id: "hemdal-sentiment-analysis",
+    title: { en: "Hemdal", id: "Hemdal" },
+    subtitle: { en: "Sentiment Intelligence & Media Monitoring", id: "Sentiment Intelligence & Media Monitoring" },
+    description: {
+      en: "An end-to-end sentiment intelligence product spanning a public landing page, authenticated portal, and analysis backend. I shaped the Command Center incident/history workflow, improved authentication refresh reliability, and helped bring the product landing experience in line with its Figma direction.",
+      id: "Produk sentiment intelligence end-to-end yang mencakup landing page publik, portal terautentikasi, dan backend analisis. Saya mengerjakan workflow incident/history pada Command Center, meningkatkan keandalan refresh autentikasi, dan membantu menyelaraskan landing page dengan arah desain Figma."
+    },
+    contributionHighlights: {
+      en: [
+        "Shaped the Command Center incident/history flow for early-warning alerts and resolved incidents.",
+        "Improved authentication reliability through refresh-token scope handling and centralized token-refresh behavior.",
+        "Reworked landing-page UI/content against the provided Figma direction and added centralized configuration controls."
+      ],
+      id: [
+        "Mengerjakan alur incident/history pada Command Center untuk early-warning alert dan incident yang telah diselesaikan.",
+        "Meningkatkan keandalan autentikasi melalui penanganan scope refresh token dan perilaku token refresh yang lebih terpusat.",
+        "Menyempurnakan UI/konten landing page mengikuti arah Figma dan menambahkan kontrol konfigurasi terpusat."
+      ]
+    },
+    tags: ["Next.js", "React", "TypeScript", "NestJS", "Elasticsearch", "Socket.IO", "OIDC"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
+    images: ["/img/portfolio/stk/hemdal-portal.png", "/img/portfolio/stk/hemdal-dashboard.webp"],
+    githubUrls: [
+      { label: "Portal source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis-portal-v2" },
+      { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis" },
+      { label: "Landing source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis-landing" }
+    ],
+    role: { en: "Fullstack Engineer — Analytics Platform", id: "Fullstack Engineer — Platform Analitik" },
+    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
+    featured: true,
+  },
+  {
+    id: "knowledge-based-core",
+    title: { en: "Knowledge Base Core", id: "Knowledge Base Core" },
+    subtitle: { en: "Multi-tenant AI & Document Intelligence Service", id: "Layanan AI Multi-tenant & Kecerdasan Dokumen" },
+    description: {
+      en: "The backend core behind a multi-tenant knowledge-base product, combining document ingestion, vector search, storage, and AI conversations. I extended its provider architecture, tenant-aware completion settings, language fallback chain, embedding fallback, and Milvus connection resilience.",
+      id: "Core backend untuk produk knowledge base multi-tenant yang menggabungkan ingestion dokumen, vector search, storage, dan percakapan AI. Saya mengembangkan arsitektur provider, pengaturan completion per tenant, language fallback chain, embedding fallback, serta ketahanan koneksi Milvus."
+    },
+    contributionHighlights: {
+      en: [
+        "Added an OpenAI-compatible gateway and dynamic multi-provider factory for completion services.",
+        "Implemented tenant-aware completion settings with a hybrid language fallback chain.",
+        "Added automatic embedding-model fallback and improved Milvus connection resilience for indexing workflows."
+      ],
+      id: [
+        "Menambahkan gateway yang kompatibel dengan OpenAI dan dynamic multi-provider factory untuk layanan completion.",
+        "Mengimplementasikan pengaturan completion per tenant dengan hybrid language fallback chain.",
+        "Menambahkan fallback model embedding otomatis dan meningkatkan ketahanan koneksi Milvus pada workflow indexing."
+      ]
+    },
+    tags: ["NestJS", "TypeScript", "OpenAI-compatible API", "Milvus", "MariaDB", "MinIO", "Socket.IO"],
+    category: { en: "Backend / AI", id: "Backend / AI" },
+    categoryType: "backend",
+    images: ["/img/portfolio/stk/knowledge-base-core.svg"],
+    githubUrl: "https://git.productzillaacademy.com/solusiteknologikreatif/knowledge-based-core",
+    role: { en: "Backend Engineer — AI Infrastructure", id: "Backend Engineer — Infrastruktur AI" },
+    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
+    featured: true,
+  },
+  {
+    id: "smart-booking-room",
+    title: { en: "Smart Booking Room", id: "Smart Booking Room" },
+    subtitle: { en: "Meeting Room Reservation for DPR RI", id: "Pemesanan Ruang Rapat DPR RI" },
+    description: {
+      en: "A meeting-room reservation product for DPR RI, covering the public booking experience and the backend reservation lifecycle. I strengthened room-display consistency by prioritizing ongoing meetings, auto-completing stale active reservations, persisting completed status, and keeping room context visible in the confirmation flow.",
+      id: "Produk pemesanan ruang rapat untuk DPR RI yang mencakup pengalaman booking publik dan lifecycle reservasi di backend. Saya memperkuat konsistensi room display dengan memprioritaskan meeting yang sedang berjalan, menutup reservasi aktif yang tertinggal secara otomatis, menyimpan status selesai, dan menjaga konteks ruangan pada alur konfirmasi."
+    },
+    contributionHighlights: {
+      en: [
+        "Prioritized ongoing reservations in room display and prevented duplicate active meetings from appearing in upcoming agendas.",
+        "Automatically completed the previous ongoing meeting when a new meeting starts in the same room.",
+        "Added completed reservation state across the service, entity, and migration while keeping confirmation copy tied to the selected room."
+      ],
+      id: [
+        "Memprioritaskan reservasi yang sedang berlangsung pada room display dan mencegah meeting aktif ganda muncul di agenda berikutnya.",
+        "Menyelesaikan meeting ongoing sebelumnya secara otomatis ketika meeting baru dimulai di ruangan yang sama.",
+        "Menambahkan status reservasi selesai pada service, entity, dan migration serta menjaga copy konfirmasi sesuai ruangan yang dipilih."
+      ]
+    },
+    tags: ["Next.js", "React", "TypeScript", "NestJS", "MySQL", "Socket.IO"],
+    category: { en: "Full Stack", id: "Full Stack" },
+    categoryType: "fullstack",
+    images: ["/img/portfolio/stk/smart-booking-room.png"],
+    githubUrls: [
+      { label: "Frontend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-frontend" },
+      { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-backend" }
+    ],
+    role: { en: "Fullstack Engineer — Reservation Systems", id: "Fullstack Engineer — Sistem Reservasi" },
+    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
+    featured: true,
+  },
   {
     id: "syasaa",
     title: { en: "Attendance App", id: "Aplikasi Presensi" },
@@ -188,7 +346,7 @@ export const projects = [
     role: { en: "Full Stack Developer, UI/UX Designer & AI Integrator", id: "Full Stack Developer, Desainer UI/UX & Integrator AI" },
     contributors: 2,
     isLead: false,
-    featured: true,
+    featured: false,
   },
   {
     id: "flowbyte",
@@ -213,7 +371,7 @@ export const projects = [
     githubUrl: "https://github.com/FarizRafiqi/flowbyte",
     role: { en: "Mobile Developer (Kotlin FE & BE)", id: "Pengembang Mobile (Kotlin FE & BE)" },
     contributors: 1,
-    featured: true,
+    featured: false,
     gradient: "bg-gradient-to-t from-black/95 via-blue-900/40 to-transparent",
   },
   {
@@ -232,7 +390,7 @@ export const projects = [
     role: { en: "Full Stack Developer & Team Lead", id: "Full Stack Developer & Ketua Tim" },
     contributors: 3,
     isLead: true,
-    featured: true,
+    featured: false,
   },
   {
     id: "nexpay",
@@ -250,62 +408,7 @@ export const projects = [
     oldRepoUrl: "https://github.com/FarizRafiqi/1819_rplb_praukk_06_auliaelihzafarizrafiqi",
     role: { en: "Full Stack Developer (Redesign)", id: "Full Stack Developer (Redesain)" },
     contributors: 1,
-    featured: true,
-  },
-  {
-    id: "madina-inventory",
-    title: { en: "Madina Inventory", id: "Inventaris Madina" },
-    subtitle: { en: "Stock & Warehouse Management", id: "Manajemen Stok & Gudang" },
-    description: {
-      en: "A professional mobile application for real-time inventory tracking and warehouse management. Built as a freelance client project in collaboration with 2 other developers, featuring barcode scanning and stock analysis.",
-      id: "Aplikasi mobile profesional untuk pelacakan inventaris real-time dan manajemen gudang. Dibangun sebagai proyek freelance klien, berkolaborasi dengan 2 pengembang lainnya, menampilkan pemindaian barcode dan analisis stok."
-    },
-    tags: ["Ionic React", "Capacitor", "TypeScript", "Node.js", "Express", "MySQL"],
-    category: { en: "Full Stack", id: "Full Stack" },
-    categoryType: "fullstack",
-    images: ["/img/portfolio/madina-inventory.png"],
-    githubUrls: [
-      { label: "Frontend", url: "https://github.com/FarizRafiqi/MadinaInventoryApp" },
-      { label: "Backend", url: "https://github.com/FarizRafiqi/MadinaInventoryBE" }
-    ],
-    role: { en: "Full Stack Developer", id: "Full Stack Developer" },
-    contributors: 3,
-    isLead: false,
-    featured: true,
-  },
-  {
-    id: "ankersal",
-    title: { en: "Ankersal App", id: "Aplikasi Ankersal" },
-    subtitle: { en: "Sexual Violence Survivor Support Platform", id: "Platform Pendampingan Penyintas Kekerasan Seksual" },
-    description: {
-      en: "A Progressive Web App designed to assist survivors of sexual violence, featuring emergency SOS reports and map integration. Developed for the Gemastik 15 competition (national finalist in Software Development). Built with Laravel, PWA, Leaflet.js for mapping, and Bootstrap for styling.",
-      id: "Progressive Web App (PWA) yang dirancang untuk mendampingi penyintas kekerasan seksual, dilengkapi pelaporan SOS darurat dan integrasi peta. Dikembangkan untuk kompetisi Gemastik 15 dan berhasil lolos sebagai finalis nasional dalam kategori Pengembangan Perangkat Lunak. Dibangun dengan Laravel, PWA, Leaflet.js untuk pemetaan, dan Bootstrap untuk styling."
-    },
-    tags: ["Laravel", "PWA", "Leaflet.js", "Bootstrap", "MySQL"],
-    category: { en: "Full Stack", id: "Full Stack" },
-    categoryType: "fullstack",
-    images: ["/img/portfolio/ankersal.png"],
-    githubUrl: "https://github.com/FarizRafiqi/ankersal-app",
-    role: { en: "Full Stack Developer", id: "Full Stack Developer" },
-    contributors: 3,
-    featured: true,
-  },
-  {
-    id: "vrvttj",
-    title: { en: "VR Javanese Dance Visualization", id: "VR Visualisasi Tari Tradisional Jawa" },
-    subtitle: { en: "VR Research & Animation Optimization", id: "Riset VR & Optimasi Animasi" },
-    description: {
-      en: "A Virtual Reality research project for Javanese traditional dance learning and visualization, built in Unity. Features animated movements optimized with Cascadeur, character costumes, and integrated API authentication.",
-      id: "Proyek riset Virtual Reality untuk pembelajaran dan visualisasi tari tradisional Jawa, dibangun menggunakan Unity. Menampilkan gerakan tari yang dioptimalkan dengan Cascadeur, kostum karakter, serta integrasi API."
-    },
-    tags: ["Unity", "C#", "Cascadeur", "Virtual Reality", "3D Modeling"],
-    category: { en: "VR / 3D", id: "VR / 3D" },
-    categoryType: "3d",
-    images: ["/img/portfolio/megamendung.png"],
-    githubUrl: "https://github.com/FarizRafiqi/VRVTTJ",
-    role: { en: "VR & 3D Developer, Cascadeur Animator", id: "Pengembang VR & 3D, Animator Cascadeur" },
-    contributors: 1,
-    featured: true,
+    featured: false,
   },
   {
     id: "kania-jaya",
@@ -325,36 +428,6 @@ export const projects = [
     featured: false,
   },
 
-  {
-    id: "doyaneat",
-    title: { en: "DoyanEat", id: "DoyanEat" },
-    subtitle: { en: "Street Food Recommendation", id: "Rekomendasi Makanan Kaki Lima" },
-    description: {
-      en: "Vibrant platform for discovering Indonesian street food with ratings and location services.",
-      id: "Platform ceria untuk menemukan makanan kaki lima Indonesia dengan rating dan layanan lokasi."
-    },
-    tags: ["Vue.js", "Ionic", "Capacitor", "Tailwind CSS"],
-    category: { en: "Mobile App", id: "Aplikasi Mobile" },
-    categoryType: "mobile",
-    images: ["/img/portfolio/doyaneat.png"],
-    githubUrl: "https://github.com/FarizRafiqi/doyaneat",
-    featured: false,
-  },
-  {
-    id: "workfrom",
-    title: { en: "Workfrom", id: "Workfrom" },
-    subtitle: { en: "Workspace Booking Platform", id: "Platform Pemesanan Ruang Kerja" },
-    description: {
-      en: "A web redesign of workfrom.id created during a bootcamp at Maxy Academy. Focused on improving UI/UX for coworking space discovery.",
-      id: "Redesain web dari workfrom.id yang dibuat saat bootcamp di Maxy Academy. Berfokus pada peningkatan UI/UX untuk penemuan ruang kerja bersama."
-    },
-    tags: ["Laravel", "Bootstrap 5"],
-    category: { en: "Web Design", id: "Desain Web" },
-    categoryType: "frontend",
-    images: ["/img/portfolio/workfrom.png"],
-    githubUrl: "https://github.com/FarizRafiqi/workfrom",
-    featured: false,
-  },
 ];
 
 export const skills = {

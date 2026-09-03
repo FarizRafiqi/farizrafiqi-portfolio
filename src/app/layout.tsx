@@ -7,7 +7,7 @@ import { CustomizationProvider } from "@/context/CustomizationContext";
 export const metadata: Metadata = {
   title: "Fariz Rafiqi — Software Engineer | Web, Mobile & AI Specialist",
   description:
-    "Portfolio of Aulia El Ihza Fariz Rafiqi — a software engineer focused on Web Development, Mobile Development, and AI & Machine Learning. Currently working at Solusi Teknologi Kreatif.",
+    "Portfolio of Aulia El Ihza Fariz Rafiqi — a software engineer focused on web, mobile, backend, and AI-enabled products, with professional experience at Solusi Teknologi Kreatif through September 2026.",
   keywords: [
     "Fariz Rafiqi",
     "Software Engineer",

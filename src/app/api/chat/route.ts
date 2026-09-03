@@ -1,173 +1,236 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-import { personalData, experiences, projects, skills } from "@/lib/data";
+import { experienceSummary, personalData, experiences, projects, skills } from "@/lib/data";
 
+export const runtime = "nodejs";
+
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+type PortfolioProject = {
+  title: { en: string; id: string };
+  subtitle: { en: string; id: string };
+  description: { en: string; id: string };
+  tags: string[];
+  organization?: { en: string; id: string };
+  contributionHighlights?: { en: string[]; id: string[] };
+  githubUrl?: string;
+  githubUrls?: { label: string; url: string }[];
+  liveUrl?: string;
+  role?: { en: string; id: string };
+};
+
+type CompletionResponse = {
+  choices?: Array<{ message?: { content?: unknown } }>;
+};
+
+type ErrorPayload = {
+  error?: { message?: unknown };
+};
+
+const ninerouterBaseUrl = (process.env.NINEROUTER_BASE_URL || "").replace(/\/+$/, "");
+const ninerouterApiKey = process.env.NINEROUTER_API_KEY || "";
+const ninerouterModel = process.env.NINEROUTER_MODEL || "cx/gpt-5.2-codex";
 const openRouterApiKey = process.env.OPENROUTER_API_KEY || "";
 const openRouterModel = process.env.OPENROUTER_MODEL || "openrouter/free";
 const geminiApiKey = process.env.GEMINI_API_KEY || "";
+const geminiModel = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
-// Helper to format experiences for the system instructions
-const formattedExperiences = experiences.map((exp: any) => {
-  return `- ${exp.title.en} at ${typeof exp.company === 'string' ? exp.company : exp.company.en} (${exp.year.en}):
-    Description: ${exp.description.en.join(". ")}
-    Technologies used: ${exp.tags.join(", ")}`;
+const formattedExperiences = experiences.map((experience) => {
+  const company = experience.company;
+  return `- ${experience.title.en} at ${company} (${experience.year.en}):
+    Description: ${experience.description.en.join(". ")}
+    Technologies used: ${experience.tags.join(", ")}`;
 }).join("\n");
 
-// Helper to format projects for the system instructions
-const formattedProjects = projects.map((p: any) => {
-  const gitUrlStr = p.githubUrls 
-    ? p.githubUrls.map((u: any) => `${u.label}: ${u.url}`).join(", ")
-    : (p.githubUrl || "N/A");
-  
-  return `- ${p.title.en} (${p.subtitle.en}):
-    Description: ${p.description.en}
-    Tech Stack: ${p.tags.join(", ")}
-    GitHub: ${gitUrlStr}
-    ${p.oldRepoUrl ? `Old GitHub Repo: ${p.oldRepoUrl}` : ""}
-    Live Demo: ${p.liveUrl || "N/A"}
-    My Role: ${p.role?.en || "Full Stack Developer"}
-    Team/Collaborators: ${p.contributors ? `Team of ${p.contributors} ${p.isLead ? "(Lead)" : ""}` : "Solo Project"}`;
+const formattedProjects = projects.map((project) => {
+  const portfolioProject = project as PortfolioProject;
+  const sourceLinks = portfolioProject.githubUrls
+    ? portfolioProject.githubUrls.map((link) => `${link.label}: ${link.url}`).join(", ")
+    : (portfolioProject.githubUrl || "N/A");
+  const highlights = portfolioProject.contributionHighlights?.en?.join(" | ") || "N/A";
+
+  return `- ${portfolioProject.title.en} (${portfolioProject.subtitle.en}):
+    Organization: ${portfolioProject.organization?.en || "Personal project"}
+    Description: ${portfolioProject.description.en}
+    Contribution highlights: ${highlights}
+    Tech stack: ${portfolioProject.tags.join(", ")}
+    Source: ${sourceLinks}
+    Live demo: ${portfolioProject.liveUrl || "N/A"}
+    My role: ${portfolioProject.role?.en || "Full Stack Developer"}`;
 }).join("\n");
 
 const systemInstruction = `
-You are a friendly, professional AI Assistant representing Aulia El Ihza Fariz Rafiqi (often called Fariz Rafiqi) on his portfolio website.
-Your goal is to answer visitor questions about Fariz's background, skills, projects, and work experience.
+You are a friendly, professional AI assistant representing Aulia El Ihza Fariz Rafiqi (often called Fariz Rafiqi) on his portfolio website.
+Your job is to answer visitor questions about Fariz's background, skills, projects, and work experience using only the factual context below.
 
-Here is the factual context about Fariz Rafiqi:
-- **Full Name**: ${personalData.name}
-- **Job Title**: ${personalData.title.en} / ${personalData.title.id}
-- **Bio**: Fariz is a fresh graduate informatics student with experience in software engineering since 2018. Currently working as a Fullstack Engineer at Solusi Teknologi Kreatif. He is highly passionate about Web Development, Mobile Development, and AI & Machine Learning.
-- **Location**: ${personalData.location}
-- **Email**: ${personalData.email}
-- **Website**: ${personalData.website}
-- **GitHub**: ${personalData.socials.github}
-- **LinkedIn**: ${personalData.socials.linkedin}
+Factual context:
+- Full name: ${personalData.name}
+- Job title: ${personalData.title.en} / ${personalData.title.id}
+- Bio: Fariz has been building software since 2018. His professional experience includes freelance full-stack delivery and a Fullstack Engineer role at Solusi Teknologi Kreatif (STK) from September 2025 through September 2026. He works across web, mobile, backend, frontend, and AI-enabled products.
+- Experience summary: ${experienceSummary.professional.en} professional years; ${experienceSummary.journey.en} years in his software journey. The professional figure is based on freelance and company work; internships are shown in the timeline but are not added to that professional total.
+- Location: ${personalData.location}
+- Email: ${personalData.email}
+- Website: ${personalData.website}
+- GitHub: ${personalData.socials.github}
+- LinkedIn: ${personalData.socials.linkedin}
 
-**Skills**:
-- Frontend: ${skills.frontend.map(s => s.name).join(", ")}
-- Backend: ${skills.backend.map(s => s.name).join(", ")}
-- Tools: ${skills.tools.map(s => s.name).join(", ")}
-- Interests/Exploring: ${skills.interests.join(", ")}
+Skills:
+- Frontend: ${skills.frontend.map((skill) => skill.name).join(", ")}
+- Backend: ${skills.backend.map((skill) => skill.name).join(", ")}
+- Tools: ${skills.tools.map((skill) => skill.name).join(", ")}
+- Interests: ${skills.interests.join(", ")}
 
-**Work & Education Experience**:
+Work and education:
 ${formattedExperiences}
 
-**Projects**:
+Projects:
 ${formattedProjects}
 
-**Instructions**:
-1. Be helpful, professional, and warm.
-2. Answer in the same language as the user's message (mostly English or Indonesian).
-3. Keep your answers concise, clear, and focused. Avoid overly long replies.
-4. If a visitor asks about collaborating or hiring Fariz, encourage them to reach out via email at ${personalData.email} or connect on LinkedIn at ${personalData.socials.linkedin}.
-5. If the query is completely unrelated to Fariz, his work, or computer science/engineering, politely guide the topic back to his portfolio (e.g., "I'm here to help you learn more about Fariz's work and technical skills. Do you have any questions about his projects?").
-6. Do not make up facts. Only state what is mentioned above.
+Instructions:
+1. Be helpful, professional, warm, and concise.
+2. Answer in the same language as the user's message, usually English or Indonesian.
+3. Emphasize substantive ownership and contribution highlights when describing projects. Do not inflate small fixes into major achievements.
+4. Never invent metrics, responsibilities, technologies, employers, or project outcomes that are not in the context.
+5. For collaboration or hiring questions, direct visitors to ${personalData.email} or ${personalData.socials.linkedin}.
+6. For unrelated questions, politely guide the visitor back to Fariz's work and technical skills.
 `;
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { messages } = body;
+function normalizeMessages(value: unknown): ChatMessage[] {
+  if (!Array.isArray(value) || value.length === 0 || value.length > 20) return [];
 
-    if (!messages || !Array.isArray(messages)) {
-      return NextResponse.json(
-        { error: "Invalid request body: 'messages' array is required." },
-        { status: 400 }
-      );
+  return value
+    .map((message): ChatMessage | null => {
+      if (!message || typeof message !== "object") return null;
+      const candidate = message as { role?: unknown; content?: unknown };
+      const content = typeof candidate.content === "string" ? candidate.content.trim() : "";
+      if (!content || content.length > 4000) return null;
+      return {
+        role: candidate.role === "assistant" ? "assistant" : "user",
+        content,
+      };
+    })
+    .filter((message): message is ChatMessage => message !== null);
+}
+
+function getCompatibleEndpoint(baseUrl: string) {
+  return baseUrl.endsWith("/v1") ? `${baseUrl}/chat/completions` : `${baseUrl}/v1/chat/completions`;
+}
+
+function readCompletionContent(data: unknown) {
+  const content = (data as CompletionResponse)?.choices?.[0]?.message?.content;
+  if (typeof content === "string") return content.trim();
+  if (Array.isArray(content)) {
+    return content.map((part) => {
+      if (typeof part === "string") return part;
+      if (part && typeof part === "object" && "text" in part && typeof part.text === "string") return part.text;
+      return "";
+    }).join("").trim();
+  }
+  return "";
+}
+
+async function requestCompatibleChat(baseUrl: string, apiKey: string, model: string, messages: ChatMessage[]) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 25_000);
+
+  try {
+    const response = await fetch(getCompatibleEndpoint(baseUrl), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
+      },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: "system", content: systemInstruction }, ...messages],
+        temperature: 0.35,
+        max_tokens: 700,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({})) as ErrorPayload;
+      const message = typeof errorData.error?.message === "string" ? errorData.error.message : `${response.status} ${response.statusText}`;
+      throw new Error(message);
     }
 
-    // 1. OpenRouter (Primary if OPENROUTER_API_KEY is configured)
-    if (openRouterApiKey) {
+    const content = readCompletionContent(await response.json());
+    if (!content) throw new Error("The provider returned an empty response");
+    return content;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function requestGemini(messages: ChatMessage[]) {
+  if (!geminiApiKey) throw new Error("Gemini fallback is not configured");
+
+  const genAI = new GoogleGenerativeAI(geminiApiKey);
+  const history = messages.slice(0, -1).map((message) => ({
+    role: message.role === "assistant" ? "model" : "user",
+    parts: [{ text: message.content }],
+  }));
+  const model = genAI.getGenerativeModel({ model: geminiModel, systemInstruction });
+  const chat = model.startChat({ history });
+  return (await chat.sendMessage(messages[messages.length - 1].content)).response.text();
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json() as { messages?: unknown };
+    const messages = normalizeMessages(body?.messages);
+    if (messages.length === 0) {
+      return NextResponse.json({ error: "A non-empty messages array is required." }, { status: 400 });
+    }
+
+    const errors: string[] = [];
+
+    if (ninerouterBaseUrl) {
       try {
-        const formattedHistory = messages.slice(0, -1).map((msg: any) => {
-          return {
-            role: msg.role === "assistant" ? "assistant" : "user",
-            content: msg.content,
-          };
-        });
-
-        const latestMessage = messages[messages.length - 1]?.content || "";
-
-        const apiMessages = [
-          { role: "system", content: systemInstruction },
-          ...formattedHistory,
-          { role: "user", content: latestMessage }
-        ];
-
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${openRouterApiKey}`,
-            "HTTP-Referer": "https://farizrafiqi.dev",
-            "X-Title": "Fariz Rafiqi Portfolio",
-          },
-          body: JSON.stringify({
-            model: openRouterModel,
-            messages: apiMessages,
-          }),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData?.error?.message || `OpenRouter responded with status ${response.status}`);
-        }
-
-        const data = await response.json();
-        const text = data.choices?.[0]?.message?.content || "";
-
-        return NextResponse.json({ role: "assistant", content: text });
-      } catch (error: any) {
-        console.error("OpenRouter API Error:", error);
-        if (!geminiApiKey) {
-          return NextResponse.json(
-            { error: error?.message || "OpenRouter error and no Gemini fallback key configured" },
-            { status: 500 }
-          );
-        }
-        console.log("Attempting fallback to Gemini API...");
+        const content = await requestCompatibleChat(ninerouterBaseUrl, ninerouterApiKey, ninerouterModel, messages);
+        return NextResponse.json({ role: "assistant", content, provider: "ninerouter" });
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "request failed";
+        errors.push(`9Router: ${message}`);
+        console.error("9Router chat error:", error);
       }
     }
 
-    // 2. Direct Google Gemini API (Fallback or Primary if OpenRouter key is not set)
-    if (!geminiApiKey) {
-      return NextResponse.json(
-        { error: "No API key configured (neither OPENROUTER_API_KEY nor GEMINI_API_KEY found)" },
-        { status: 500 }
-      );
+    if (openRouterApiKey) {
+      try {
+        const content = await requestCompatibleChat("https://openrouter.ai/api", openRouterApiKey, openRouterModel, messages);
+        return NextResponse.json({ role: "assistant", content, provider: "openrouter" });
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "request failed";
+        errors.push(`OpenRouter: ${message}`);
+        console.error("OpenRouter chat error:", error);
+      }
     }
 
-    const genAI = new GoogleGenerativeAI(geminiApiKey);
+    if (geminiApiKey) {
+      try {
+        const content = await requestGemini(messages);
+        return NextResponse.json({ role: "assistant", content, provider: "gemini" });
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "request failed";
+        errors.push(`Gemini: ${message}`);
+        console.error("Gemini chat error:", error);
+      }
+    }
 
-    // Format chat history for Gemini SDK
-    const formattedHistory = messages.slice(0, -1).map((msg: any) => {
-      const role = msg.role === "assistant" ? "model" : "user";
-      return {
-        role,
-        parts: [{ text: msg.content }],
-      };
-    });
-
-    const latestMessage = messages[messages.length - 1]?.content || "";
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      systemInstruction,
-    });
-
-    const chat = model.startChat({
-      history: formattedHistory,
-    });
-
-    const result = await chat.sendMessage(latestMessage);
-    const text = result.response.text();
-
-    return NextResponse.json({ role: "assistant", content: text });
-  } catch (error: any) {
-    console.error("Chat API Error:", error);
     return NextResponse.json(
-      { error: error?.message || "Internal server error" },
-      { status: 500 }
+      {
+        error: "No chat provider is available. Configure 9Router, OpenRouter, or Gemini on the server.",
+        details: process.env.NODE_ENV === "development" ? errors : undefined,
+      },
+      { status: 503 },
     );
+  } catch (error: unknown) {
+    console.error("Chat API error:", error);
+    return NextResponse.json({ error: "Unable to process the chat request." }, { status: 500 });
   }
 }

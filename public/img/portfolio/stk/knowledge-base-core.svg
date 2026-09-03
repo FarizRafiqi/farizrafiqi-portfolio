@@ -1,0 +1,29 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#111A2B"/>
+  <path d="M0 126H1200M0 250H1200M0 374H1200M0 498H1200M0 622H1200" stroke="#2A3B57" stroke-width="1"/>
+  <path d="M120 0V750M240 0V750M360 0V750M480 0V750M600 0V750M720 0V750M840 0V750M960 0V750M1080 0V750" stroke="#2A3B57" stroke-width="1"/>
+  <path d="M192 375H1008" stroke="#4B7FF2" stroke-width="2" stroke-dasharray="8 12" opacity="0.65"/>
+  <path d="M600 176V574M382 268L818 482M382 482L818 268" stroke="#4B7FF2" stroke-width="2" stroke-dasharray="8 12" opacity="0.45"/>
+  <circle cx="600" cy="375" r="126" fill="#172844" stroke="#7EA5FF" stroke-width="2"/>
+  <circle cx="600" cy="375" r="88" fill="#111A2B" stroke="#4B7FF2" stroke-width="2"/>
+  <circle cx="600" cy="375" r="28" fill="#7EA5FF"/>
+  <circle cx="600" cy="375" r="11" fill="#F5F8FF"/>
+  <circle cx="192" cy="375" r="12" fill="#7EA5FF"/>
+  <circle cx="1008" cy="375" r="12" fill="#7EA5FF"/>
+  <circle cx="382" cy="268" r="12" fill="#7EA5FF"/>
+  <circle cx="818" cy="482" r="12" fill="#7EA5FF"/>
+  <circle cx="382" cy="482" r="12" fill="#7EA5FF"/>
+  <circle cx="818" cy="268" r="12" fill="#7EA5FF"/>
+  <text x="64" y="88" fill="#B7C9EE" font-family="monospace" font-size="18" letter-spacing="4">KNOWLEDGE BASE / AI CORE</text>
+  <text x="600" y="368" text-anchor="middle" fill="#F5F8FF" font-family="Arial, sans-serif" font-size="27" font-weight="700">AI ORCHESTRATION</text>
+  <text x="600" y="402" text-anchor="middle" fill="#9EB7EA" font-family="monospace" font-size="15" letter-spacing="2">TENANT-AWARE COMPLETION</text>
+  <g font-family="monospace" font-size="16" letter-spacing="1">
+    <text x="124" y="350" fill="#E8EEFF">DOCUMENTS</text>
+    <text x="934" y="350" fill="#E8EEFF">MILVUS</text>
+    <text x="302" y="224" fill="#E8EEFF">OPENAI API</text>
+    <text x="754" y="548" fill="#E8EEFF">MINIO</text>
+    <text x="283" y="548" fill="#E8EEFF">NESTJS</text>
+    <text x="742" y="224" fill="#E8EEFF">SOCKET.IO</text>
+  </g>
+  <text x="64" y="694" fill="#7894C8" font-family="monospace" font-size="14" letter-spacing="2">SOURCE-BASED PROJECT COVER · STK</text>
+</svg>

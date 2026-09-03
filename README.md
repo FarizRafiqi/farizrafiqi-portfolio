@@ -20,6 +20,26 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Portfolio chatbot
+
+The `/api/chat` route keeps provider credentials on the server and sends requests to a self-hosted [9Router gateway](https://github.com/decolua/9router). Configure the gateway with the Codex OAuth and/or Antigravity/Google auth connections, then expose its API through an HTTPS URL reachable by the portfolio server.
+
+Copy `.env.example` to `.env.local` and set the provider values that apply to your deployment:
+
+```bash
+NINEROUTER_BASE_URL=https://your-public-9router.example/v1
+NINEROUTER_API_KEY=
+NINEROUTER_MODEL=cx/gpt-5.2-codex
+
+# Optional fallbacks when the primary gateway is unavailable.
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=openrouter/free
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+`NINEROUTER_MODEL` should match a model ID exposed by the connected 9Router account; use the model identifier shown in its dashboard for Antigravity/Google-backed models. Never use `NEXT_PUBLIC_` for these values. If no provider is configured, the UI shows a clear configuration message instead of pretending that a response was generated.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

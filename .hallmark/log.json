@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2026-09-03",
+    "type": "verification",
+    "genre": "modern-minimal",
+    "macrostructure": "Workbench",
+    "theme": "Cobalt",
+    "enrichment": "3d-scene",
+    "nav": "N5",
+    "footer": "Ft2",
+    "route": "/",
+    "notes": "Validated reduced-motion visibility, desktop/mobile responsive layout, project tabs, accessible detail modal, chatbot fallback, and light/dark theme rendering."
+  },
+  {
+    "timestamp": "2026-09-03",
+    "type": "redesign",
+    "genre": "modern-minimal",
+    "macrostructure": "Workbench",
+    "theme": "Cobalt",
+    "enrichment": "3d-scene",
+    "nav": "N5",
+    "footer": "Ft2",
+    "route": "/",
+    "notes": "Reframed the portfolio around evidence-led STK project work, real product screenshots, a left-biased technical hero, and a server-side AI gateway configuration."
+  }
+]
