@@ -20,12 +20,12 @@ export default function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const suggestions = language === "en"
-    ? ["What are Fariz's core skills?", "Tell me about Hemdal.", "Which STK project used AI?", "How can I contact Fariz?"]
-    : ["Apa keahlian utama Fariz?", "Ceritakan tentang Hemdal.", "Proyek STK mana yang memakai AI?", "Bagaimana menghubungi Fariz?"];
+    ? ["What are Fariz's core skills?", "Tell me about Hemdal.", "Which project used AI?", "How can I contact Fariz?"]
+    : ["Apa keahlian utama Fariz?", "Ceritakan tentang Hemdal.", "Proyek mana yang memakai AI?", "Bagaimana menghubungi Fariz?"];
 
   const greeting = language === "en"
-    ? "Hi! I can walk you through Fariz’s experience, STK project contributions, and technical focus."
-    : "Halo! Saya bisa menjelaskan pengalaman, kontribusi proyek STK, dan fokus teknis Fariz.";
+    ? "Hi! I can walk you through Fariz’s experience, project contributions, and technical focus."
+    : "Halo! Saya bisa menjelaskan pengalaman, kontribusi proyek, dan fokus teknis Fariz.";
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

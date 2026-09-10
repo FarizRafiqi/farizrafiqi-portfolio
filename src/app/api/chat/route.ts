@@ -116,7 +116,9 @@ function normalizeMessages(value: unknown): ChatMessage[] {
 }
 
 function getCompatibleEndpoint(baseUrl: string) {
-  return baseUrl.endsWith("/v1") ? `${baseUrl}/chat/completions` : `${baseUrl}/v1/chat/completions`;
+  const normalized = baseUrl.replace(/\/+$/, "");
+  if (normalized.endsWith("/chat/completions")) return normalized;
+  return normalized.endsWith("/v1") ? `${normalized}/chat/completions` : `${normalized}/v1/chat/completions`;
 }
 
 function readCompletionContent(data: unknown) {
@@ -141,6 +143,7 @@ async function requestCompatibleChat(baseUrl: string, apiKey: string, model: str
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
       },
       body: JSON.stringify({

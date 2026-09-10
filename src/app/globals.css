@@ -391,9 +391,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 12%;
   right: 4%;
   border-radius: 50%;
-  background: var(--hm-cobalt);
-  filter: blur(120px);
-  opacity: 0.055;
+  background: radial-gradient(circle, var(--hm-rule) 0%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.12;
   pointer-events: none;
 }
 

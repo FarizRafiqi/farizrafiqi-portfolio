@@ -38,13 +38,13 @@ function WireShape({
     groupRef.current.rotation.z += delta * speed * 0.04;
   });
 
-  const color = isDark ? "#dbeafe" : "#2d6df5";
+  const color = isDark ? "#ffffff" : "#111111";
 
   return (
     <Float speed={speed * 0.65} rotationIntensity={reducedMotion ? 0 : 0.22} floatIntensity={reducedMotion ? 0 : 0.3}>
       <group ref={groupRef} position={position} scale={size}>
         <lineSegments geometry={edgesGeo}>
-          <lineBasicMaterial color={color} transparent opacity={isDark ? 0.22 : 0.34} />
+          <lineBasicMaterial color={color} transparent opacity={isDark ? 0.18 : 0.22} />
         </lineSegments>
       </group>
     </Float>
@@ -65,7 +65,7 @@ function OrbitalRing({
   reducedMotion: boolean;
 }) {
   const ref = useRef<THREE.Mesh>(null);
-  const color = isDark ? "#c7dcff" : "#2d6df5";
+  const color = isDark ? "#ffffff" : "#111111";
 
   useFrame((_, delta) => {
     if (!ref.current || reducedMotion) return;
@@ -75,7 +75,7 @@ function OrbitalRing({
   return (
     <mesh ref={ref} rotation={rotation}>
       <torusGeometry args={[radius, 0.012, 8, 96]} />
-      <meshBasicMaterial color={color} transparent opacity={isDark ? 0.32 : 0.38} />
+      <meshBasicMaterial color={color} transparent opacity={isDark ? 0.20 : 0.22} />
     </mesh>
   );
 }
@@ -109,25 +109,25 @@ function DotGlobe({ isDark, reducedMotion }: { isDark: boolean; reducedMotion: b
     ref.current.rotation.x += delta * 0.025;
   });
 
-  const color = isDark ? "#edf5ff" : "#2d6df5";
+  const color = isDark ? "#ffffff" : "#111111";
 
   return (
     <group ref={ref} position={[0, 0, -0.5]}>
       <mesh>
         <sphereGeometry args={[1.72, 32, 32]} />
-        <meshBasicMaterial color={isDark ? "#1d3557" : "#dce9ff"} transparent opacity={isDark ? 0.18 : 0.58} />
+        <meshBasicMaterial color={isDark ? "#141414" : "#f0f0f0"} transparent opacity={isDark ? 0.25 : 0.45} />
       </mesh>
       <lineSegments geometry={shellGeo}>
-        <lineBasicMaterial color={color} transparent opacity={isDark ? 0.16 : 0.26} />
+        <lineBasicMaterial color={color} transparent opacity={isDark ? 0.12 : 0.18} />
       </lineSegments>
       <points geometry={bufferGeo}>
-        <pointsMaterial size={0.025} color={color} transparent opacity={isDark ? 0.72 : 0.64} sizeAttenuation />
+        <pointsMaterial size={0.025} color={color} transparent opacity={isDark ? 0.65 : 0.55} sizeAttenuation />
       </points>
       <OrbitalRing radius={2.05} rotation={[0.8, 0.2, 0.2]} speed={0.22} isDark={isDark} reducedMotion={reducedMotion} />
       <OrbitalRing radius={2.18} rotation={[0.15, 0.95, 0.6]} speed={-0.16} isDark={isDark} reducedMotion={reducedMotion} />
       <mesh>
         <sphereGeometry args={[0.26, 24, 24]} />
-        <meshBasicMaterial color={isDark ? "#dbeafe" : "#2d6df5"} transparent opacity={0.92} />
+        <meshBasicMaterial color={isDark ? "#ffffff" : "#111111"} transparent opacity={0.85} />
       </mesh>
     </group>
   );

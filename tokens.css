@@ -1,38 +1,38 @@
 :root {
-  --hm-paper: oklch(98.5% 0.004 250);
-  --hm-paper-raised: oklch(100% 0 0);
-  --hm-ink: oklch(24% 0.02 258);
-  --hm-ink-soft: oklch(38% 0.018 257);
-  --hm-ink-muted: oklch(56% 0.014 257);
-  --hm-rule: oklch(24% 0.02 258 / 0.14);
-  --hm-rule-soft: oklch(24% 0.02 258 / 0.08);
-  --hm-cobalt: oklch(58% 0.20 256);
-  --hm-cobalt-bright: oklch(68% 0.18 256);
+  --hm-paper: oklch(100% 0 0);
+  --hm-paper-raised: oklch(97.5% 0 0);
+  --hm-ink: oklch(12% 0 0);
+  --hm-ink-soft: oklch(35% 0 0);
+  --hm-ink-muted: oklch(56% 0 0);
+  --hm-rule: oklch(12% 0 0 / 0.12);
+  --hm-rule-soft: oklch(12% 0 0 / 0.06);
+  --hm-cobalt: oklch(12% 0 0);
+  --hm-cobalt-bright: oklch(28% 0 0);
   --hm-cobalt-ink: oklch(100% 0 0);
   --hm-success: oklch(67% 0.13 154);
-  --hm-graphite: oklch(21% 0.016 260);
-  --hm-graphite-soft: oklch(29% 0.018 260);
-  --hm-shadow: 0 18px 50px oklch(24% 0.02 258 / 0.10);
-  --hm-radius: 10px;
-  --hm-radius-tight: 6px;
+  --hm-graphite: oklch(20% 0 0);
+  --hm-graphite-soft: oklch(30% 0 0);
+  --hm-shadow: 0 18px 50px oklch(0% 0 0 / 0.08);
+  --hm-radius: 8px;
+  --hm-radius-tight: 5px;
   --hm-font-display: 'Space Grotesk', sans-serif;
   --hm-font-body: 'Inter', sans-serif;
   --hm-font-mono: 'JetBrains Mono', monospace;
 }
 
 .dark {
-  --hm-paper: oklch(16% 0.016 260);
-  --hm-paper-raised: oklch(20% 0.018 260);
-  --hm-ink: oklch(96% 0.008 250);
-  --hm-ink-soft: oklch(78% 0.012 250);
-  --hm-ink-muted: oklch(61% 0.014 250);
-  --hm-rule: oklch(96% 0.008 250 / 0.16);
-  --hm-rule-soft: oklch(96% 0.008 250 / 0.09);
-  --hm-cobalt: oklch(70% 0.17 256);
-  --hm-cobalt-bright: oklch(78% 0.14 256);
-  --hm-cobalt-ink: oklch(16% 0.016 260);
+  --hm-paper: oklch(0% 0 0);
+  --hm-paper-raised: oklch(12% 0 0);
+  --hm-ink: oklch(96% 0 0);
+  --hm-ink-soft: oklch(76% 0 0);
+  --hm-ink-muted: oklch(52% 0 0);
+  --hm-rule: oklch(100% 0 0 / 0.12);
+  --hm-rule-soft: oklch(100% 0 0 / 0.06);
+  --hm-cobalt: oklch(96% 0 0);
+  --hm-cobalt-bright: oklch(88% 0 0);
+  --hm-cobalt-ink: oklch(10% 0 0);
   --hm-success: oklch(73% 0.13 154);
-  --hm-graphite: oklch(11% 0.014 260);
-  --hm-graphite-soft: oklch(23% 0.018 260);
-  --hm-shadow: 0 18px 50px oklch(0% 0 0 / 0.28);
+  --hm-graphite: oklch(14% 0 0);
+  --hm-graphite-soft: oklch(22% 0 0);
+  --hm-shadow: 0 18px 50px oklch(0% 0 0 / 0.40);
 }

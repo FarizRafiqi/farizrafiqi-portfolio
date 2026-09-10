@@ -40,6 +40,8 @@ GEMINI_MODEL=gemini-2.5-flash
 
 `NINEROUTER_MODEL` should match a model ID exposed by the connected 9Router account; use the model identifier shown in its dashboard for Antigravity/Google-backed models. Never use `NEXT_PUBLIC_` for these values. If no provider is configured, the UI shows a clear configuration message instead of pretending that a response was generated.
 
+The portfolio only talks to 9Router through its OpenAI-compatible `/v1/chat/completions` endpoint. Configure Codex OAuth or Antigravity/Google connections inside 9Router itself; do not put those OAuth tokens in this repository. `NINEROUTER_BASE_URL` may be either the gateway origin, its `/v1` URL, or the complete `/chat/completions` URL.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

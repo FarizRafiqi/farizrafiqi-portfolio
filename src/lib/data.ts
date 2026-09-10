@@ -175,88 +175,77 @@ export const experienceSummary = {
 
 export const projects = [
   {
-    id: "satria-muda-indonesia",
-    title: { en: "Satria Muda Indonesia", id: "Satria Muda Indonesia" },
-    subtitle: { en: "Member & Art Battle Management Platform", id: "Platform Manajemen Anggota & Art Battle" },
+    id: "satria-muda-indonesia-platform",
+    title: { en: "Satria Muda Indonesia Platform", id: "Platform Satria Muda Indonesia" },
+    subtitle: { en: "Bilingual Organization Portal & Art Battle Management System", id: "Portal Organisasi Bilingual & Sistem Manajemen Art Battle" },
     description: {
-      en: "A production member and event-management platform for Satria Muda Indonesia. I worked across the art-battle bracket workflow, from scoring synchronization and match progression to manual winner decisions and printable recap reporting for event operators.",
-      id: "Platform produksi untuk manajemen anggota dan event Satria Muda Indonesia. Saya mengerjakan alur bracket art battle dari sinkronisasi penilaian dan progres pertandingan hingga penentuan pemenang manual serta laporan recap yang siap dicetak untuk operator event."
+      en: "A comprehensive production platform for Satria Muda Indonesia combining a bilingual public portal and an internal tournament/member management system. Features real-time Art Battle brackets, scoring synchronization across judges, official match sheets, and offline tournament synchronization.",
+      id: "Platform produksi komprehensif untuk Satria Muda Indonesia yang menggabungkan portal publik bilingual dan sistem manajemen turnamen serta keanggotaan. Mencakup bracket turnamen Art Battle real-time, sinkronisasi penilaian juri, lembar pertandingan resmi, dan sinkronisasi turnamen offline."
     },
     contributionHighlights: {
       en: [
-        "Implemented art-battle bracket management across backend scoring sync and frontend match operations.",
-        "Added a manual winner workflow with a dedicated modal, API endpoint, and persisted winner score and duration.",
-        "Delivered dynamic match recap reporting with judge columns, print layout, and event-management deep links."
+        "Engineered the Art Battle tournament bracket workflow, synchronizing real-time referee scoring sheets, penalty deductions, and manual winner overrides.",
+        "Built the bilingual public landing page using Next.js and Sanity CMS with localized schema models, internationalized routing, and dynamic activity pages.",
+        "Created an offline tournament data synchronization CLI seeder and designed high-density printable match recap reports for championship organizers."
       ],
       id: [
-        "Mengimplementasikan manajemen bracket art battle pada sinkronisasi skor backend dan operasi pertandingan di frontend.",
-        "Menambahkan alur penentuan pemenang manual dengan modal, endpoint API, serta penyimpanan skor dan durasi pemenang.",
-        "Menghadirkan laporan recap pertandingan dinamis dengan kolom juri, layout cetak, dan deep link dari manajemen event."
+        "Mengembangkan alur bracket turnamen Art Battle dengan sinkronisasi lembar penilaian juri real-time, pengurangan penalti, dan override pemenang manual.",
+        "Membangun landing page publik bilingual menggunakan Next.js dan Sanity CMS dengan model schema terlokalisasi, routing internasional, dan halaman aktivitas dinamis.",
+        "Membangun CLI seeder sinkronisasi data turnamen offline dan merancang laporan rekap pertandingan siap cetak untuk panitia kejuaraan."
       ]
     },
-    tags: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "WebSocket"],
+    tags: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "Sanity"],
     category: { en: "Full Stack", id: "Full Stack" },
     categoryType: "fullstack",
-    images: ["/img/portfolio/stk/satria-muda-member.png"],
-    githubUrls: [
-      { label: "Frontend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-member-management" },
-      { label: "Public landing source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing" }
+    images: [
+      "/img/portfolio/stk/satria-muda-admin-dashboard.png",
+      "/img/portfolio/stk/satria-muda-scorecard.png",
+      "/img/portfolio/stk/satria-muda-landing.png",
+      "/img/portfolio/stk/satria-muda-events.png",
+      "/img/portfolio/stk/satria-muda-kontingen.png",
     ],
-    role: { en: "Fullstack Engineer — Event Management", id: "Fullstack Engineer — Manajemen Event" },
-    organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
-    featured: true,
-  },
-  {
-    id: "satria-muda-landing",
-    title: { en: "Satria Muda Landing", id: "Landing Page Satria Muda" },
-    subtitle: { en: "Bilingual Organization & Activity Website", id: "Website Organisasi & Aktivitas Bilingual" },
-    description: {
-      en: "The public-facing Satria Muda Indonesia website, built to present the organization, events, activities, and history in a polished bilingual experience. I established the localization foundation across the UI and Sanity content model, then carried it through activity and gallery surfaces.",
-      id: "Website publik Satria Muda Indonesia untuk menyajikan organisasi, event, aktivitas, dan sejarah dalam pengalaman bilingual yang rapi. Saya membangun fondasi localization pada UI dan content model Sanity, lalu menerapkannya pada halaman aktivitas dan galeri."
-    },
-    contributionHighlights: {
-      en: [
-        "Built the shared language context, locale files, and localized Sanity schema fields for the public site.",
-        "Carried localization through navigation, hero, events, gallery, organization structure, history, and activity surfaces."
-      ],
-      id: [
-        "Membangun language context, file locale, dan field schema Sanity yang mendukung konten terlokalisasi.",
-        "Menerapkan localization pada navigasi, hero, event, galeri, struktur organisasi, sejarah, dan halaman aktivitas."
-      ]
-    },
-    tags: ["Next.js", "TypeScript", "Sanity", "Tailwind CSS", "i18n"],
-    category: { en: "Frontend", id: "Frontend" },
-    categoryType: "frontend",
-    images: ["/img/portfolio/stk/satria-muda-landing.png"],
-    githubUrl: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing",
-    role: { en: "Frontend Engineer — Localization", id: "Frontend Engineer — Localization" },
+    liveUrl: "https://satriamudaindonesia.com/",
+    githubUrls: [
+      { label: "Member Management", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-member-management" },
+      { label: "Public Landing", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing" },
+      { label: "Staging Portal", url: "https://smi-member-management.tech.solusiteknologikreatif.id/" }
+    ],
+    role: { en: "Fullstack Engineer — Core Platform & Localization", id: "Fullstack Engineer — Core Platform & Localization" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
     featured: true,
   },
   {
     id: "hemdal-sentiment-analysis",
     title: { en: "Hemdal", id: "Hemdal" },
-    subtitle: { en: "Sentiment Intelligence & Media Monitoring", id: "Sentiment Intelligence & Media Monitoring" },
+    subtitle: { en: "Media Intelligence & Sentiment Analysis Platform", id: "Platform Media Intelligence & Analisis Sentimen" },
     description: {
-      en: "An end-to-end sentiment intelligence product spanning a public landing page, authenticated portal, and analysis backend. I shaped the Command Center incident/history workflow, improved authentication refresh reliability, and helped bring the product landing experience in line with its Figma direction.",
-      id: "Produk sentiment intelligence end-to-end yang mencakup landing page publik, portal terautentikasi, dan backend analisis. Saya mengerjakan workflow incident/history pada Command Center, meningkatkan keandalan refresh autentikasi, dan membantu menyelaraskan landing page dengan arah desain Figma."
+      en: "An end-to-end media monitoring and sentiment intelligence product spanning a public showcase, authenticated analytics portal, and real-time backend. Empowers organizations to track news and social media conversations across channels, detect sentiment shifts, and manage operational incidents.",
+      id: "Platform pemantauan media dan sentiment intelligence end-to-end yang mencakup landing page publik, portal analitik multi-tenant, dan backend pemrosesan real-time. Membantu organisasi memantau percakapan berita dan media sosial, mendeteksi pergeseran sentimen, serta menangani insiden operasional."
     },
     contributionHighlights: {
       en: [
-        "Shaped the Command Center incident/history flow for early-warning alerts and resolved incidents.",
-        "Improved authentication reliability through refresh-token scope handling and centralized token-refresh behavior.",
-        "Reworked landing-page UI/content against the provided Figma direction and added centralized configuration controls."
+        "Engineered the Command Center early-warning alert system and incident handling lifecycle, integrating Telegram notification webhooks.",
+        "Eliminated incident ID race conditions during high-volume mention spikes, verified through k6 concurrency load testing.",
+        "Hardened headless Chromium PDF export pipelines with process-level isolation to prevent memory leaks and out-of-memory crashes.",
+        "Strengthened OIDC authentication reliability through centralized token refresh and scope management across portal and services."
       ],
       id: [
-        "Mengerjakan alur incident/history pada Command Center untuk early-warning alert dan incident yang telah diselesaikan.",
-        "Meningkatkan keandalan autentikasi melalui penanganan scope refresh token dan perilaku token refresh yang lebih terpusat.",
-        "Menyempurnakan UI/konten landing page mengikuti arah Figma dan menambahkan kontrol konfigurasi terpusat."
+        "Membangun sistem early-warning alert Command Center dan alur penanganan insiden yang terintegrasi webhook notifikasi Telegram.",
+        "Mengatasi race condition incident ID saat lonjakan data sebutan tinggi, diverifikasi dengan pengujian beban konkurensi k6.",
+        "Memperkuat pipeline ekspor PDF Chromium headless dengan isolasi proses untuk mencegah kebocoran memori dan crash OOM.",
+        "Meningkatkan keandalan autentikasi OIDC melalui penanganan token refresh terpusat dan manajemen scope lintas layanan."
       ]
     },
-    tags: ["Next.js", "React", "TypeScript", "NestJS", "Elasticsearch", "Socket.IO", "OIDC"],
+    tags: ["Next.js", "React", "TypeScript", "NestJS", "Elasticsearch", "Socket.IO"],
     category: { en: "Full Stack", id: "Full Stack" },
     categoryType: "fullstack",
-    images: ["/img/portfolio/stk/hemdal-portal.png", "/img/portfolio/stk/hemdal-dashboard.webp"],
+    images: [
+      "/img/portfolio/stk/hemdal-dashboard.png",
+      "/img/portfolio/stk/hemdal-portal.png",
+      "/img/portfolio/stk/hemdal-command-center.png",
+      "/img/portfolio/stk/hemdal-landing.png",
+    ],
+    liveUrl: "https://sentiment-analysis-landing.tech.solusiteknologikreatif.id/",
     githubUrls: [
       { label: "Portal source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis-portal-v2" },
       { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis" },
@@ -269,27 +258,30 @@ export const projects = [
   {
     id: "knowledge-based-core",
     title: { en: "Knowledge Base Core", id: "Knowledge Base Core" },
-    subtitle: { en: "Multi-tenant AI & Document Intelligence Service", id: "Layanan AI Multi-tenant & Kecerdasan Dokumen" },
+    subtitle: { en: "Multi-tenant RAG & Vector Intelligence Service", id: "Layanan RAG Multi-tenant & Vector Intelligence" },
     description: {
-      en: "The backend core behind a multi-tenant knowledge-base product, combining document ingestion, vector search, storage, and AI conversations. I extended its provider architecture, tenant-aware completion settings, language fallback chain, embedding fallback, and Milvus connection resilience.",
-      id: "Core backend untuk produk knowledge base multi-tenant yang menggabungkan ingestion dokumen, vector search, storage, dan percakapan AI. Saya mengembangkan arsitektur provider, pengaturan completion per tenant, language fallback chain, embedding fallback, serta ketahanan koneksi Milvus."
+      en: "The high-throughput RAG backend core powering AI conversational intelligence and document analysis. Combines document ingestion, chunking pipelines, vector similarity search, and multi-provider completion.",
+      id: "Core backend RAG berkinerja tinggi yang mendukung kecerdasan percakapan AI dan analisis dokumen. Menggabungkan ingestion dokumen, pipeline chunking, vector similarity search, dan completion multi-provider."
     },
     contributionHighlights: {
       en: [
-        "Added an OpenAI-compatible gateway and dynamic multi-provider factory for completion services.",
-        "Implemented tenant-aware completion settings with a hybrid language fallback chain.",
-        "Added automatic embedding-model fallback and improved Milvus connection resilience for indexing workflows."
+        "Architected a dynamic completion factory supporting DeepSeek, OpenAI, and custom LLM inference endpoints.",
+        "Implemented tenant-isolated completion configurations with hybrid language and model fallback chains.",
+        "Enhanced Milvus vector database reconnection resilience and built automatic embedding model failover."
       ],
       id: [
-        "Menambahkan gateway yang kompatibel dengan OpenAI dan dynamic multi-provider factory untuk layanan completion.",
-        "Mengimplementasikan pengaturan completion per tenant dengan hybrid language fallback chain.",
-        "Menambahkan fallback model embedding otomatis dan meningkatkan ketahanan koneksi Milvus pada workflow indexing."
+        "Merancang dynamic completion factory yang mendukung DeepSeek, OpenAI, dan endpoint inferensi LLM kustom.",
+        "Mengimplementasikan konfigurasi completion terisolasi per tenant dengan chain fallback bahasa dan model hibrida.",
+        "Meningkatkan ketahanan rekoneksi vector database Milvus dan membangun failover model embedding otomatis."
       ]
     },
-    tags: ["NestJS", "TypeScript", "OpenAI-compatible API", "Milvus", "MariaDB", "MinIO", "Socket.IO"],
+    tags: ["NestJS", "TypeScript", "Milvus", "MariaDB", "MinIO", "Socket.IO", "RAG"],
     category: { en: "Backend / AI", id: "Backend / AI" },
     categoryType: "backend",
-    images: ["/img/portfolio/stk/knowledge-base-core.svg"],
+    images: [
+      "/img/portfolio/stk/knowledge-base-api.png",
+    ],
+    liveUrl: "https://knowledge-based-core.dev.solusiteknologikreatif.id/api",
     githubUrl: "https://git.productzillaacademy.com/solusiteknologikreatif/knowledge-based-core",
     role: { en: "Backend Engineer — AI Infrastructure", id: "Backend Engineer — Infrastruktur AI" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
@@ -298,27 +290,29 @@ export const projects = [
   {
     id: "smart-booking-room",
     title: { en: "Smart Booking Room", id: "Smart Booking Room" },
-    subtitle: { en: "Meeting Room Reservation for DPR RI", id: "Pemesanan Ruang Rapat DPR RI" },
+    subtitle: { en: "Meeting Room Reservation System for DPR RI", id: "Sistem Pemesanan Ruang Rapat DPR RI" },
     description: {
-      en: "A meeting-room reservation product for DPR RI, covering the public booking experience and the backend reservation lifecycle. I strengthened room-display consistency by prioritizing ongoing meetings, auto-completing stale active reservations, persisting completed status, and keeping room context visible in the confirmation flow.",
-      id: "Produk pemesanan ruang rapat untuk DPR RI yang mencakup pengalaman booking publik dan lifecycle reservasi di backend. Saya memperkuat konsistensi room display dengan memprioritaskan meeting yang sedang berjalan, menutup reservasi aktif yang tertinggal secara otomatis, menyimpan status selesai, dan menjaga konteks ruangan pada alur konfirmasi."
+      en: "An institutional meeting room reservation system engineered for Dewan Perwakilan Rakyat Republik Indonesia (DPR RI). Covers public room schedule displays, real-time availability filters, and backend reservation lifecycle management.",
+      id: "Sistem pemesanan ruang rapat institusional yang dibangun untuk Dewan Perwakilan Rakyat Republik Indonesia (DPR RI). Mencakup tampilan jadwal ruangan publik, filter ketersediaan real-time, dan manajemen siklus hidup reservasi backend."
     },
     contributionHighlights: {
       en: [
-        "Prioritized ongoing reservations in room display and prevented duplicate active meetings from appearing in upcoming agendas.",
-        "Automatically completed the previous ongoing meeting when a new meeting starts in the same room.",
-        "Added completed reservation state across the service, entity, and migration while keeping confirmation copy tied to the selected room."
+        "Engineered room display prioritization to display ongoing meetings prominently and prevent schedule collisions.",
+        "Built automated lifecycle hooks to cleanly auto-complete stale reservations when a new booking session commences.",
+        "Implemented completed reservation state machine across NestJS services, MySQL entities, and database migrations."
       ],
       id: [
-        "Memprioritaskan reservasi yang sedang berlangsung pada room display dan mencegah meeting aktif ganda muncul di agenda berikutnya.",
-        "Menyelesaikan meeting ongoing sebelumnya secara otomatis ketika meeting baru dimulai di ruangan yang sama.",
-        "Menambahkan status reservasi selesai pada service, entity, dan migration serta menjaga copy konfirmasi sesuai ruangan yang dipilih."
+        "Membangun prioritas tampilan ruangan untuk menampilkan rapat yang sedang berlangsung dan mencegah tabrakan jadwal.",
+        "Membangun hook siklus hidup otomatis untuk menyelesaikan reservasi lama secara bersih saat sesi booking baru dimulai.",
+        "Mengimplementasikan state machine status reservasi selesai pada layanan NestJS, entitas MySQL, dan migrasi database."
       ]
     },
     tags: ["Next.js", "React", "TypeScript", "NestJS", "MySQL", "Socket.IO"],
     category: { en: "Full Stack", id: "Full Stack" },
     categoryType: "fullstack",
-    images: ["/img/portfolio/stk/smart-booking-room.png"],
+    images: [
+      "/img/portfolio/stk/smart-booking-room.png",
+    ],
     githubUrls: [
       { label: "Frontend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-frontend" },
       { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-backend" }

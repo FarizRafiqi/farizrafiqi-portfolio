@@ -87,7 +87,7 @@ export default function HeroSection() {
 
             <motion.h1 variants={itemVariants} className="hm-hero-title">
               <span>Fariz</span>
-              <span className="hm-hero-title-accent">Rafiqi</span>
+              <span>Rafiqi</span>
             </motion.h1>
 
             <motion.p variants={itemVariants} className="hm-hero-tagline">
