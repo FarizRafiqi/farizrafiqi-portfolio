@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { personalData } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/LanguageContext";
-import { Globe } from "lucide-react";
+import { Globe, Search } from "lucide-react";
 
 function SunIcon({ className }: { className?: string }) {
   return (
@@ -182,6 +182,18 @@ export default function Navbar() {
           <div className="flex items-center gap-2 flex-shrink-0">
             {mounted && (
               <>
+                {/* Command Palette Trigger */}
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.dispatchEvent(new CustomEvent("toggle-command-palette"))}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-2.5 h-8 rounded-full text-xs font-mono text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/[0.08] border border-black/[0.08] dark:border-white/[0.12] transition-all duration-200 cursor-pointer"
+                  aria-label="Open Command Palette (Cmd+K)"
+                  title="Search & Commands (⌘K / Ctrl+K)"
+                >
+                  <Search size={13} />
+                  <span className="font-semibold tracking-wider text-[11px]">⌘K</span>
+                </motion.button>
+
                 {/* Language Toggle */}
                 <motion.button
                   whileTap={{ scale: 0.9 }}

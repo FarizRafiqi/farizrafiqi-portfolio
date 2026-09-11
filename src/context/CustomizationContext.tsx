@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 export interface PitchData {
@@ -17,12 +17,14 @@ export interface PitchData {
 
 interface CustomizationContextType {
   role: string | null;            // e.g. "frontend", "backend", etc.
+  setRole: (role: string | null) => void;
   pitch: PitchData | null;        // active Sanity application pitch, if any
   isCustomized: boolean;          // true if either role param or pitch is active
 }
 
 const CustomizationContext = createContext<CustomizationContextType>({
   role: null,
+  setRole: () => {},
   pitch: null,
   isCustomized: false,
 });
@@ -36,29 +38,25 @@ function CustomizationInnerProvider({
   initialPitch?: PitchData | null;
   initialRole?: string | null;
 }) {
-  const [role, setRole] = useState<string | null>(initialRole);
   const searchParams = useSearchParams();
+  const urlRole = !initialPitch ? searchParams.get("role")?.toLowerCase() || null : null;
+  const [explicitRole, setExplicitRole] = useState<string | null>(initialRole ?? null);
 
-  useEffect(() => {
-    // If not in a pre-fetched pitch page, check the URL query parameter
-    if (!initialPitch) {
-      const urlRole = searchParams.get("role");
-      if (urlRole) {
-        setRole(urlRole.toLowerCase());
-      } else {
-        setRole(null);
-      }
-    }
-  }, [searchParams, initialPitch]);
+  const role = explicitRole ?? urlRole;
+  const setRole = setExplicitRole;
+
+  const contextValue = React.useMemo(
+    () => ({
+      role,
+      setRole,
+      pitch: initialPitch,
+      isCustomized: !!role || !!initialPitch,
+    }),
+    [role, initialPitch]
+  );
 
   return (
-    <CustomizationContext.Provider
-      value={{
-        role,
-        pitch: initialPitch,
-        isCustomized: !!role || !!initialPitch,
-      }}
-    >
+    <CustomizationContext.Provider value={contextValue}>
       {children}
     </CustomizationContext.Provider>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { ProjectModal } from "@/components/ui/ProjectModal";
@@ -27,6 +27,19 @@ export default function ProjectsSection() {
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
   const [selectedProject, setSelectedProject] = useState<BentoProject | null>(null);
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const handleOpenProject = (event: Event) => {
+      const customEvent = event as CustomEvent<{ projectId: string }>;
+      const targetId = customEvent.detail?.projectId;
+      if (targetId) {
+        const found = projects.find((p) => p.id === targetId);
+        if (found) setSelectedProject(found as BentoProject);
+      }
+    };
+    window.addEventListener("open-project-modal", handleOpenProject);
+    return () => window.removeEventListener("open-project-modal", handleOpenProject);
+  }, []);
 
   // Map role params to default tab categories
   const defaultTab = useMemo<TabType>(() => {

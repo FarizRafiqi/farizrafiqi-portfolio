@@ -17,7 +17,7 @@ const roleTitles: Record<string, { en: string; id: string }> = {
   backend: { en: "Backend Engineer · Go, NestJS, Laravel & Kubernetes", id: "Backend Engineer · Go, NestJS, Laravel & Kubernetes" },
   fullstack: { en: "Fullstack Engineer · Next.js, Go, NestJS & cloud infrastructure", id: "Fullstack Engineer · Next.js, Go, NestJS & infrastruktur cloud" },
   mobile: { en: "Mobile Engineer · Kotlin, Ionic React & Capacitor", id: "Mobile Engineer · Kotlin, Ionic React & Capacitor" },
-  "3d": { en: "3D & VR Developer · Unity, C#, Three.js & Blender", id: "Pengembang 3D & VR · Unity, C#, Three.js & Blender" },
+  "3d": { en: "3D & AI Developer · Unity, C#, Three.js & Python", id: "Pengembang 3D & AI · Unity, C#, Three.js & Python" },
 };
 
 const roleTaglines: Record<string, { en: string; id: string }> = {
@@ -25,7 +25,7 @@ const roleTaglines: Record<string, { en: string; id: string }> = {
   backend: { en: "Designing scalable APIs and dependable server architecture", id: "Merancang API terukur dan arsitektur server yang andal" },
   fullstack: { en: "Connecting backend clarity with polished product experiences", id: "Menghubungkan kejelasan backend dengan pengalaman produk yang matang" },
   mobile: { en: "Building native and multiplatform mobile products", id: "Membangun produk mobile native dan multiplatform" },
-  "3d": { en: "Creating immersive 3D experiences and virtual realities", id: "Menciptakan pengalaman 3D imersif dan virtual reality" },
+  "3d": { en: "Creating immersive 3D experiences and intelligent systems", id: "Menciptakan pengalaman 3D imersif dan sistem cerdas" },
 };
 
 const socialLinks = [
@@ -36,12 +36,13 @@ const socialLinks = [
 
 export default function HeroSection() {
   const { language, t } = useLanguage();
-  const { role, pitch } = useCustomization();
+  const { role, setRole, pitch } = useCustomization();
   const reducedMotion = useReducedMotion();
   const featuredCount = projects.filter((project) => project.featured).length;
 
-  const displayedTitle = role && roleTitles[role] ? roleTitles[role][language] : personalData.title[language];
-  const displayedTagline = role && roleTaglines[role] ? roleTaglines[role][language] : personalData.tagline[language];
+  const currentRoleKey = role || "fullstack";
+  const displayedTitle = roleTitles[currentRoleKey] ? roleTitles[currentRoleKey][language] : personalData.title[language];
+  const displayedTagline = roleTaglines[currentRoleKey] ? roleTaglines[currentRoleKey][language] : personalData.tagline[language];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -56,19 +57,27 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="hm-hero-shell relative overflow-hidden">
-      <div className="hm-hero-grid-lines" aria-hidden="true" />
-      <div className="hm-hero-glow" aria-hidden="true" />
+    <section id="home" className="hm-hero-shell relative overflow-hidden flex flex-col justify-between min-h-screen pt-20 pb-6">
+      {/* Full-bleed 3D Spatial Canvas (Unboxed) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
+        <HeroScene reducedMotion={Boolean(reducedMotion)} />
+      </div>
 
-      <div className="container relative z-10">
-        <div className="hm-hero-topline">
+      {/* Atmospheric radial vignette ensuring crystalline typography legibility */}
+      <div
+        className="absolute inset-0 z-1 pointer-events-none bg-gradient-to-r from-white via-white/90 to-transparent dark:from-black dark:via-black/90 dark:to-transparent w-full max-w-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="container relative z-10 pointer-events-none flex flex-col justify-between flex-1 py-2">
+        <div className="hm-hero-topline pointer-events-auto">
           <span className="hm-mono-label">FARIZ RAFIQI / 2026</span>
           <span className="hm-mono-label hm-mono-label-muted">{t("hero.stkPeriod")}</span>
         </div>
 
-        <div className="hm-hero-layout">
+        <div className="hm-hero-layout !grid-cols-1 lg:!grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center my-auto py-4">
           <motion.div
-            className="hm-hero-copy"
+            className="hm-hero-copy pointer-events-auto"
             variants={containerVariants}
             initial="hidden"
             animate="show"
@@ -90,12 +99,14 @@ export default function HeroSection() {
               <span>Rafiqi</span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="hm-hero-tagline">
-              {displayedTagline}
-            </motion.p>
-            <motion.p variants={itemVariants} className="hm-hero-lede">
-              {displayedTitle}. {t("hero.title")}
-            </motion.p>
+            <motion.div variants={itemVariants} className="mt-2 mb-4">
+              <p className="hm-hero-tagline">
+                {displayedTagline}
+              </p>
+              <p className="hm-hero-lede">
+                {displayedTitle}. {t("hero.title")}
+              </p>
+            </motion.div>
 
             <motion.div variants={itemVariants} className="hm-hero-actions">
               <a href="#projects" className="hm-primary-button">
@@ -120,47 +131,57 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="hm-hero-stage-column"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="hm-hero-stage">
-              <div className="hm-stage-corner hm-stage-corner-tl" aria-hidden="true" />
-              <div className="hm-stage-corner hm-stage-corner-br" aria-hidden="true" />
-              <HeroScene reducedMotion={Boolean(reducedMotion)} />
-              <div className="hm-stage-header">
-                <span className="hm-mono-label">01 / SIGNAL OBJECT</span>
-                <span className="hm-live-indicator"><span aria-hidden="true" /> LIVE BUILD</span>
-              </div>
-              <div className="hm-stage-caption">
-                <span className="hm-stage-caption-title">Systems · interfaces · intelligence</span>
-                <span className="hm-stage-caption-copy">A small visual index of the disciplines behind the work.</span>
+          {/* Right Column: Open spatial HUD telemetry over unboxed 3D scene */}
+          <div className="hidden lg:flex flex-col justify-between h-[420px] pointer-events-none">
+            <div className="flex justify-end">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/10 dark:border-white/10 backdrop-blur-md text-[11px] font-mono text-neutral-600 dark:text-neutral-400">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="font-semibold text-neutral-900 dark:text-neutral-100">01 / TOPOLOGY MATRIX</span>
+                <span className="opacity-30">|</span>
+                <span>LIVE SPATIAL FIELD</span>
               </div>
             </div>
 
-            <div className="hm-proof-strip" aria-label={t("hero.proof")}>
-              <div className="hm-proof-item">
-                <span className="hm-proof-value">{experienceSummary.professional[language]}</span>
-                <span className="hm-proof-label">{t("hero.professional")}</span>
-              </div>
-              <div className="hm-proof-item">
-                <span className="hm-proof-value">{experienceSummary.journey[language]}</span>
-                <span className="hm-proof-label">{t("hero.journey")}</span>
-              </div>
-              <div className="hm-proof-item">
-                <span className="hm-proof-value">{featuredCount}</span>
-                <span className="hm-proof-label">{t("hero.featured")}</span>
-              </div>
+            <div className="flex flex-col items-end text-right mt-auto">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-800 dark:text-neutral-200">
+                Kinetic Vector Lattice
+              </span>
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 max-w-xs mt-1 leading-relaxed">
+                {language === "en"
+                  ? "Move cursor across canvas to deform wave topology · Click to radiate shockwave"
+                  : "Gerakkan kursor untuk mendistorsi gelombang · Klik untuk gelombang kejut"}
+              </span>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <a href="#projects" className="hm-scroll-cue">
-          <span>{t("hero.scroll")}</span>
-          <span className="hm-scroll-line" aria-hidden="true" />
-        </a>
+        {/* Bottom Bar: Proof Metrics & Scroll Cue */}
+        <div className="mt-4 pt-6 border-t border-black/10 dark:border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 pointer-events-auto">
+          <div className="flex flex-wrap items-center gap-8 sm:gap-12">
+            <div className="flex flex-col">
+              <span className="hm-proof-value">{experienceSummary.professional[language]}</span>
+              <span className="hm-proof-label">{t("hero.professional")}</span>
+            </div>
+            <div className="w-[1px] h-8 bg-black/10 dark:bg-white/10 hidden sm:block" />
+            <div className="flex flex-col">
+              <span className="hm-proof-value">{experienceSummary.journey[language]}</span>
+              <span className="hm-proof-label">{t("hero.journey")}</span>
+            </div>
+            <div className="w-[1px] h-8 bg-black/10 dark:bg-white/10 hidden sm:block" />
+            <div className="flex flex-col">
+              <span className="hm-proof-value">{featuredCount}</span>
+              <span className="hm-proof-label">{t("hero.featured")}</span>
+            </div>
+          </div>
+
+          <a href="#projects" className="hm-scroll-cue !p-0 !m-0">
+            <span>{t("hero.scroll")}</span>
+            <span className="hm-scroll-line" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );

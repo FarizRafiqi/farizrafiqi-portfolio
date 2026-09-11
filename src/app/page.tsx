@@ -8,6 +8,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import LatestArticles from "@/components/LatestArticles";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <ContactSection />
       <Footer />
       <Chatbot />
+      <CommandPalette />
     </main>
   );
 }

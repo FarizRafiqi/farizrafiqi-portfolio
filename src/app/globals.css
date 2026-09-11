@@ -365,8 +365,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hm-hero-shell {
-  min-height: min(940px, 100vh);
-  padding: 7.5rem 0 3rem;
+  min-height: 100vh;
+  padding: clamp(5.5rem, 8vh, 6.8rem) 0 2rem;
 }
 
 .hm-hero-grid-lines,
@@ -442,8 +442,8 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
   align-items: center;
-  gap: clamp(2.5rem, 7vw, 8rem);
-  padding: clamp(4.5rem, 10vh, 7rem) 0 4rem;
+  gap: clamp(2rem, 5vw, 6rem);
+  padding: clamp(1.8rem, 4vh, 3rem) 0 clamp(1.2rem, 3vh, 2rem);
 }
 
 .hm-hero-copy {
@@ -630,6 +630,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  pointer-events: none;
 }
 
 .hm-stage-header {

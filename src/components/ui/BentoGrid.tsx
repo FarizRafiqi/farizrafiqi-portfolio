@@ -1,11 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { TechIconStack } from "@/components/ui/TechIconStack";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 type LocalizedText = { en: string; id: string };
 
@@ -61,7 +61,7 @@ export function BentoCard({
   };
 
   return (
-    <motion.div
+    <SpotlightCard
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -73,6 +73,8 @@ export function BentoCard({
       tabIndex={0}
       aria-label={`${t("projects.caseStudy")}: ${project.title[language]}`}
       className={cn("hm-project-card group relative overflow-hidden cursor-pointer", className)}
+      enableTilt={true}
+      tiltMaxAngle={3.5}
     >
       <div className="absolute inset-0" aria-hidden="true">
         {image ? (
@@ -140,6 +142,6 @@ export function BentoCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </SpotlightCard>
   );
 }
