@@ -1,468 +1,262 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, Sparkles } from "@react-three/drei";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
+import styles from "./HeroScene.module.css";
 
-/**
- * StructureFlowWave
- * An architectural undulating 3D topographic surface lattice.
- * Vertices undulate with harmonic wave equations and react dynamically
- * with real-time physical ripples under the user's cursor across the whole screen.
- */
-function StructureFlowWave({
-  isDark,
-  reducedMotion,
-  isHovered,
-  pulse,
-  offsetX,
-  offsetY,
-}: {
-  readonly isDark: boolean;
-  readonly reducedMotion: boolean;
-  readonly isHovered: boolean;
-  readonly pulse: number;
-  readonly offsetX: number;
-  readonly offsetY: number;
-}) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const wireRef = useRef<THREE.Mesh>(null);
+const ROUTES = [
+  [[-2.4, 1.8], [-1.2, 1.8], [-1.2, 0], [0, 0]],
+  [[0, 0], [1.2, 0], [1.2, -1.8], [2.4, -1.8]],
+  [[-2.4, -1.8], [0, -1.8], [0, 0]],
+  [[0, 0], [0, 1.8], [2.4, 1.8]],
+] as const;
 
-  // Expansive 16x16 plane grid for fluid, seamless edge-to-edge coverage
-  const geomRef = useRef<THREE.PlaneGeometry | null>(null);
-  const initialPositionsRef = useRef<Float32Array | null>(null);
+const motionQuery = "(prefers-reduced-motion: reduce)";
+const subscribeMotion = (notify: () => void) => {
+  const query = window.matchMedia(motionQuery);
+  query.addEventListener("change", notify);
+  return () => query.removeEventListener("change", notify);
+};
+const getMotionSnapshot = () => window.matchMedia(motionQuery).matches;
+const getServerMotionSnapshot = () => false;
 
-  if (!geomRef.current) {
-    const geo = new THREE.PlaneGeometry(16, 16, 60, 60);
-    const pos = geo.attributes.position;
-    const initial = new Float32Array(pos.array.length);
-    initial.set(pos.array);
-    geomRef.current = geo;
-    initialPositionsRef.current = initial;
-  }
-
-  useEffect(() => {
-    return () => {
-      geomRef.current?.dispose();
-    };
-  }, []);
-
-  const pointerTarget = useRef({ x: 0, y: 0 });
-  const pointerCurrent = useRef({ x: 0, y: 0 });
-  const pulseDecay = useRef(0);
-
-  useEffect(() => {
-    if (pulse > 0) pulseDecay.current = 1.0;
-  }, [pulse]);
-
-  useFrame((state, delta) => {
-    if (reducedMotion) return;
-
-    const geo = geomRef.current;
-    const initialPositions = initialPositionsRef.current;
-    if (!geo || !initialPositions) return;
-
-    if (pulseDecay.current > 0.01) {
-      pulseDecay.current = THREE.MathUtils.lerp(pulseDecay.current, 0, delta * 3.2);
-    } else {
-      pulseDecay.current = 0;
-    }
-
-    // Map screen pointer [-1, 1] to world space relative to the wave mesh
-    pointerTarget.current.x = state.pointer.x * 6.5 - offsetX;
-    pointerTarget.current.y = state.pointer.y * 5.0 - offsetY;
-
-    pointerCurrent.current.x = THREE.MathUtils.lerp(
-      pointerCurrent.current.x,
-      pointerTarget.current.x,
-      delta * 6
-    );
-    pointerCurrent.current.y = THREE.MathUtils.lerp(
-      pointerCurrent.current.y,
-      pointerTarget.current.y,
-      delta * 6
-    );
-
-    const t = state.clock.getElapsedTime();
-    const pos = geo.attributes.position;
-    const pX = pointerCurrent.current.x;
-    const pY = pointerCurrent.current.y;
-    const pIntensity = pulseDecay.current;
-
-    for (let i = 0; i < pos.count; i++) {
-      const x = initialPositions[i * 3];
-      const y = initialPositions[i * 3 + 1];
-
-      // Harmonic multi-frequency wave equations
-      const w1 = Math.sin(x * 0.65 + t * 1.05) * Math.cos(y * 0.55 + t * 0.8) * 0.48;
-      const w2 = Math.sin((x + y) * 0.4 - t * 0.6) * 0.28;
-      const w3 = Math.cos(Math.hypot(x, y) * 0.7 - t * 1.3) * 0.18;
-
-      // Real-time cursor deformation ripple
-      const dx = x - pX;
-      const dy = y - pY;
-      const distSq = dx * dx + dy * dy;
-      const dist = Math.hypot(dx, dy);
-
-      let ripple = 0;
-      if (dist < 4.5) {
-        const falloff = Math.exp(-distSq / 3.0);
-        ripple =
-          falloff *
-          (0.55 + pIntensity * 1.8 + (isHovered ? 0.25 : 0)) *
-          Math.sin(dist * 4.2 - t * 7.5);
-      }
-
-      pos.setZ(i, w1 + w2 + w3 + ripple);
-    }
-
-    pos.needsUpdate = true;
-    geo.computeVertexNormals();
-  });
-
-  const wireColor = isDark ? "#ffffff" : "#111111";
-  const surfaceColor = isDark ? "#050505" : "#f7f7f7";
-
-  return (
-    <group position={[offsetX, offsetY, 0.3]} rotation={[-Math.PI / 2.65, 0, 0]}>
-      {geomRef.current && (
-        <>
-          <mesh ref={meshRef} geometry={geomRef.current}>
-            <meshStandardMaterial
-              color={surfaceColor}
-              roughness={0.88}
-              metalness={0.12}
-              flatShading={false}
-              polygonOffset
-              polygonOffsetFactor={1}
-              polygonOffsetUnits={1}
-            />
-          </mesh>
-
-          <mesh ref={wireRef} geometry={geomRef.current}>
-            <meshBasicMaterial
-              color={wireColor}
-              wireframe
-              transparent
-              opacity={isDark ? 0.22 : 0.16}
-            />
-          </mesh>
-        </>
-      )}
-    </group>
-  );
-}
-
-/**
- * QuantumCore
- * Floating kinetic Torus Knot monolith suspended above the topology wave.
- * High-reflectivity metallic surface with precision geodesic edges and parallax gaze.
- */
-function QuantumCore({
-  isDark,
-  reducedMotion,
-  isHovered,
-  pulse,
-  posX,
-  posY,
-}: {
-  readonly isDark: boolean;
-  readonly reducedMotion: boolean;
-  readonly isHovered: boolean;
-  readonly pulse: number;
-  readonly posX: number;
-  readonly posY: number;
-}) {
-  const groupRef = useRef<THREE.Group>(null);
-  const coreRef = useRef<THREE.Mesh>(null);
-  const wireRef = useRef<THREE.LineSegments>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
-
-  const knotGeo = useMemo(() => new THREE.TorusKnotGeometry(0.92, 0.24, 128, 24, 2, 3), []);
-  const edgesGeo = useMemo(() => new THREE.EdgesGeometry(knotGeo, 24), [knotGeo]);
-  const ringGeo = useMemo(() => new THREE.TorusGeometry(1.85, 0.012, 16, 100), []);
-
-  const color = isDark ? "#ffffff" : "#111111";
-  const chromeColor = isDark ? "#383838" : "#f2f2f2";
-
-  useFrame((state, delta) => {
-    if (!groupRef.current) return;
-
-    if (!reducedMotion) {
-      // Pointer parallax lookAt tilt
-      const targetRotX = state.pointer.y * 0.38;
-      const targetRotY = (state.pointer.x - (posX > 0 ? 0.3 : 0)) * 0.48;
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.07);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.07);
-
-      const speed = isHovered ? 1.8 : 0.75;
-      if (coreRef.current) {
-        coreRef.current.rotation.x += delta * 0.35 * speed;
-        coreRef.current.rotation.y += delta * 0.55 * speed;
-      }
-      if (wireRef.current && coreRef.current) {
-        wireRef.current.rotation.x = coreRef.current.rotation.x;
-        wireRef.current.rotation.y = coreRef.current.rotation.y;
-      }
-      if (ringRef.current) {
-        ringRef.current.rotation.z += delta * 0.25 * speed;
-        ringRef.current.rotation.x += delta * 0.15 * speed;
-      }
-    }
-
-    // Pulse & hover scale spring dynamics
-    const targetScale = 1 + pulse * 0.24 + (isHovered ? 0.08 : 0);
-    const newScale = THREE.MathUtils.lerp(groupRef.current.scale.x, targetScale, 0.12);
-    groupRef.current.scale.set(newScale, newScale, newScale);
-  });
-
-  return (
-    <group ref={groupRef} position={[posX, posY, 0.8]}>
-      {/* Chrome Reflective Knot Core */}
-      <mesh ref={coreRef} geometry={knotGeo}>
-        <meshStandardMaterial
-          color={chromeColor}
-          roughness={0.14}
-          metalness={0.94}
-          transparent
-          opacity={isDark ? 0.92 : 0.95}
-        />
-      </mesh>
-
-      {/* Geodesic Contour Edges */}
-      <lineSegments ref={wireRef} geometry={edgesGeo}>
-        <lineBasicMaterial color={color} transparent opacity={isDark ? 0.65 : 0.45} />
-      </lineSegments>
-
-      {/* Equatorial Orbit Gimbal Ring */}
-      <mesh ref={ringRef} geometry={ringGeo}>
-        <meshStandardMaterial
-          color={color}
-          metalness={0.9}
-          roughness={0.1}
-          transparent
-          opacity={isDark ? 0.45 : 0.35}
-        />
-      </mesh>
-
-      {/* Central Singularity Point */}
-      <mesh>
-        <sphereGeometry args={[0.24, 32, 32]} />
-        <meshBasicMaterial color={color} transparent opacity={isDark ? 0.98 : 0.9} />
-      </mesh>
-    </group>
-  );
-}
-
-/**
- * SignalStream
- * High-dimensional orbital particle ribbons weaving across the 3D space.
- */
-function SignalStream({
-  isDark,
-  reducedMotion,
-  isHovered,
-  centerOriginX,
-}: {
-  readonly isDark: boolean;
-  readonly reducedMotion: boolean;
-  readonly isHovered: boolean;
-  readonly centerOriginX: number;
-}) {
-  const pointsRef = useRef<THREE.Points>(null);
-  const count = 90;
-
-  const [positions, offsets, speeds] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const offs = new Float32Array(count);
-    const spds = new Float32Array(count);
-
-    for (let i = 0; i < count; i++) {
-      offs[i] = (i / count) * Math.PI * 2;
-      const pseudo = Math.abs(Math.sin(i * 12.9898 + 78.233) * 43758.5453) % 1;
-      spds[i] = 0.45 + pseudo * 0.55;
-    }
-    return [pos, offs, spds];
-  }, [count]);
-
-  useFrame(({ clock }) => {
-    if (!pointsRef.current || reducedMotion) return;
-    const time = clock.getElapsedTime();
-    const speedMult = isHovered ? 2.0 : 1.0;
-    const posAttr = pointsRef.current.geometry.attributes.position;
-
-    for (let i = 0; i < count; i++) {
-      const t = time * speeds[i] * speedMult + offsets[i];
-      // 3D Lissajous ribbon flow across coordinate axes centered on core
-      const x = centerOriginX + Math.sin(t) * 3.0 + Math.sin(t * 2) * 0.5;
-      const y = Math.cos(t * 0.85) * 1.8 + Math.sin(t * 3) * 0.25;
-      const z = Math.sin(t * 1.45) * 2.0 + 0.5;
-
-      posAttr.setXYZ(i, x, y, z);
-    }
-    posAttr.needsUpdate = true;
-  });
-
-  const color = isDark ? "#ffffff" : "#111111";
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        color={color}
-        size={0.065}
-        transparent
-        opacity={isDark ? 0.75 : 0.55}
-      />
-    </points>
-  );
-}
-
-/**
- * CursorPointLight
- * Tracks the mouse in 3D space to cast dynamic specular glints directly under the cursor.
- */
-function CursorPointLight({ isDark }: { readonly isDark: boolean }) {
-  const lightRef = useRef<THREE.PointLight>(null);
-
-  useFrame((state) => {
-    if (!lightRef.current) return;
-    lightRef.current.position.x = THREE.MathUtils.lerp(
-      lightRef.current.position.x,
-      state.pointer.x * 6.5,
-      0.1
-    );
-    lightRef.current.position.y = THREE.MathUtils.lerp(
-      lightRef.current.position.y,
-      state.pointer.y * 4.5,
-      0.1
-    );
-    lightRef.current.position.z = 1.8;
-  });
-
-  return (
-    <pointLight
-      ref={lightRef}
-      intensity={isDark ? 2.0 : 1.4}
-      distance={8}
-      decay={2}
-      color={isDark ? "#ffffff" : "#333333"}
-    />
-  );
-}
-
-function Scene({
-  isDark,
-  reducedMotion,
-  isHovered,
-  pulse,
-}: {
-  readonly isDark: boolean;
-  readonly reducedMotion: boolean;
-  readonly isHovered: boolean;
-  readonly pulse: number;
-}) {
-  const { viewport } = useThree();
-  const isDesktop = viewport.width > 7.5;
-
-  // Responsive spatial anchor coordinates
-  const coreX = isDesktop ? Math.min(viewport.width * 0.24, 2.6) : 0;
-  const coreY = isDesktop ? 0.4 : 0.8;
-  const waveX = isDesktop ? 1.2 : 0;
-  const waveY = isDesktop ? -1.25 : -1.35;
-
-  return (
-    <>
-      <ambientLight intensity={isDark ? 0.5 : 0.8} />
-      <directionalLight position={[6, 8, 6]} intensity={isDark ? 1.8 : 1.3} />
-      <directionalLight position={[-6, -4, -2]} intensity={isDark ? 0.9 : 0.6} />
-      <pointLight position={[coreX + 1.2, coreY + 1.6, 2.8]} intensity={isDark ? 2.8 : 2.0} distance={10} color={isDark ? "#ffffff" : "#333333"} />
-      <CursorPointLight isDark={isDark} />
-
-      {/* Atmospheric distance fog dissolving grid into the infinite background */}
-      <fogExp2 attach="fog" args={[isDark ? "#000000" : "#ffffff", 0.075]} />
-
-      <Sparkles
-        count={isDark ? 45 : 30}
-        scale={10}
-        size={isDark ? 1.6 : 1.2}
-        speed={reducedMotion ? 0 : 0.35}
-        opacity={isDark ? 0.35 : 0.25}
-        color={isDark ? "#ffffff" : "#222222"}
-      />
-
-      <Float
-        speed={reducedMotion ? 0 : 1.2}
-        rotationIntensity={reducedMotion ? 0 : 0.15}
-        floatIntensity={reducedMotion ? 0 : 0.25}
-      >
-        <QuantumCore
-          isDark={isDark}
-          reducedMotion={reducedMotion}
-          isHovered={isHovered}
-          pulse={pulse}
-          posX={coreX}
-          posY={coreY}
-        />
-      </Float>
-
-      <SignalStream
-        isDark={isDark}
-        reducedMotion={reducedMotion}
-        isHovered={isHovered}
-        centerOriginX={coreX}
-      />
-
-      <StructureFlowWave
-        isDark={isDark}
-        reducedMotion={reducedMotion}
-        isHovered={isHovered}
-        pulse={pulse}
-        offsetX={waveX}
-        offsetY={waveY}
-      />
-    </>
-  );
-}
-
+/** An original procedural scene. React owns only its lifetime; Three.js owns rendering. */
 export default function HeroScene({ reducedMotion = false }: { readonly reducedMotion?: boolean }) {
+  const systemReducedMotion = useSyncExternalStore(subscribeMotion, getMotionSnapshot, getServerMotionSnapshot);
+  const motionDisabled = reducedMotion || systemReducedMotion;
+  const hostRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme !== "light";
-  const [isHovered, setIsHovered] = useState(false);
-  const [pulse, setPulse] = useState(0);
 
-  const handlePointerDown = () => {
-    setPulse((prev) => (prev > 0 ? 0 : 1));
-    setTimeout(() => setPulse(0), 400);
-  };
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+    const dark = resolvedTheme !== "light";
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
+    } catch {
+      host.dataset.unavailable = "true";
+      return;
+    }
+    host.dataset.unavailable = "false";
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.setClearColor(0, 0);
+    host.appendChild(renderer.domElement);
+    renderer.domElement.setAttribute("aria-hidden", "true");
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 60);
+    camera.position.set(10, 10, 10);
+    camera.lookAt(0, 0.3, 0);
+    const world = new THREE.Group();
+    scene.add(world);
+    scene.add(new THREE.HemisphereLight(0xffffff, dark ? 0x444444 : 0xaaaaaa, 2.2));
+    const key = new THREE.DirectionalLight(0xffffff, 3.2);
+    key.position.set(-3, 9, 5);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffffff, 1.6);
+    rim.position.set(5, 3, -4);
+    scene.add(rim);
+
+    // Shared resources are disposed once, including those used by instanced meshes.
+    const geometries = new Set<THREE.BufferGeometry>();
+    const materials = new Set<THREE.Material>();
+    const geo = <T extends THREE.BufferGeometry>(g: T) => { geometries.add(g); return g; };
+    const mat = <T extends THREE.Material>(m: T) => { materials.add(m); return m; };
+    const porcelain = mat(new THREE.MeshStandardMaterial({ color: dark ? 0xaaaaaa : 0xf5f5f5, roughness: 0.48, metalness: 0.25 }));
+    const graphite = mat(new THREE.MeshStandardMaterial({ color: dark ? 0x202020 : 0x555555, roughness: 0.5, metalness: 0.3 }));
+    const substrate = mat(new THREE.MeshStandardMaterial({ color: dark ? 0x111111 : 0xdddddd, roughness: 0.8 }));
+    const ink = dark ? 0xffffff : 0x222222;
+    const lineMat = mat(new THREE.LineBasicMaterial({ color: ink, transparent: true, opacity: dark ? 0.22 : 0.17 }));
+    const signalMat = mat(new THREE.MeshBasicMaterial({ color: ink }));
+    const unitBox = geo(new THREE.BoxGeometry(1, 1, 1));
+    const edges = geo(new THREE.EdgesGeometry(unitBox));
+    function box(parent: THREE.Object3D, x: number, y: number, z: number, w: number, h: number, d: number, material: THREE.Material, outline = false) {
+      const mesh = new THREE.Mesh(unitBox, material);
+      mesh.position.set(x, y, z);
+      mesh.scale.set(w, h, d);
+      parent.add(mesh);
+      if (outline) mesh.add(new THREE.LineSegments(edges, lineMat));
+      return mesh;
+    }
+    box(world, 0, -0.25, 0, 6.5, 0.13, 6.5, substrate, true);
+    box(world, 0, -0.13, 0, 6.2, 0.08, 6.2, graphite, true);
+
+    // 121 individually animated tiles, submitted in a single draw call.
+    const tiles = new THREE.InstancedMesh(unitBox, porcelain, 121);
+    tiles.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    world.add(tiles);
+    const dummy = new THREE.Object3D();
+    const tileData: { x: number; z: number; radius: number }[] = [];
+    for (let x = -5; x <= 5; x++) for (let z = -5; z <= 5; z++) {
+      tileData.push({ x: x * 0.56, z: z * 0.56, radius: Math.hypot(x, z) * 0.56 });
+    }
+    // Raised orthogonal traces sit above the motion field.
+    const routeMaterial = mat(new THREE.LineBasicMaterial({ color: 0x333333, transparent: true, opacity: 0.65 }));
+    const routes = ROUTES.map(points => {
+      const vertices = points.map(([x, z]) => new THREE.Vector3(x, 0.26, z));
+      const path = new THREE.CurvePath<THREE.Vector3>();
+      vertices.slice(1).forEach((v, i) => path.add(new THREE.LineCurve3(vertices[i], v)));
+      world.add(new THREE.Line(geo(new THREE.BufferGeometry().setFromPoints(vertices)), routeMaterial));
+      return path;
+    });
+    const packets = new THREE.InstancedMesh(unitBox, signalMat, 20);
+    world.add(packets);
+    const packetPoint = new THREE.Vector3();
+
+    // Central compute module: stacked plates, socket pins and a suspended die.
+    const core = new THREE.Group();
+    world.add(core);
+    box(core, 0, 0.30, 0, 1.52, 0.18, 1.52, graphite, true);
+    const plates: THREE.Mesh[] = [];
+    for (let i = 0; i < 4; i++) plates.push(box(core, 0, 0.52 + i * 0.18, 0, 1.2, 0.10, 1.2, i % 2 ? graphite : porcelain, true));
+    const cap = box(core, 0, 1.20, 0, 0.7, 0.12, 0.7, graphite, true);
+    const die = box(core, 0, 1.27, 0, 0.42, 0.025, 0.42, signalMat);
+    for (let i = -3; i <= 3; i++) {
+      for (const side of [-1, 1]) {
+        box(core, i * 0.17, 0.33, side * 0.85, 0.055, 0.06, 0.18, porcelain);
+        box(core, side * 0.85, 0.33, i * 0.17, 0.18, 0.06, 0.055, porcelain);
+      }
+    }
+    // Four readable architectural families, each with a distinct silhouette.
+    for (let n = 0; n < 4; n++) {
+      const x = n % 2 ? 2.4 : -2.4;
+      const z = n < 2 ? -1.8 : 1.8;
+      box(world, x, 0.28, z, 0.86, 0.13, 0.86, graphite, true);
+      if (n === 0) {
+        for (let i = 0; i < 3; i++) {
+          box(world, x + (i - 1) * 0.24, 0.64, z, 0.17, 0.62, 0.56, porcelain, true);
+          box(world, x + (i - 1) * 0.24, 0.8, z + 0.29, 0.07, 0.03, 0.012, signalMat);
+        }
+      } else if (n === 1) {
+        for (let i = 0; i < 4; i++) {
+          const disk = new THREE.Mesh(geo(new THREE.CylinderGeometry(0.32, 0.32, 0.12, 32)), i % 2 ? graphite : porcelain);
+          disk.position.set(x, 0.42 + i * 0.17, z);
+          world.add(disk);
+        }
+      } else if (n === 2) {
+        box(world, x - 0.25, 0.64, z, 0.13, 0.62, 0.45, porcelain, true);
+        box(world, x + 0.25, 0.64, z, 0.13, 0.62, 0.45, porcelain, true);
+        box(world, x, 0.91, z, 0.63, 0.13, 0.45, porcelain, true);
+      } else {
+        for (let i = 0; i < 3; i++) box(world, x, 0.42 + i * 0.21, z, 0.65, 0.13, 0.65, porcelain, true);
+      }
+    }
+    // Fine registration marks around the perimeter, like a technical drawing.
+    const ticks: number[] = [];
+    for (let i = -6; i <= 6; i++) {
+      for (const side of [-1, 1]) {
+        ticks.push(i * 0.5, -0.14, side * 3.4, i * 0.5, -0.14, side * (3.4 + (i % 2 === 0 ? 0.13 : 0.06)));
+        ticks.push(side * 3.4, -0.14, i * 0.5, side * (3.4 + (i % 2 === 0 ? 0.13 : 0.06)), -0.14, i * 0.5);
+      }
+    }
+    world.add(new THREE.LineSegments(geo(new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(ticks, 3))), lineMat));
+
+    let time = 0;
+    let last = 0;
+    let frame = 0;
+    let lost = false;
+    let disposed = false;
+    const pointer = new THREE.Vector2();
+    function draw(dt: number) {
+      if (!motionDisabled) time += dt;
+      tileData.forEach(({ x, z, radius }, i) => {
+        const wave = motionDisabled ? 0 : Math.sin(radius * 2.3 - time * 1.3) * 0.035;
+        const h = 0.10 + (radius > 1.2 ? wave : 0);
+        dummy.position.set(x, h / 2, z);
+        dummy.scale.set(0.52, h, 0.52);
+        dummy.updateMatrix();
+        tiles.setMatrixAt(i, dummy.matrix);
+      });
+      tiles.instanceMatrix.needsUpdate = true;
+      for (let i = 0; i < 20; i++) {
+        routes[i % routes.length].getPoint((i / 20 + time * 0.12) % 1, packetPoint);
+        dummy.position.copy(packetPoint);
+        dummy.scale.set(0.075, 0.045, 0.075);
+        dummy.updateMatrix();
+        packets.setMatrixAt(i, dummy.matrix);
+      }
+      packets.instanceMatrix.needsUpdate = true;
+      plates.forEach((plate, i) => { plate.position.y = 0.52 + i * 0.18; });
+      cap.position.y = 1.20;
+      die.position.y = 1.27;
+      const ease = 1 - Math.exp(-dt * 5);
+      world.rotation.y += ((motionDisabled ? 0 : pointer.x * 0.12) - world.rotation.y) * ease;
+      world.rotation.x += ((motionDisabled ? 0 : pointer.y * 0.045) - world.rotation.x) * ease;
+      renderer.render(scene, camera);
+    }
+    function loop(now: number) {
+      frame = 0;
+      if (disposed || lost || document.hidden) return;
+      const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+      last = now;
+      draw(dt);
+      if (!motionDisabled) frame = requestAnimationFrame(loop);
+    }
+    function schedule() {
+      if (!frame && !disposed && !lost && !document.hidden) {
+        last = 0;
+        frame = requestAnimationFrame(loop);
+      }
+    }
+    function resize() {
+      if (!host) return;
+      const { width, height } = host.getBoundingClientRect();
+      if (!width || !height) return;
+      renderer.setSize(width, height);
+      const aspect = width / height;
+      const half = Math.max(3.8, 5.0 / aspect);
+      camera.left = -half * aspect;
+      camera.right = half * aspect;
+      camera.top = half;
+      camera.bottom = -half;
+      camera.updateProjectionMatrix();
+      schedule();
+    }
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(host);
+    const move = (event: PointerEvent) => {
+      const bounds = host.getBoundingClientRect();
+      pointer.set((event.clientX - bounds.left) / bounds.width * 2 - 1, (event.clientY - bounds.top) / bounds.height * 2 - 1);
+    };
+    const leave = () => pointer.set(0, 0);
+    const visibility = () => {
+      if (document.hidden) { cancelAnimationFrame(frame); frame = 0; last = 0; }
+      else schedule();
+    };
+    const contextLost = (event: Event) => {
+      event.preventDefault(); lost = true; cancelAnimationFrame(frame); frame = 0;
+      host.dataset.unavailable = "true";
+    };
+    const restored = () => { lost = false; host.dataset.unavailable = "false"; schedule(); };
+    host.addEventListener("pointermove", move);
+    host.addEventListener("pointerleave", leave);
+    document.addEventListener("visibilitychange", visibility);
+    renderer.domElement.addEventListener("webglcontextlost", contextLost);
+    renderer.domElement.addEventListener("webglcontextrestored", restored);
+    resize();
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      host.removeEventListener("pointermove", move);
+      host.removeEventListener("pointerleave", leave);
+      document.removeEventListener("visibilitychange", visibility);
+      renderer.domElement.removeEventListener("webglcontextlost", contextLost);
+      renderer.domElement.removeEventListener("webglcontextrestored", restored);
+      geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose());
+      tiles.dispose(); packets.dispose(); renderer.dispose();
+      renderer.domElement.remove();
+    };
+  }, [resolvedTheme, motionDisabled]);
 
   return (
-    <section
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onPointerDown={handlePointerDown}
-      className="w-full h-full cursor-grab active:cursor-grabbing"
-      aria-label="Interactive 3D Spatial Topology"
-    >
-      <Canvas
-        camera={{ position: [0, 0.4, 7.2], fov: 46 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        onCreated={({ gl }) => {
-          gl.domElement.addEventListener("webglcontextlost", (event) => event.preventDefault());
-        }}
-      >
-        <Scene
-          isDark={isDark}
-          reducedMotion={reducedMotion}
-          isHovered={isHovered}
-          pulse={pulse}
-        />
-      </Canvas>
-    </section>
+    <div className={styles.scene}>
+      <div ref={hostRef} className={styles.viewport} role="img" aria-label="Animated isometric system: a layered processor connects a gateway, compute cluster, database and storage across a monochrome motion grid.">
+        <div className={styles.fallback} aria-hidden="true"><span>◇</span> SYSTEMS ARCHITECTURE</div>
+      </div>
+    </div>
   );
 }

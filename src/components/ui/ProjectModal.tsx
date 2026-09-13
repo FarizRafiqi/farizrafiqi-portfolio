@@ -57,58 +57,58 @@ const projectArchitectures: Record<string, ArchitectureCard[]> = {
   "satria-muda-indonesia-platform": [
     {
       category: "concurrency",
-      label: { en: "REAL-TIME SCORING SYNC", id: "SINKRONISASI SKOR REAL-TIME" },
-      title: { en: "WebSocket & Judge Scorecard State Machine", id: "State Machine Lembar Penilaian Juri & WebSocket" },
+      label: { en: "DIGITAL SCORING ENGINE", id: "ENGINE SCORING DIGITAL" },
+      title: { en: "Real-Time Tanding & Seni Scoring Sync", id: "Sinkronisasi Real-Time Skor Tanding & Seni" },
       description: {
-        en: "Engineered state synchronization across multiple mat referees, synchronizing live deductions and penalty calculations with instantaneous winner resolution.",
-        id: "Merekayasa sinkronisasi state lintas juri gelanggang dengan kalkulasi penalti real-time dan penentuan pemenang instan.",
+        en: "Replaced legacy paper judging sheets with a real-time digital state machine connecting mat judges, referee council, and public TV displays with instant winner resolution.",
+        id: "Menggantikan lembar kertas manual dengan sistem penilaian digital real-time yang menghubungkan juri gelanggang, dewan wasit, dan layar publik dengan penentuan pemenang instan.",
+      },
+    },
+    {
+      category: "security",
+      label: { en: "SEAMLESS AUTH & ROLES", id: "AUTENTIKASI & DELEGASI PERAN" },
+      title: { en: "Rapid Ring Transition & Delegated Auth", id: "Delegasi Peran & Transisi Cepat Gelanggang" },
+      description: {
+        en: "Designed smooth role delegation allowing judges and match officials to switch rings and shift duties instantly without authentication delays or session drops.",
+        id: "Merancang delegasi peran dinamis yang memungkinkan juri dan wasit bertukar gelanggang dan jadwal tugas tanpa jeda sesi atau kendala autentikasi.",
       },
     },
     {
       category: "resilience",
-      label: { en: "OFFLINE CHAMPIONSHIP RUNTIME", id: "RUNTIME KEJUARAAN OFFLINE" },
-      title: { en: "CLI Database Seeder & Local Match Storage", id: "CLI Seeder Database & Penyimpanan Lokal" },
+      label: { en: "OFFLINE TOURNAMENT RUNTIME", id: "OPERASIONAL TURNAMEN OFFLINE" },
+      title: { en: "Offline Sync CLI & Match Reports", id: "Sinkronisasi Offline & Rekap Pertandingan" },
       description: {
-        en: "Built a CLI seeder and localized caching layer enabling uninterrupted tournament operations in venues with intermittent connectivity.",
-        id: "Membangun CLI seeder dan caching lokal untuk kelancaran operasional kejuaraan di venue dengan koneksi internet terbatas.",
-      },
-    },
-    {
-      category: "architecture",
-      label: { en: "CONTENT & LOCALIZATION", id: "KONTEN & LOKALISASI" },
-      title: { en: "Next.js App Router + Sanity CMS Pipeline", id: "Pipeline Next.js App Router + Sanity CMS" },
-      description: {
-        en: "Designed internationalized bilingual content models (ID/EN) with revalidation webhooks ensuring instant publishing for national tournament announcements.",
-        id: "Merancang model konten bilingual (ID/EN) dengan revalidation webhook untuk pembaruan pengumuman kejuaraan secara instan.",
+        en: "Built an offline tournament synchronization seeder and official high-density printable recap sheet generator for uninterrupted championship execution in limited connectivity venues.",
+        id: "Membangun sinkronisasi data turnamen offline dan generator lembar rekap resmi siap cetak agar operasional kejuaraan tetap berjalan lancar di venue minim sinyal.",
       },
     },
   ],
   "hemdal-sentiment-analysis": [
     {
       category: "concurrency",
-      label: { en: "LOAD TESTED PIPELINE", id: "PIPELINE TERUJI BEBAN" },
-      title: { en: "k6 Concurrency Testing & Race Condition Elimination", id: "Pengujian Beban k6 & Eliminasi Race Condition" },
+      label: { en: "COMMAND CENTER", id: "PUSAT KOMANDO" },
+      title: { en: "Real-Time Incident & Crisis Alerts", id: "Pemantauan Insiden & Notifikasi Krisis" },
       description: {
-        en: "Identified and fixed incident ID race conditions during high-volume mention surges through automated k6 virtual user concurrency scripts.",
-        id: "Mengidentifikasi dan memperbaiki race condition incident ID pada lonjakan data sebutan tinggi melalui skrip konkurensi k6.",
+        en: "Engineered a live incident monitoring hub integrated with instant Telegram alerts, empowering communication teams to detect and respond to negative media surges immediately.",
+        id: "Membangun pusat pemantauan insiden real-time dengan integrasi alert Telegram instan untuk respons cepat tim humas terhadap lonjakan isu media negatif.",
+      },
+    },
+    {
+      category: "architecture",
+      label: { en: "AI ASSIST & RAG", id: "ASISTEN AI & RAG" },
+      title: { en: "Knowledge Base RAG Intelligence", id: "Kecerdasan Media Berbasis RAG" },
+      description: {
+        en: "Connected AI Assist directly to Knowledge Base Core to perform RAG-driven contextual searches, sentiment summaries, and topic analysis across news and social media archives.",
+        id: "Menghubungkan asisten cerdas AI Assist langsung ke Knowledge Base Core untuk penelusuran arsip berbasis RAG, perangkuman sentimen, dan analisis tren isu secara mendalam.",
       },
     },
     {
       category: "resilience",
-      label: { en: "MEMORY ISOLATION", id: "ISOLASI MEMORI" },
-      title: { en: "Sandboxed Headless Chromium PDF Worker", id: "Worker PDF Chromium Headless Terisolasi" },
+      label: { en: "EXECUTIVE REPORTING", id: "PELAPORAN EKSEKUTIF" },
+      title: { en: "Automated Multi-Channel PDF Reports", id: "Laporan PDF Multi-Channel Otomatis" },
       description: {
-        en: "Hardened automated analytics report generation by wrapping Chromium processes in isolated worker pools to prevent memory exhaustion and zombie processes.",
-        id: "Memperkuat pembuatan laporan analitik otomatis dengan worker pool Chromium terisolasi guna mencegah kebocoran memori dan crash OOM.",
-      },
-    },
-    {
-      category: "security",
-      label: { en: "AUTH INFRASTRUCTURE", id: "INFRASTRUKTUR AUTENTIKASI" },
-      title: { en: "Centralized OIDC Refresh & Scope Verification", id: "Token Refresh OIDC & Verifikasi Scope Terpusat" },
-      description: {
-        en: "Streamlined multi-tenant Single Sign-On and session lifecycle handling across the portal showcase and analytics microservices.",
-        id: "Mengintegrasikan Single Sign-On multi-tenant dan penanganan siklus hidup sesi lintas showcase dan portal analitik.",
+        en: "Built automated digest engines and high-fidelity PDF report exports for decision-makers, cleanly visualizing sentiment shifts and cross-platform comparisons.",
+        id: "Membangun generator ringkasan berkala dan ekspor laporan PDF berkualitas tinggi untuk manajemen, menyajikan tren sentimen dan komparasi media secara rapi.",
       },
     },
   ],
@@ -191,11 +191,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   if (!project) return null;
 
-  const sourceLinks = project.githubUrls?.length
+  const rawSourceLinks = project.githubUrls?.length
     ? project.githubUrls
     : project.githubUrl
       ? [{ label: t("projects.sourceCode"), url: project.githubUrl }]
       : [];
+  const sourceLinks = rawSourceLinks.filter(
+    (link) => !link.url.includes("productzillaacademy.com") && !link.url.includes("localhost")
+  );
   const highlights = project.contributionHighlights?.[language] ?? [];
   const imageCount = project.images?.length ?? 0;
   const currentImageIndex = imageSelection.projectId === project.id ? imageSelection.index : 0;

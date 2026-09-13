@@ -177,21 +177,26 @@ export const projects = [
   {
     id: "satria-muda-indonesia-platform",
     title: { en: "Satria Muda Indonesia Platform", id: "Platform Satria Muda Indonesia" },
-    subtitle: { en: "Bilingual Organization Portal & Art Battle Management System", id: "Portal Organisasi Bilingual & Sistem Manajemen Art Battle" },
+    subtitle: {
+      en: "Digital Scoring & Tournament Management Platform",
+      id: "Platform Digital Scoring & Manajemen Kejuaraan Pencak Silat",
+    },
     description: {
-      en: "A comprehensive production platform for Satria Muda Indonesia combining a bilingual public portal and an internal tournament/member management system. Features real-time Art Battle brackets, scoring synchronization across judges, official match sheets, and offline tournament synchronization.",
-      id: "Platform produksi komprehensif untuk Satria Muda Indonesia yang menggabungkan portal publik bilingual dan sistem manajemen turnamen serta keanggotaan. Mencakup bracket turnamen Art Battle real-time, sinkronisasi penilaian juri, lembar pertandingan resmi, dan sinkronisasi turnamen offline."
+      en: "A comprehensive digital platform built for Satria Muda Indonesia to modernize and digitize the championship workflow—transforming traditional manual paper scoring into a synchronized, real-time digital system for both Tanding (combat) and Seni (art forms) categories, integrated with the official organization portal.",
+      id: "Platform digital komprehensif untuk Satria Muda Indonesia guna mendigitalkan seluruh operasional kejuaraan—mengubah pencatatan nilai manual berbasis kertas menjadi sistem digital real-time untuk kategori Tanding dan Seni, terintegrasi dengan portal resmi organisasi."
     },
     contributionHighlights: {
       en: [
-        "Engineered the Art Battle tournament bracket workflow, synchronizing real-time referee scoring sheets, penalty deductions, and manual winner overrides.",
-        "Built the bilingual public landing page using Next.js and Sanity CMS with localized schema models, internationalized routing, and dynamic activity pages.",
-        "Created an offline tournament data synchronization CLI seeder and designed high-density printable match recap reports for championship organizers."
+        "Digitized the championship scoring process from manual paper sheets into a real-time digital scoring system for both Tanding and Seni categories with automated point calculations, penalty deductions, and instant winner determination.",
+        "Engineered seamless authentication and role delegation, enabling referees, judges, and committee members to transition across rings without session interruptions.",
+        "Built autonomous athlete and contingent registration workflows alongside national event management modules for organizational jamborees.",
+        "Implemented offline-first tournament data synchronization and automated high-density printable match recap sheets for venues with intermittent connectivity."
       ],
       id: [
-        "Mengembangkan alur bracket turnamen Art Battle dengan sinkronisasi lembar penilaian juri real-time, pengurangan penalti, dan override pemenang manual.",
-        "Membangun landing page publik bilingual menggunakan Next.js dan Sanity CMS dengan model schema terlokalisasi, routing internasional, dan halaman aktivitas dinamis.",
-        "Membangun CLI seeder sinkronisasi data turnamen offline dan merancang laporan rekap pertandingan siap cetak untuk panitia kejuaraan."
+        "Mendigitalkan proses penilaian kejuaraan dari kertas manual menjadi sistem scoring digital real-time untuk kategori Tanding dan Seni dengan kalkulasi penalti dan pemenang otomatis.",
+        "Mengembangkan alur seamless authentication dan delegasi peran, memungkinkan wasit, juri, dan panitia bertukar tugas antar-gelanggang tanpa hambatan sesi.",
+        "Membangun portal pendaftaran atlet dan kontingen mandiri serta modul manajemen kegiatan kejuaraan dan jambore nasional organisasi.",
+        "Mengimplementasikan sinkronisasi data turnamen offline dan rekap lembar pertandingan resmi siap cetak untuk kejuaraan di lokasi minim sinyal."
       ]
     },
     tags: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "Sanity"],
@@ -199,41 +204,39 @@ export const projects = [
     categoryType: "fullstack",
     images: [
       "/img/portfolio/stk/satria-muda-admin-dashboard.png",
-      "/img/portfolio/stk/satria-muda-scorecard.png",
+      "/img/portfolio/stk/satria-muda-members.png",
       "/img/portfolio/stk/satria-muda-landing.png",
       "/img/portfolio/stk/satria-muda-events.png",
-      "/img/portfolio/stk/satria-muda-kontingen.png",
+      "/img/portfolio/stk/satria-muda-login-clean.png",
     ],
     liveUrl: "https://satriamudaindonesia.com/",
-    githubUrls: [
-      { label: "Member Management", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-member-management" },
-      { label: "Public Landing", url: "https://git.productzillaacademy.com/solusiteknologikreatif/satria-muda-indonesia-landing" },
-      { label: "Staging Portal", url: "https://smi-member-management.tech.solusiteknologikreatif.id/" }
-    ],
-    role: { en: "Fullstack Engineer — Core Platform & Localization", id: "Fullstack Engineer — Core Platform & Localization" },
+    role: { en: "Fullstack Engineer", id: "Fullstack Engineer" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
     featured: true,
   },
   {
     id: "hemdal-sentiment-analysis",
     title: { en: "Hemdal", id: "Hemdal" },
-    subtitle: { en: "Media Intelligence & Sentiment Analysis Platform", id: "Platform Media Intelligence & Analisis Sentimen" },
+    subtitle: {
+      en: "Media Monitoring & Sentiment Intelligence",
+      id: "Platform Media Monitoring & Analisis Sentimen",
+    },
     description: {
-      en: "An end-to-end media monitoring and sentiment intelligence product spanning a public showcase, authenticated analytics portal, and real-time backend. Empowers organizations to track news and social media conversations across channels, detect sentiment shifts, and manage operational incidents.",
-      id: "Platform pemantauan media dan sentiment intelligence end-to-end yang mencakup landing page publik, portal analitik multi-tenant, dan backend pemrosesan real-time. Membantu organisasi memantau percakapan berita dan media sosial, mendeteksi pergeseran sentimen, serta menangani insiden operasional."
+      en: "A media monitoring and sentiment intelligence application that tracks public conversations, news coverage, and social media discussions in real time, helping organizations detect emerging trends and respond promptly to PR and operational incidents.",
+      id: "Aplikasi pemantauan media dan analisis sentimen cerdas untuk melacak percakapan publik, pemberitaan berita, dan media sosial secara real-time, membantu organisasi mendeteksi tren isu terkini serta merespons insiden komunikasi secara cepat."
     },
     contributionHighlights: {
       en: [
-        "Engineered the Command Center early-warning alert system and incident handling lifecycle, integrating Telegram notification webhooks.",
-        "Eliminated incident ID race conditions during high-volume mention spikes, verified through k6 concurrency load testing.",
-        "Hardened headless Chromium PDF export pipelines with process-level isolation to prevent memory leaks and out-of-memory crashes.",
-        "Strengthened OIDC authentication reliability through centralized token refresh and scope management across portal and services."
+        "Engineered the Command Center incident management dashboard with instant Telegram alert integrations for real-time crisis monitoring and swift response coordination.",
+        "Developed the AI Assist conversational copilot integrated directly with Knowledge Base Core for RAG-powered deep search, topic summarization, and sentiment extraction.",
+        "Built automated executive reporting tools with scheduled digest generation and high-fidelity PDF exports for stakeholders.",
+        "Implemented centralized Single Sign-On (OIDC) with automatic token refresh, ensuring smooth and secure access for enterprise multi-tenant users."
       ],
       id: [
-        "Membangun sistem early-warning alert Command Center dan alur penanganan insiden yang terintegrasi webhook notifikasi Telegram.",
-        "Mengatasi race condition incident ID saat lonjakan data sebutan tinggi, diverifikasi dengan pengujian beban konkurensi k6.",
-        "Memperkuat pipeline ekspor PDF Chromium headless dengan isolasi proses untuk mencegah kebocoran memori dan crash OOM.",
-        "Meningkatkan keandalan autentikasi OIDC melalui penanganan token refresh terpusat dan manajemen scope lintas layanan."
+        "Membangun dashboard Command Center dan manajemen insiden terintegrasi alert Telegram instan untuk pemantauan krisis dan koordinasi penanganan isu real-time.",
+        "Mengembangkan asisten cerdas AI Assist yang terhubung langsung ke Knowledge Base Core untuk penelusuran arsip berbasis RAG, perangkuman topik, dan analisis sentimen mendalam.",
+        "Membangun fitur pelaporan eksekutif otomatis dengan penjadwalan laporan berkala dan ekspor PDF berkualitas tinggi untuk kebutuhan manajemen.",
+        "Mengimplementasikan Single Sign-On (OIDC) terpusat dengan token refresh otomatis untuk akses yang mulus dan aman bagi pengguna multi-tenant."
       ]
     },
     tags: ["Next.js", "React", "TypeScript", "NestJS", "Elasticsearch", "Socket.IO"],
@@ -245,13 +248,8 @@ export const projects = [
       "/img/portfolio/stk/hemdal-command-center.png",
       "/img/portfolio/stk/hemdal-landing.png",
     ],
-    liveUrl: "https://sentiment-analysis-landing.tech.solusiteknologikreatif.id/",
-    githubUrls: [
-      { label: "Portal source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis-portal-v2" },
-      { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis" },
-      { label: "Landing source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/sentiment-analysis-landing" }
-    ],
-    role: { en: "Fullstack Engineer — Analytics Platform", id: "Fullstack Engineer — Platform Analitik" },
+    liveUrl: "https://www.hemdal.id/",
+    role: { en: "Fullstack Engineer", id: "Fullstack Engineer" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
     featured: true,
   },
@@ -282,7 +280,6 @@ export const projects = [
       "/img/portfolio/stk/knowledge-base-api.png",
     ],
     liveUrl: "https://knowledge-based-core.dev.solusiteknologikreatif.id/api",
-    githubUrl: "https://git.productzillaacademy.com/solusiteknologikreatif/knowledge-based-core",
     role: { en: "Backend Engineer — AI Infrastructure", id: "Backend Engineer — Infrastruktur AI" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
     featured: true,
@@ -313,10 +310,6 @@ export const projects = [
     images: [
       "/img/portfolio/stk/smart-booking-room.png",
     ],
-    githubUrls: [
-      { label: "Frontend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-frontend" },
-      { label: "Backend source", url: "https://git.productzillaacademy.com/solusiteknologikreatif/smart-booking-room-backend" }
-    ],
     role: { en: "Fullstack Engineer — Reservation Systems", id: "Fullstack Engineer — Sistem Reservasi" },
     organization: { en: "Solusi Teknologi Kreatif (STK)", id: "Solusi Teknologi Kreatif (STK)" },
     featured: true,
@@ -324,20 +317,41 @@ export const projects = [
   {
     id: "syasaa",
     title: { en: "Attendance App", id: "Aplikasi Presensi" },
-    subtitle: { en: "Freelance Administration & AI Verification", id: "Platform Administrasi & Verifikasi AI" },
+    subtitle: { en: "Academic Attendance & Administrative Management", id: "Platform Presensi Akademik & Manajemen Administrasi" },
     description: {
-      en: "A comprehensive attendance system featuring location-based check-ins and AI-powered face recognition for secure identity verification. Collaborated with 1 peer student to design and build the complete UI/UX, frontend (Ionic React), and backend APIs (Laravel) with face recognition capabilities.",
-      id: "Sistem presensi komprehensif yang dilengkapi fitur absen berbasis lokasi dan pengenalan wajah berbasis AI untuk verifikasi identitas yang aman. Berkolaborasi dengan 1 rekan mahasiswa untuk mendesain dan membangun keseluruhan UI/UX, frontend (Ionic React), dan backend API (Laravel) dengan kemampuan pengenalan wajah."
+      en: "A full-scale academic attendance and administrative platform engineered with Ionic React, Laravel Sanctum, and MySQL. Provides multi-role dashboards for administrators, faculty staff, lecturers, and students with geolocation-aware class mapping, curriculum course management, and facial verification.",
+      id: "Platform presensi akademik dan manajemen administrasi kampus berskala lengkap yang dibangun menggunakan Ionic React, Laravel Sanctum, dan MySQL. Menyediakan dashboard multi-peran untuk administrator, staf fakultas, dosen, dan mahasiswa dengan pemetaan kelas berbasis geolokasi, manajemen mata kuliah kurikulum, serta verifikasi presensi."
     },
-    tags: ["Ionic React", "Capacitor", "TypeScript", "Laravel", "AI Face Recognition", "MySQL"],
+    contributionHighlights: {
+      en: [
+        "Architected and developed the SPA administration panel with Ionic React, React Router, and modular state management for seamless cross-platform desktop and mobile operation.",
+        "Built secure role-based access control (RBAC) and cookie-based Sanctum authentication covering Administrator, Faculty Staff, Lecturer, and Student tiers.",
+        "Designed relational database schemas and automated seeders for faculties, academic departments, courses, classes with GPS coordinates, and student attendance logs.",
+        "Engineered RESTful API endpoints in Laravel with automated validation and responsive data tables with pagination and search filters."
+      ],
+      id: [
+        "Merancang dan membangun panel administrasi SPA dengan Ionic React, React Router, dan manajemen state modular untuk operasional lintas desktop dan mobile.",
+        "Membangun kontrol akses berbasis peran (RBAC) yang aman dan otentikasi Sanctum berbasis cookie untuk tingkatan Administrator, Staf Fakultas, Dosen, dan Mahasiswa.",
+        "Mendesain skema database relasional dan seeder otomatis untuk fakultas, jurusan, mata kuliah, kelas dengan koordinat GPS, dan log absensi mahasiswa.",
+        "Mengembangkan endpoint RESTful API di Laravel dengan validasi otomatis serta tabel data responsif dengan paginasi dan filter pencarian."
+      ]
+    },
+    tags: ["Ionic React", "TypeScript", "Laravel", "PHP", "MySQL", "Sanctum"],
     category: { en: "Full Stack", id: "Full Stack" },
     categoryType: "fullstack",
-    images: ["/img/portfolio/syasaa.png"],
+    images: [
+      "/img/portfolio/syasaa/syasaa-dashboard.png",
+      "/img/portfolio/syasaa/syasaa-users.png",
+      "/img/portfolio/syasaa/syasaa-classes.png",
+      "/img/portfolio/syasaa/syasaa-courses.png",
+      "/img/portfolio/syasaa/syasaa-majors.png",
+      "/img/portfolio/syasaa/syasaa-login.png",
+    ],
     githubUrls: [
       { label: "Frontend", url: "https://github.com/FarizRafiqi/syasaa-app" },
       { label: "Backend", url: "https://github.com/FarizRafiqi/syasaa-backend" }
     ],
-    role: { en: "Full Stack Developer, UI/UX Designer & AI Integrator", id: "Full Stack Developer, Desainer UI/UX & Integrator AI" },
+    role: { en: "Fullstack Developer & System Architect", id: "Fullstack Developer & Arsitek Sistem" },
     contributors: 2,
     isLead: false,
     featured: false,

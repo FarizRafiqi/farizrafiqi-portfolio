@@ -699,10 +699,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hm-scene-loading {
-  position: absolute;
-  inset: 25% 25%;
-  border: 1px solid color-mix(in srgb, var(--hm-cobalt) 40%, transparent);
-  border-radius: 50%;
+  width: 100%;
+  height: clamp(320px, 34vw, 470px);
+}
+
+@media (max-width: 1023px) {
+  .hm-scene-loading { height: 380px; }
+}
+
+@media (max-width: 480px) {
+  .hm-scene-loading { height: 300px; }
 }
 
 .hm-proof-strip {

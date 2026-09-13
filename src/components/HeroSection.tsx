@@ -36,7 +36,7 @@ const socialLinks = [
 
 export default function HeroSection() {
   const { language, t } = useLanguage();
-  const { role, setRole, pitch } = useCustomization();
+  const { role, pitch } = useCustomization();
   const reducedMotion = useReducedMotion();
   const featuredCount = projects.filter((project) => project.featured).length;
 
@@ -58,17 +58,6 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="hm-hero-shell relative overflow-hidden flex flex-col justify-between min-h-screen pt-20 pb-6">
-      {/* Full-bleed 3D Spatial Canvas (Unboxed) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
-        <HeroScene reducedMotion={Boolean(reducedMotion)} />
-      </div>
-
-      {/* Atmospheric radial vignette ensuring crystalline typography legibility */}
-      <div
-        className="absolute inset-0 z-1 pointer-events-none bg-gradient-to-r from-white via-white/90 to-transparent dark:from-black dark:via-black/90 dark:to-transparent w-full max-w-3xl"
-        aria-hidden="true"
-      />
-
       <div className="container relative z-10 pointer-events-none flex flex-col justify-between flex-1 py-2">
         <div className="hm-hero-topline pointer-events-auto">
           <span className="hm-mono-label">FARIZ RAFIQI / 2026</span>
@@ -131,30 +120,8 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Open spatial HUD telemetry over unboxed 3D scene */}
-          <div className="hidden lg:flex flex-col justify-between h-[420px] pointer-events-none">
-            <div className="flex justify-end">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/10 dark:border-white/10 backdrop-blur-md text-[11px] font-mono text-neutral-600 dark:text-neutral-400">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="font-semibold text-neutral-900 dark:text-neutral-100">01 / TOPOLOGY MATRIX</span>
-                <span className="opacity-30">|</span>
-                <span>LIVE SPATIAL FIELD</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-end text-right mt-auto">
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-800 dark:text-neutral-200">
-                Kinetic Vector Lattice
-              </span>
-              <span className="text-xs text-neutral-500 dark:text-neutral-400 max-w-xs mt-1 leading-relaxed">
-                {language === "en"
-                  ? "Move cursor across canvas to deform wave topology · Click to radiate shockwave"
-                  : "Gerakkan kursor untuk mendistorsi gelombang · Klik untuk gelombang kejut"}
-              </span>
-            </div>
+          <div className="min-w-0 pointer-events-auto lg:-mr-8">
+            <HeroScene reducedMotion={Boolean(reducedMotion)} />
           </div>
         </div>
 
