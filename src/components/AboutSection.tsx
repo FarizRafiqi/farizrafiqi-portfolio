@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, Variants } from "framer-motion";
-import { personalData, skills } from "@/lib/data";
+import { experienceSummary, personalData, skills } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
@@ -28,10 +28,10 @@ export default function AboutSection() {
   };
 
   const stats = [
-    { value: "6+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
+    { value: experienceSummary.professional[language], label: t("hero.professional") },
+    { value: experienceSummary.journey[language], label: t("hero.journey") },
     { value: "10+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
     { value: "30+", label: language === "en" ? "Technologies" : "Teknologi" },
-    { value: "∞", label: language === "en" ? "Curiosity" : "Rasa Ingin Tahu" },
   ];
 
   return (

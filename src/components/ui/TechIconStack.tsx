@@ -52,6 +52,11 @@ export const tagToSlug: Record<string, string> = {
   "Proxmox": "proxmox",
   "Kubernetes": "kubernetes",
   "TensorFlow": "tensorflow",
+  "Sanity": "sanity",
+  "Socket.IO": "socketdotio",
+  "Milvus": "milvus",
+  "MinIO": "minio",
+  "MariaDB": "mariadb",
 };
 
 export const tagToColor: Record<string, string> = {
@@ -103,7 +108,14 @@ export const tagToColor: Record<string, string> = {
   "Proxmox": "#E57000",
   "Kubernetes": "#326CE5",
   "TensorFlow": "#FF6F00",
+  "Sanity": "#F03E2F",
+  "Socket.IO": "#010101",
+  "Milvus": "#00A1EA",
+  "MinIO": "#C72E49",
+  "MariaDB": "#003545",
 };
+
+const tagFallbackLabel: Record<string, string> = {};
 
 type Variant = "card" | "modal";
 
@@ -127,6 +139,7 @@ function IconContent({
   const slug = tagToSlug[tag];
   const brandColor = tagToColor[tag];
   const showBrandMode = isHovered && !!brandColor;
+  const fallbackLabel = tagFallbackLabel[tag];
 
   if (tag === "Midtrans") {
     return (
@@ -139,6 +152,17 @@ function IconContent({
         }}
       >
         MID
+      </span>
+    );
+  }
+
+  if (fallbackLabel) {
+    return (
+      <span
+        className="text-[9px] font-black leading-none"
+        style={{ color: variant === "card" ? "#ffffff" : isDark ? "#ffffff" : "#000000" }}
+      >
+        {fallbackLabel}
       </span>
     );
   }
@@ -187,7 +211,7 @@ export function TechIconStack({ tags, variant = "card", isStack = true }: TechIc
     <div className={`flex items-center ${isStack ? "" : "gap-2 flex-wrap"}`}>
       {tags.map((tag, i) => {
         const slug = tagToSlug[tag];
-        if (!slug && tag !== "Midtrans") return null;
+        if (!slug && !tagFallbackLabel[tag] && tag !== "Midtrans") return null;
 
         const brandColor = tagToColor[tag];
         const isHovered = hoveredIndex === i;

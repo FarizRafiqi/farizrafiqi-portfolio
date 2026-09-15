@@ -22,6 +22,13 @@ const translations = {
     "hero.title": "Building digital experiences where code meets creativity.",
     "hero.viewProjects": "View Projects",
     "hero.getInTouch": "Get in Touch",
+    "hero.eyebrow": "Software engineer · web · mobile · AI",
+    "hero.proof": "Selected delivery work",
+    "hero.professional": "Professional years",
+    "hero.journey": "Software journey",
+    "hero.featured": "Featured projects",
+    "hero.stkPeriod": "Recent professional role · Sep 2025 — Sep 2026",
+    "hero.scroll": "Scroll to selected work",
     "projects.title": "Featured Projects",
     "projects.subtitle": "A collection of my recent work and personal experiments.",
     "projects.showMore": "Show More Projects",
@@ -29,6 +36,11 @@ const translations = {
     "projects.viewProject": "View Project",
     "projects.sourceCode": "Source Code",
     "projects.liveDemo": "Live Demo",
+    "projects.contributions": "What I shipped",
+    "projects.organization": "Organization",
+    "projects.caseStudy": "Open project details",
+    "projects.verifiedWork": "Evidence-led work",
+    "projects.sourceRepositories": "Source repositories",
     "projects.tab.all": "All",
     "projects.tab.web": "Web Apps",
     "projects.tab.mobile": "Mobile Apps",
@@ -58,13 +70,25 @@ const translations = {
     "hero.title": "Membangun pengalaman digital di mana kode bertemu kreativitas.",
     "hero.viewProjects": "Lihat Proyek",
     "hero.getInTouch": "Hubungi Saya",
+    "hero.eyebrow": "software engineer · web · mobile · AI",
+    "hero.proof": "Pekerjaan terpilih",
+    "hero.professional": "Tahun profesional",
+    "hero.journey": "Perjalanan software",
+    "hero.featured": "Proyek unggulan",
+    "hero.stkPeriod": "Peran profesional terbaru · Sep 2025 — Sep 2026",
+    "hero.scroll": "Lihat pekerjaan terpilih",
     "projects.title": "Proyek Unggulan",
-    "projects.subtitle": "Koleksi pekerjaan terbaru dan eksperimen pribadi saya.",
+    "projects.subtitle": "Koleksi pekerjaan terbaru dan eksperimen pribadi saya",
     "projects.showMore": "Tampilkan Proyek Lainnya",
     "projects.showLess": "Tampilkan Lebih Sedikit",
     "projects.viewProject": "Lihat Proyek",
     "projects.sourceCode": "Kode Sumber",
     "projects.liveDemo": "Demo Langsung",
+    "projects.contributions": "Kontribusi yang saya kirim",
+    "projects.organization": "Organisasi",
+    "projects.caseStudy": "Buka detail proyek",
+    "projects.verifiedWork": "Pekerjaan berbasis bukti",
+    "projects.sourceRepositories": "Repositori sumber",
     "projects.tab.all": "Semua",
     "projects.tab.web": "Aplikasi Web",
     "projects.tab.mobile": "Aplikasi Mobile",
@@ -94,7 +118,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const savedLang = localStorage.getItem("language") as Language;
     if (savedLang && (savedLang === "en" || savedLang === "id")) {
-      setLanguage(savedLang);
+      // Read persisted preference after hydration to keep the server and first client render aligned.
+      setLanguage(savedLang); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, []);
 

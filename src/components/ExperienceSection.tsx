@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Timeline } from "@/components/ui/Timeline";
-import { experiences } from "@/lib/data";
+import { Timeline, type TimelineItem } from "@/components/ui/Timeline";
+import { experienceSummary, experiences } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
 
 const SectionLabel = ({ text }: { text: string }) => (
@@ -20,18 +20,19 @@ export default function ExperienceSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const stats = [
-    { value: "6+", label: language === "en" ? "Years Experience" : "Tahun Pengalaman" },
-    { value: "10+", label: language === "en" ? "Projects Shipped" : "Proyek Selesai" },
+    { value: experienceSummary.professional[language], label: t("hero.professional") },
+    { value: experienceSummary.journey[language], label: t("hero.journey") },
     { value: "3+", label: language === "en" ? "Companies Worked" : "Perusahaan" },
     { value: "2+", label: language === "en" ? "Internships" : "Magang" },
   ];
 
   // Localize experiences
-  const localizedExperiences = experiences.map((exp) => ({
+  const localizedExperiences: TimelineItem[] = experiences.map((exp) => ({
     ...exp,
     year: exp.year[language],
     title: exp.title[language],
     company: typeof exp.company === "string" ? exp.company : exp.company[language],
+    type: exp.type as TimelineItem["type"],
     description: exp.description[language],
   }));
 
@@ -81,7 +82,7 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Timeline */}
-        <Timeline items={localizedExperiences as any} />
+        <Timeline items={localizedExperiences} />
 
         {/* LinkedIn CTA */}
         <motion.div
